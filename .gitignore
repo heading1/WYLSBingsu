@@ -1,0 +1,23 @@
+# Dependencies
+node_modules
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# Cache
+.cache
+
+# Execution script
+run.sh
+run-dev.sh
+run-prod.sh
+test.sh
+
+# Distribution files
+dist
+
+# gitkeep
+.gitkeep
