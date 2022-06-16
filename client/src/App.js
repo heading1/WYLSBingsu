@@ -5,7 +5,7 @@ import Bingact from 'Bingact';
 function App() {
   return (
     <div>
-      <h1>안녕 나랑 빙수먹을래?</h1>
+      <h1>안녕 나는 빙액트야</h1>
     </div>
   );
 }
