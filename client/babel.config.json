@@ -5,7 +5,7 @@
       "module-resolver",
       {
         "alias": {
-          "Bingact": "./src/library"
+          "Bingact": "./library"
         }
       }
     ]
