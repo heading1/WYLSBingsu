@@ -4,9 +4,8 @@
   "description": "빙수 프로젝트 (client)",
   "main": "index.tsx",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
+    "start": "webpack-dev-server --mode development --open --history-api-fallback",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prebuild": "npm build",
     "build": "webpack --mode development"
   },
   "author": "박노준, 정진우",
@@ -14,6 +13,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.32.2",
     "react-router-dom": "^6.3.0",
     "styled-components": "^5.3.5"
   },
