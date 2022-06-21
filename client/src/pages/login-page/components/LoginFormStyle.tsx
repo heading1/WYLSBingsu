@@ -27,10 +27,10 @@ const StyledForm = styled.form`
   }
 
   & input[type='submit'] {
-    width: 4.5rem;
-    height: 2.4rem;
+    width: 5rem;
+    height: 2.6rem;
     border: ${(props) => `1px solid ${props.theme.point2}`};
-    border-radius: 20px;
+    border-radius: 2.6rem;
     background-color: ${(props) => props.theme.point2};
     color: white;
     opacity: 0.7;
@@ -45,6 +45,7 @@ const StyledForm = styled.form`
   & p {
     color: red;
     font-size: 1.2rem;
+    border: 1rem 0;
   }
 `;
 
