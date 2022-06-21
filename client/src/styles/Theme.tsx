@@ -1,11 +1,6 @@
-interface ITheme {
-  point1: String;
-  point2: String;
-  point3: String;
-  point4: String;
-}
+import { DefaultTheme } from 'styled-components';
 
-const theme: ITheme = {
+const theme: DefaultTheme = {
   point1: '#06283D',
   point2: '#1363DF',
   point3: '#47B5FF',
