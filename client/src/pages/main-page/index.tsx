@@ -1,54 +1,80 @@
 import styled from 'styled-components';
 import React from 'react';
-import bingsu from '../../assets/images/bingsu.jpeg';
+import backgroundImg from '../../assets/images/bingsu.jpeg';
 import Header from './components/Header';
 
-const MainPageDiv = styled.div`
+const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
-  display: flex;
-  flex-direction: column;
-  background-image: url(${bingsu});
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  overflow: hidden;
-  /* position: relative; */
+
+  text-align: center;
+
+  & > div {
+    position: relative;
+    display: inline-block;
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+  }
+
+  & > img {
+    display: block;
+  }
 `;
 
-const BackgroundImg = styled.img`
-  width: 100%;
-  height: 100vh;
+const HeaderLayout = styled.section`
   position: absolute;
   top: 0;
-  left: 0;
-  object-fit: contain;
-  overflow: hidden;
-  z-index: -1;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-evenly;
+
+  border: 1px solid;
+
+  & > div {
+    margin: 5%;
+  }
 `;
 
-const HeaderSSS = styled.div`
-  position: relative;
-`;
-
-const HeaderDDD = styled.div`
+const MainLayout = styled.section`
   position: absolute;
-  /* top: px; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid;
+`;
+
+const FooterLayout = styled.section`
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  border: 1px solid;
 `;
 
 const MainPage: React.FC = () => {
   return (
-    <MainPageDiv>
-      <BackgroundImg src={bingsu} />
-      <HeaderSSS>
-        <HeaderDDD>
-          <p>안녕하세요</p>
-          <button>버튼</button>
-        </HeaderDDD>
-      </HeaderSSS>
-
-      {/* <Header /> */}
-    </MainPageDiv>
+    <Wrapper>
+      <div>
+        <img src={backgroundImg} />
+        <HeaderLayout>
+          <div>
+            <span>안녕하세요</span>
+          </div>
+          <div>
+            <button>버튼</button>
+            <button>버튼</button>
+            <button>버튼</button>
+          </div>
+        </HeaderLayout>
+        <MainLayout>메인입니다.</MainLayout>
+        <FooterLayout>푸터입니다.</FooterLayout>
+      </div>
+    </Wrapper>
   );
 };
 
