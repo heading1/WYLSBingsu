@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
-
+const isDevelopment = process.env.NODE_ENV !== 'production';
 /*
 mode : 프로덕션 모드인지 개발 모드인지 확인하는 옵션이다.
 devtool : 프로덕션 모드인 경우엔 hidden-source-map을 권장한다. (외부에서 리액트 구조를 확인할 수 없다.)
@@ -12,6 +12,8 @@ plugins : 설치한 플러그인을 적용하는 옵션이다
 */
 module.exports = {
   entry: './src/index.tsx',
+
+  mode: isDevelopment ? 'development' : 'production',
 
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
