@@ -38,6 +38,15 @@ module.exports = {
         test: /\.tsx?$/,
         use: ['babel-loader', 'ts-loader'],
       },
+      {
+        test: /\.(png|jpe?g)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[ext]',
+          },
+        },
+      },
     ],
   },
 };
