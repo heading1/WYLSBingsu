@@ -3,6 +3,16 @@ import styled from 'styled-components';
 const StyledForm = styled.form`
   width: 23rem;
 
+  & h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 4rem;
+
+    & > strong {
+      color: ${(props) => props.theme.point3};
+    }
+  }
+
   & label,
   & input {
     display: block;
@@ -10,27 +20,36 @@ const StyledForm = styled.form`
 
   & label {
     margin-bottom: 0.9rem;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   & input {
     font-size: 1.2rem;
+    width: 100%;
+    border-bottom: 1px solid black;
+
+    :-webkit-autofill,
+    :-webkit-autofill:hover,
+    :-webkit-autofill:focus,
+    :-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+      -webkit-transition: background-color 9999s ease-out;
+      -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+      box-shadow: 0 0 0px white inset !important;
+    }
   }
 
   & > div {
-    margin-bottom: 1.8rem;
+    margin-bottom: 4rem;
   }
 
-  & input:not([type='submit']) {
+  & button[type='submit'] {
     width: 100%;
-    border-bottom: 1px solid black;
-  }
-
-  & input[type='submit'] {
-    width: 5rem;
     height: 2.6rem;
     border: ${(props) => `1px solid ${props.theme.point2}`};
     border-radius: 2.6rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
     background-color: ${(props) => props.theme.point2};
     color: white;
     opacity: 0.7;

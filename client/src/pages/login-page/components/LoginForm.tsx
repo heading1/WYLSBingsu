@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import StyledForm from './LoginFormStyle';
+import GithubOAuth from './GithubOAuth';
 
 type InputType = {
   email: string;
@@ -11,7 +12,7 @@ const LoginForm: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<InputType>();
+  } = useForm<InputType>({ mode: 'onChange' });
 
   const onSubmit = (data: InputType) => {
     console.log(data);
@@ -19,6 +20,9 @@ const LoginForm: React.FC = () => {
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <h1>
+        WELCOME TO <strong>BINGSU</strong> WORLD!
+      </h1>
       <div>
         <label htmlFor="emailInput">Email</label>
         <input
@@ -44,17 +48,22 @@ const LoginForm: React.FC = () => {
           type="password"
           {...register('password', {
             required: true,
-            validate: (value) => value.length >= 6 && value.length <= 20,
+            pattern:
+              /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]/,
+            validate: (value) => value.length >= 8 && value.length <= 20,
           })}
         />
         {errors.password && errors.password.type === 'required' && (
           <p>비밀번호를 입력해주세요.</p>
         )}
         {errors.password && errors.password.type === 'validate' && (
-          <p>비밀번호의 길이는 6글자 이상 20글자 이하입니다.</p>
+          <p>비밀번호의 길이는 8글자 이상 20글자 이하입니다.</p>
         )}
       </div>
-      <input type="submit" value="Login" />
+      <button type="submit" value="Login">
+        Login
+      </button>
+      <GithubOAuth />
     </StyledForm>
   );
 };
