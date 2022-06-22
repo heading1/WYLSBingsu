@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: #ffffff;
     font-family: 'MICEGothic',sans-serif;
+    margin: 0;
   }
 
   a {
@@ -23,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   input, button {
+    font-family: 'MICEGothic',sans-serif;
     background-color: transparent;
     border: none;
     outline: none;
