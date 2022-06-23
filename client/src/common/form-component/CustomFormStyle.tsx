@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const StyledForm = styled.form`
   width: 23rem;
+  margin-bottom: 1.5rem;
 
   & h1 {
     font-size: 1.5rem;

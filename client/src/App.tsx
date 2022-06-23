@@ -2,15 +2,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // pages
-import { MainPage } from './pages';
-import { LoginPage } from './pages';
+import { MainPage, LoginPage, RegisterPage } from './pages';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />}></Route>
-        <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </BrowserRouter>
   );
