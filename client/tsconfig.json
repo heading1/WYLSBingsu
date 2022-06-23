@@ -15,7 +15,10 @@
     "baseUrl": "./", // 비-상대적 모듈 이름을 해석하기 위한 기본 디렉터리. 자세한 내용은 모듈 해석 문서을 참조하세요.
     "outDir": "./dist", //	출력 구조를 디렉토리로 리다이렉트합니다.
     "moduleResolution": "node", // 모듈 해석 방법 결정. Node.js/io.js 스타일 해석의 경우, "Node" 또는 "Classic" 중 하나입니다.
-    "typeRoots": ["src/types"]
+    "typeRoots": ["src/types"],
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts", "**/*.tsx"]
