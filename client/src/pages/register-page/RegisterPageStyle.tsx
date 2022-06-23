@@ -5,6 +5,7 @@ const Wrapper = styled.div`
   height: 100vh;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `;
 
 export default Wrapper;

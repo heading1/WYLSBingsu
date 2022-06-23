@@ -1,9 +1,14 @@
 import { FormInputType } from '@/types/types';
 import CustomForm from '@/common/form-component/CustomForm';
 
-const RegisterForm = () => {
+interface RegisterProps {
+  emailCertificate: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const RegisterForm: React.FC<RegisterProps> = ({ emailCertificate }) => {
   const onSubmit = (data: FormInputType) => {
     console.log(data);
+    emailCertificate(true);
   };
 
   return (
