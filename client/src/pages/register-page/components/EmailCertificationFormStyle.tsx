@@ -6,7 +6,7 @@ export const CodeInput = styled.input`
   border-bottom: 3px solid black;
   font-size: 1.2rem;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.4rem;
 
   &:focus {
     border-bottom: 3px solid ${(props) => props.theme.point3};
