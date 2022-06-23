@@ -8,7 +8,7 @@ const RegisterPage: React.FC = () => {
 
   return (
     <Wrapper>
-      <RegisterForm emailCertificate={setIsSend} />
+      <RegisterForm emailCertificate={setIsSend} sendingStatus={isSend} />
       {isSend && <EmailCertificationForm />}
     </Wrapper>
   );
