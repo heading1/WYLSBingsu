@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import backgroundImg from '../../assets/images/bingsu.jpeg';
+import riceCakeImg from '../../assets/images/riceCake.png';
 import Header from './components/Header';
 
 const Wrapper = styled.div`
@@ -42,10 +43,56 @@ const HeaderLayout = styled.section`
 
 const MainLayout = styled.section`
   position: absolute;
-  top: 50%;
+  top: 38%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid;
+  transform: translate(-60%, -60%);
+  display: grid;
+  row-gap: 10px;
+  column-gap: 20px;
+  width: 70%;
+  /* height: 30vh; */
+  grid-template-areas:
+    '. . a . .'
+    '. b . c . '
+    'd . e . f';
+
+  /* & > img {
+    width: 90px;
+  } */
+  & > div {
+    width: 300%;
+  }
+  & > div > img {
+    width: 80%;
+    object-fit: contain;
+  }
+  & > div:nth-child(1) {
+    grid-area: a;
+  }
+  & > div:nth-child(2) {
+    grid-area: b;
+  }
+  & > div:nth-child(3) {
+    grid-area: c;
+  }
+  & > div:nth-child(4) {
+    grid-area: d;
+  }
+  & > div:nth-child(5) {
+    grid-area: e;
+  }
+  & > div:nth-child(6) {
+    grid-area: f;
+  }
+  & > div:nth-child(7) {
+    grid-area: g;
+  }
+  & > div:nth-child(8) {
+    grid-area: h;
+  }
+  & > div:nth-child(9) {
+    grid-area: i;
+  }
 `;
 
 const FooterLayout = styled.section`
@@ -71,7 +118,26 @@ const MainPage: React.FC = () => {
             <button>버튼</button>
           </div>
         </HeaderLayout>
-        <MainLayout>메인입니다.</MainLayout>
+        <MainLayout>
+          <div>
+            <img src={riceCakeImg} />
+          </div>
+          <div>
+            <img src={riceCakeImg} />
+          </div>
+          <div>
+            <img src={riceCakeImg} />
+          </div>
+          <div>
+            <img src={riceCakeImg} />
+          </div>
+          <div>
+            <img src={riceCakeImg} />
+          </div>
+          <div>
+            <img src={riceCakeImg} />
+          </div>
+        </MainLayout>
         <FooterLayout>푸터입니다.</FooterLayout>
       </div>
     </Wrapper>
