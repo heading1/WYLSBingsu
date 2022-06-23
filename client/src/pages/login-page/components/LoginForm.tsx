@@ -56,6 +56,9 @@ const LoginForm: React.FC = () => {
         {errors.password && errors.password.type === 'required' && (
           <p>비밀번호를 입력해주세요.</p>
         )}
+        {errors.password && errors.password.type === 'pattern' && (
+          <p>비밀번호는 문자, 숫자, 특수문자의 조합이어야합니다.</p>
+        )}
         {errors.password && errors.password.type === 'validate' && (
           <p>비밀번호의 길이는 8글자 이상 20글자 이하입니다.</p>
         )}
