@@ -27,7 +27,7 @@ const StyledForm = styled.form`
   & input {
     font-size: 1.2rem;
     width: 100%;
-    border-bottom: 1px solid black;
+    border-bottom: 3px solid black;
 
     :-webkit-autofill,
     :-webkit-autofill:hover,
@@ -37,6 +37,10 @@ const StyledForm = styled.form`
       -webkit-transition: background-color 9999s ease-out;
       -webkit-box-shadow: 0 0 0px 1000px white inset !important;
       box-shadow: 0 0 0px white inset !important;
+    }
+
+    &:focus {
+      border-bottom: 3px solid ${(props) => props.theme.point3};
     }
   }
 
