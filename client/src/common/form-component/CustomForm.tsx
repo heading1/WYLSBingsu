@@ -1,14 +1,10 @@
 import { useForm } from 'react-hook-form';
 import StyledForm from './CustomFormStyle';
-
-type InputType = {
-  email: string;
-  password: string;
-};
+import { FormInputType } from '@/types/types';
 
 interface FormProps {
   children?: React.ReactNode;
-  onSubmit: (data: InputType) => void;
+  onSubmit: (data: FormInputType) => void;
 }
 
 const CustomForm: React.FC<FormProps> = ({ children, onSubmit }) => {
@@ -16,7 +12,7 @@ const CustomForm: React.FC<FormProps> = ({ children, onSubmit }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<InputType>({ mode: 'onChange' });
+  } = useForm<FormInputType>({ mode: 'onChange' });
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
