@@ -5,9 +5,14 @@ import { FormInputType } from '@/types/types';
 interface FormProps {
   children?: React.ReactNode;
   onSubmit: (data: FormInputType) => void;
+  isDisabled?: boolean;
 }
 
-const CustomForm: React.FC<FormProps> = ({ children, onSubmit }) => {
+const CustomForm: React.FC<FormProps> = ({
+  children,
+  onSubmit,
+  isDisabled,
+}) => {
   const {
     register,
     handleSubmit,

@@ -27,7 +27,7 @@ const StyledForm = styled.form`
   & input {
     font-size: 1.2rem;
     width: 100%;
-    border-bottom: 1px solid black;
+    border-bottom: 3px solid black;
 
     :-webkit-autofill,
     :-webkit-autofill:hover,
@@ -38,28 +38,14 @@ const StyledForm = styled.form`
       -webkit-box-shadow: 0 0 0px 1000px white inset !important;
       box-shadow: 0 0 0px white inset !important;
     }
+
+    &:focus {
+      border-bottom: 3px solid ${(props) => props.theme.point3};
+    }
   }
 
   & > div {
     margin-bottom: 4rem;
-  }
-
-  & button[type='submit'] {
-    width: 100%;
-    height: 2.6rem;
-    border: ${(props) => `1px solid ${props.theme.point2}`};
-    border-radius: 2.6rem;
-    margin-bottom: 1.5rem;
-    font-size: 1.2rem;
-    background-color: ${(props) => props.theme.point2};
-    color: white;
-    opacity: 0.7;
-    cursor: pointer;
-    transition: opacity 0.2s linear;
-
-    &:hover {
-      opacity: 1;
-    }
   }
 
   & p {
