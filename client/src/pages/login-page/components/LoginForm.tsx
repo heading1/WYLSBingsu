@@ -1,6 +1,7 @@
 import GithubOAuth from './GithubOAuth';
 import CustomForm from '@/common/form-component/CustomForm';
 import { FormInputType } from '@/types/types';
+import { LoginButton } from './LoginFormStyle';
 
 const LoginForm: React.FC = () => {
   const onSubmit = (data: FormInputType) => {
@@ -9,7 +10,7 @@ const LoginForm: React.FC = () => {
 
   return (
     <CustomForm onSubmit={onSubmit}>
-      <button type="submit">Login</button>
+      <LoginButton type="submit">Login</LoginButton>
       <GithubOAuth />
     </CustomForm>
   );
