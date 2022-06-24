@@ -14,10 +14,14 @@ userRouter.post('/register', async (req, res, next) => {
     }
 
     // req (request) 에서 데이터 가져오기
-    const nickName: string = req.body.nickName;
-    const email: string = req.body.email;
-    const password: string = req.body.password;
-
+    interface user{
+        nickName:string;
+        email:string;
+        password:string;
+    }
+        
+    const {nickName,email,password}:user = req.body
+        
     let regexEmail = /^(([^<>()[\]\.,;:\s@"]+(\.[^<>()[\]\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!regexEmail.test(email)){
       throw new Error(
