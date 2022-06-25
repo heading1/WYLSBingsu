@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components';
 
-const ImageStyle = styled.img<{ top: number; left: number; width: number }>`
+const ImageStyle = styled.img<{
+  top: number;
+  left: number;
+  width: number;
+}>`
   position: absolute;
   width: ${({ width }) => width}px;
   height: auto;

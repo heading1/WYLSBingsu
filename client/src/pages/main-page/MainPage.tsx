@@ -16,6 +16,9 @@ const location5 = { top: 38, left: 66, width: 188 * ratio };
 const location6 = { top: 40, left: 0, width: 188 * ratio };
 
 const MainPage: React.FC = () => {
+  const handleClick = () => {
+    return alert('test');
+  };
   return (
     <Wrapper>
       <div>
@@ -24,32 +27,32 @@ const MainPage: React.FC = () => {
         <Topping
           {...location1}
           imageSrc={riceCakeImg}
-          onClick={() => alert('test1')}
+          eventClick={handleClick}
         />
         <Topping
           {...location2}
           imageSrc={riceCakeImg}
-          onClick={() => alert('test2')}
+          eventClick={() => alert('test2')}
         />
         <Topping
           {...location3}
           imageSrc={riceCakeImg}
-          onClick={() => alert('test3')}
+          eventClick={() => alert('test3')}
         />
         <Topping
           {...location4}
           imageSrc={riceCakeImg}
-          onClick={() => alert('test4')}
+          eventClick={() => alert('test4')}
         />
         <Topping
           {...location5}
           imageSrc={riceCakeImg}
-          onClick={() => alert('test5')}
+          eventClick={() => alert('test5')}
         />
         <Topping
           {...location6}
           imageSrc={riceCakeImg}
-          onClick={() => alert('test6')}
+          eventClick={() => alert('test6')}
         />
 
         <Footer />
