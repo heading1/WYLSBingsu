@@ -1,5 +1,6 @@
-interface ViewheightProps {
-  deviceHeight: string;
+interface DeviceViewport {
+  deviceWidth?: string;
+  deviceHeight?: string;
 }
 
-export type { ViewheightProps };
+export type { DeviceViewport };
