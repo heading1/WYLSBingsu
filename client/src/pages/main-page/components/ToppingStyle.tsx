@@ -10,8 +10,8 @@ const ImageStyle = styled.img<{
   height: auto;
   cursor: pointer;
   z-index: 1;
+  transition: all 0.2s ease-in-out;
   &:hover {
-    transition: all 0.3s ease-in-out;
     transform: scale(1.1);
   }
   ${(props) =>
