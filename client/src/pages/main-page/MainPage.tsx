@@ -21,12 +21,36 @@ const MainPage: React.FC = () => {
       <div>
         <img src={backgroundImg} />
         <Header />
-        <Topping {...location1} imageSrc={riceCakeImg} />
-        <Topping {...location2} imageSrc={riceCakeImg} />
-        <Topping {...location3} imageSrc={riceCakeImg} />
-        <Topping {...location4} imageSrc={riceCakeImg} />
-        <Topping {...location5} imageSrc={riceCakeImg} />
-        <Topping {...location6} imageSrc={riceCakeImg} />
+        <Topping
+          {...location1}
+          imageSrc={riceCakeImg}
+          onClick={() => alert('test1')}
+        />
+        <Topping
+          {...location2}
+          imageSrc={riceCakeImg}
+          onClick={() => alert('test2')}
+        />
+        <Topping
+          {...location3}
+          imageSrc={riceCakeImg}
+          onClick={() => alert('test3')}
+        />
+        <Topping
+          {...location4}
+          imageSrc={riceCakeImg}
+          onClick={() => alert('test4')}
+        />
+        <Topping
+          {...location5}
+          imageSrc={riceCakeImg}
+          onClick={() => alert('test5')}
+        />
+        <Topping
+          {...location6}
+          imageSrc={riceCakeImg}
+          onClick={() => alert('test6')}
+        />
 
         <Footer />
       </div>

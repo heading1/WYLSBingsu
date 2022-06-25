@@ -3,17 +3,19 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   /* height: 99vh; */
   width: 100vw;
-  text-align: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
   & > div {
-    position: relative;
+    position: absolute;
     display: inline-block;
-    height: 99vh;
+    height: 100vh;
     overflow: hidden;
     z-index: -1;
   }
   & > img {
     display: block;
-    position: absolute;
+    /* position: relative; */
     top: 0;
     left: 0;
     width: 100%;
