@@ -13,7 +13,7 @@ const Wrapper = styled.div<DeviceViewport>`
   flex-direction: column;
 `;
 
-const InfoDiv = styled.div<DeviceViewport>`
+const InfoDiv = styled.div`
   display: flex;
   width: 25.2rem;
   height: 24rem;

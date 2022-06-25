@@ -2,11 +2,11 @@ import { Wrapper, InfoDiv, HomeLink } from './ErrorPageStyle';
 import useDeviceViewport from '@/common/hooks/useDeviceViewport';
 
 const ErrorPage: React.FC = () => {
-  const { deviceWidth, deviceHeight } = useDeviceViewport();
+  const { deviceHeight } = useDeviceViewport();
 
   return (
-    <Wrapper deviceWidth={deviceWidth} deviceHeight={deviceHeight}>
-      <InfoDiv deviceWidth={deviceWidth}>
+    <Wrapper deviceHeight={deviceHeight}>
+      <InfoDiv>
         <h1>
           Bingsu <strong>NOT</strong> FOUND!
         </h1>
