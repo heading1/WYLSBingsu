@@ -16,7 +16,14 @@ const location3 = { top: 27, left: 8, width: 188 * ratio };
 const location4 = { top: 35, left: 33, width: 188 * ratio };
 const location5 = { top: 38, left: 66, width: 188 * ratio };
 const location6 = { top: 40, left: 0, width: 188 * ratio };
-
+const locationArr = [
+  location1,
+  location2,
+  location3,
+  location4,
+  location5,
+  location6,
+];
 interface TestInterface {
   uniqueNumber: string;
   nickName: string;
@@ -28,17 +35,21 @@ interface DataInterface extends Array<TestInterface> {}
 const MainPage: React.FC = () => {
   const [page, setPage] = useState(0);
   const [data, setData] = useState<DataInterface>(MockData);
-  const maxPage = useMemo(() => Math.ceil(data.length / 6), [data]);
+  const maxPage = useMemo(() => Math.ceil(data.length / 6) - 1, [data]);
   const [loading, setLoading] = useState(false);
 
   const nextPage = () => {
     if (page === maxPage) setPage(0);
     else setPage((page) => page + 1);
+
+    console.log(page);
   };
 
   const prevPage = () => {
     if (page === 0) setPage(maxPage);
     else setPage((page) => page - 1);
+
+    console.log(page);
   };
 
   const handleClick = () => {
@@ -58,52 +69,34 @@ const MainPage: React.FC = () => {
     // get();
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 1000);
   }, [data]);
 
   return (
     <Wrapper>
       <div>
         <img src={backgroundImg} />
-
-        <Header />
         {loading ? (
           <Loading />
         ) : (
           <>
-            <Topping
-              {...location1}
-              imageSrc={riceCakeImg}
-              eventClick={handleClick}
-            />
-            <Topping
-              {...location2}
-              imageSrc={riceCakeImg}
-              eventClick={() => alert('test2')}
-            />
-            <Topping
-              {...location3}
-              imageSrc={riceCakeImg}
-              eventClick={() => alert('test3')}
-            />
-            <Topping
-              {...location4}
-              imageSrc={riceCakeImg}
-              eventClick={() => alert('test4')}
-            />
-            <Topping
-              {...location5}
-              imageSrc={riceCakeImg}
-              eventClick={() => alert('test5')}
-            />
-            <Topping
-              {...location6}
-              imageSrc={riceCakeImg}
-              eventClick={() => alert('test6')}
-            />
+            <Header />
+            {locationArr.map((item, i) => {
+              return data[6 * page + i] ? (
+                <Topping
+                  {...item}
+                  key={i + 1}
+                  imageSrc={riceCakeImg}
+                  eventClick={handleClick}
+                />
+              ) : (
+                ''
+              );
+            })}
+
+            <Footer nextPage={nextPage} prevPage={prevPage} />
           </>
         )}
-        <Footer nextPage={nextPage} prevPage={prevPage} />
       </div>
     </Wrapper>
   );

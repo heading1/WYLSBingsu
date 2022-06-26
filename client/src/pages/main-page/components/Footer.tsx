@@ -10,10 +10,16 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = (
   props: PropsWithChildren<FooterProps>
 ) => {
+  const { prevPage, nextPage } = props;
+
   return (
     <Wrapper>
-      <Button variant="contained">이전</Button>
-      <Button variant="contained">다음</Button>
+      <Button variant="contained" onClick={() => prevPage()}>
+        이전
+      </Button>
+      <Button variant="contained" onClick={() => nextPage()}>
+        다음
+      </Button>
     </Wrapper>
   );
 };
