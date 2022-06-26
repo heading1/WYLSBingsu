@@ -7,5 +7,7 @@ declare module 'styled-components' {
     point2: string;
     point3: string;
     point4: string;
+    windowWidth: number;
+    windowHeight: number;
   }
 }

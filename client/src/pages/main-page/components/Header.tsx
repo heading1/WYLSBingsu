@@ -8,7 +8,7 @@ const Header: React.FC = () => {
         <span>안녕하세요</span>
       </div>
       <div>
-        <button>버튼</button>
+        <button onClick={() => alert('test')}>버튼</button>
         <button>버튼</button>
         <button>버튼</button>
       </div>
