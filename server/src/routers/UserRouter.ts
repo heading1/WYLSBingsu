@@ -59,8 +59,10 @@ userRouter.post('/login', async function (req, res, next) {
     }
 
     // req (request) 에서 데이터 가져오기
-    const email: string = req.body.email;
-    const password: string = req.body.password;
+    // const email: string = req.body.email;
+    // const password: string = req.body.password;
+
+    const { email,password } = req.body;
 
     // 위 데이터가 db에 있는지 확인하고,
     // db 있을 시 로그인 성공 및, 토큰 받아오기
