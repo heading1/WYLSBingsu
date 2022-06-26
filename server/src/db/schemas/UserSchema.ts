@@ -24,6 +24,7 @@ const UserSchema = new Schema(
           kakao: String,
           github: String,
           google: String,
+          base: String,
         },
         { _id: false }
       ),
