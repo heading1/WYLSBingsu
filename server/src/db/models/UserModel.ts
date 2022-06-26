@@ -4,10 +4,10 @@ import { UserSchema } from '../schemas/UserSchema';
 const User = model('users', UserSchema);
 
 export interface UserRefreshToken {
-  kakao?: String;
-  github?: String;
-  google?: String;
-  base?:String;
+  kakao?: string;
+  github?: string;
+  google?: string;
+  base?:string;
 }
 
 export interface UserInfo {
@@ -36,9 +36,9 @@ export interface ToUpdateRefreshToken {
   
 
 export class UserModel {
-  async findByEmail(email: string): Promise<UserData | null> {
+  async findByEmail(email: string): Promise<UserData> {
     const user = await User.findOne({ email });
-    return user as null;
+    return user;
   }
 
   async create(userInfo: UserInfo): Promise<UserData> {
