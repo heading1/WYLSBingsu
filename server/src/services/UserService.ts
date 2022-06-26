@@ -33,6 +33,19 @@ class UserService {
 
     return createdNewUser;
   }
+
+  // 랜덤 유저 링크 생성
+  async findRandomUser(): Promise<String> {
+
+    const randomUser = await this.userModel.findByRandom();
+
+    const {_id } = randomUser;
+    console.log(_id.toString(),randomUser.email)
+
+    const randomLink = await bcrypt.hash(_id.toString(), 10);
+    console.log(randomUser.email,randomLink);
+    return randomLink;
+  }
 }
 
 const userService = new UserService(userModel);

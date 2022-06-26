@@ -49,5 +49,16 @@ userRouter.post('/register', async (req, res, next) => {
   }
 });
 
+userRouter.get('/random', async (req, res, next) => {
+  try {
+
+    const randomLink = await userService.findRandomUser();
+
+    res.status(200).json(randomLink);
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 export { userRouter };
