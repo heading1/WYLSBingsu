@@ -2,10 +2,11 @@ import GithubOAuth from './GithubOAuth';
 import CustomForm from '@/common/form-component/CustomForm';
 import { FormInputType } from '@/types/types';
 import { LoginButton } from './LoginFormStyle';
+import requestLogin from '../API/requestLogin';
 
 const LoginForm: React.FC = () => {
   const onSubmit = (data: FormInputType) => {
-    console.log(data);
+    requestLogin(data);
   };
 
   return (
