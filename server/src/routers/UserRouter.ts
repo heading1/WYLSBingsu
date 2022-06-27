@@ -98,6 +98,12 @@ userRouter.put('/', authJwt, tokenRequestMatch, async (req, res, next) => {
     const password: string = req.body.password;
     const nickName: string = req.body.nickName;
 
+    let regexPassword =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
+    if (!regexPassword.test(password)) {
+      throw new Error('비밀번호 형식이 올바르지 않습니다.');
+    }
+
     // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
     const currentPassword = req.body.currentPassword;
 
