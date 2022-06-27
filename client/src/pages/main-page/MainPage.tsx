@@ -18,13 +18,13 @@ import Topping from './components/Topping';
 import MockData from './MockData.json';
 import Loading from '@/components/Loading';
 
-const ratio = theme.windowHeight / 1000;
-const location1 = { top: 15, left: 28, width: 188 * ratio };
-const location2 = { top: 22, left: 55, width: 188 * ratio };
-const location3 = { top: 27, left: 8, width: 188 * ratio };
-const location4 = { top: 35, left: 33, width: 188 * ratio };
-const location5 = { top: 38, left: 66, width: 188 * ratio };
-const location6 = { top: 40, left: 0, width: 188 * ratio };
+const ratio = theme.windowHeight / 1500;
+const location1 = { top: 15, left: 32, width: 188 * ratio };
+const location2 = { top: 22, left: 59, width: 188 * ratio };
+const location3 = { top: 27, left: 12, width: 188 * ratio };
+const location4 = { top: 35, left: 37, width: 188 * ratio };
+const location5 = { top: 38, left: 70, width: 188 * ratio };
+const location6 = { top: 40, left: 4, width: 188 * ratio };
 const locationArr = [
   location1,
   location2,
