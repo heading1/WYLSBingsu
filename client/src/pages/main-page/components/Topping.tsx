@@ -5,6 +5,7 @@ interface ToppingProps {
   left: number;
   width: number;
   imageSrc: string;
+  rotate: number;
   eventClick: Function;
 }
 

@@ -1,6 +1,15 @@
 import { theme } from '@/styles';
 import React, { useEffect, useMemo, useState } from 'react';
-import backgroundImg from '../../assets/images/bingsu.jpeg';
+import {
+  bingsu,
+  chocolate1,
+  chocolate2,
+  chocolate3,
+  chocolate4,
+  kiwi,
+  pineapple,
+  watermelon,
+} from '../../assets/images';
 import { Header, Footer } from './components';
 import axios from 'axios';
 import Wrapper from './MainPageStyle';
@@ -24,6 +33,16 @@ const locationArr = [
   location5,
   location6,
 ];
+const toppingImgArr = [kiwi, pineapple, watermelon];
+const randomTopping = () => {
+  const randomIndex = Math.floor(Math.random() * toppingImgArr.length);
+  const randomImage = toppingImgArr[randomIndex];
+
+  return randomImage;
+};
+const randomRotate = () => {
+  return Math.floor(Math.random() * 360);
+};
 interface TestInterface {
   uniqueNumber: string;
   nickName: string;
@@ -75,7 +94,7 @@ const MainPage: React.FC = () => {
   return (
     <Wrapper>
       <div>
-        <img src={backgroundImg} />
+        <img src={bingsu} />
         {loading ? (
           <Loading />
         ) : (
@@ -85,8 +104,9 @@ const MainPage: React.FC = () => {
               return data[6 * page + i] ? (
                 <Topping
                   {...item}
+                  rotate={randomRotate()}
                   key={i + 1}
-                  imageSrc={riceCakeImg}
+                  imageSrc={randomTopping()}
                   eventClick={handleClick}
                 />
               ) : (
