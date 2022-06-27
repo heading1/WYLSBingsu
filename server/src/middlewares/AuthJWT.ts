@@ -5,11 +5,11 @@ import { userService } from '../services';
 
 async function authJwt(req: Request, res: Response, next: NextFunction) {
   // request 헤더로부터 authorization bearer 토큰을 받음.
-  const userAcessToken = req.headers['authorization']?.split(' ')[1];
+  const userAccessToken = req.headers['authorization']?.split(' ')[1];
 
   // 이 토큰은 jwt 토큰 문자열이거나, 혹은 "null" 문자열이거나, undefined임.
   // 토큰이 "null" 일 경우, login_required 가 필요한 서비스 사용을 제한함.
-  if (!userAcessToken || userAcessToken === 'null') {
+  if (!userAccessToken || userAccessToken === 'null') {
 
     res.status(403).json({
       result: 'forbidden-approach',
@@ -22,13 +22,13 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
   // 해당 token 이 정상적인 token인지 확인
   try {
     
-    const verifyAccessToken = verifyToken(userAcessToken);
+    const verifyAccessToken = verifyToken(userAccessToken);
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
 
     // access token 만료
     if (verifyAccessToken == "jwt expired"){  
         
-        const userInfo:any = jwt_decode(userAcessToken);
+        const userInfo:any = jwt_decode(userAccessToken);
         
         const { userEmail } = userInfo;
 
@@ -48,17 +48,17 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
         // access token은 만료됐지만, refresh token은 유효한 경우 ->  access token 재발급
         } else {
             
-            const newAcessToken = jwt.sign({ userEmail: user.email, userNickname: user.nickName }, secretKey,{
+            const newAccessToken = jwt.sign({ userEmail: user.email, userNickname: user.nickName }, secretKey,{
                 expiresIn: "30s",
               });
             
-            res.send({ message: "new AcessToken", newAcessToken });
+            res.send({ message: "new AccessToken", newAccessToken });
       
         }
     
     //  access token 만료 X
     } else {
-        const { userEmail } = jwt.verify(userAcessToken,secretKey) as JwtPayload;
+        const { userEmail } = jwt.verify(userAccessToken,secretKey) as JwtPayload;
 
         const user = await userService.findUserByEmail(userEmail);
 
