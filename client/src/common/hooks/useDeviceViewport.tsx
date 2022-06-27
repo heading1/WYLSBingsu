@@ -11,7 +11,6 @@ const useDeviceViewport = (): DeviceViewport => {
     const height = window.innerHeight;
 
     if (width > RESPONSIVE_WIDTH) {
-      console.log(true);
       setDeviceWidth(26 + 'rem');
     } else {
       setDeviceWidth(width + 'px');
@@ -24,7 +23,7 @@ const useDeviceViewport = (): DeviceViewport => {
     setScreenSize();
   }, []);
 
-  return { deviceWidth: deviceWidth, deviceHeight: deviceHeight };
+  return { deviceWidth, deviceHeight };
 };
 
 export default useDeviceViewport;

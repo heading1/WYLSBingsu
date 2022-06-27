@@ -3,12 +3,13 @@ import ArticleForm from './components/ArticleForm';
 import useDeviceViewport from '@/common/hooks/useDeviceViewport';
 
 const WritePage: React.FC = () => {
-  const { deviceHeight } = useDeviceViewport();
+  const { deviceWidth, deviceHeight } = useDeviceViewport();
 
   return (
     <Wrapper deviceHeight={deviceHeight}>
-      <ArticleForm />
-      <SubmitButton>글 쓰기</SubmitButton>
+      <ArticleForm deviceWidth={deviceWidth}>
+        <SubmitButton>글 쓰기</SubmitButton>
+      </ArticleForm>
     </Wrapper>
   );
 };
