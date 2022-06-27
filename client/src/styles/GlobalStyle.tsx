@@ -23,7 +23,9 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
-  input, button {
+  input,
+  button,
+  textarea {
     font-family: 'MICEGothic',sans-serif;
     background-color: transparent;
     border: none;
