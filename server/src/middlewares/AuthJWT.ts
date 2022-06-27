@@ -6,7 +6,7 @@ import { userService } from '../services';
 async function authJwt(req: Request, res: Response, next: NextFunction) {
   // request 헤더로부터 authorization bearer 토큰을 받음.
   const userAccessToken = req.headers['authorization']?.split(' ')[1];
-
+ 
   // 이 토큰은 jwt 토큰 문자열이거나, 혹은 "null" 문자열이거나, undefined임.
   // 토큰이 "null" 일 경우, login_required 가 필요한 서비스 사용을 제한함.
   if (!userAccessToken || userAccessToken === 'null') {
@@ -38,22 +38,29 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
 
         const verifyRefreshToken = verifyToken(userRefreshToken);
 
-        // access token과 refresh token 모두가 만료된 경우 -> 에러 발생
+        
         if(verifyRefreshToken == "jwt expired"){
             
-            res.send({ errorMessage: "로그인이 필요합니다." });
-
-            return ; 
+          res.status(403).json({
+            result: 'login expired',
+            reason: '로그인이 만료되었습니다. 다시 로그인 해주세요',
+          });
+          
+          return ; 
         
-        // access token은 만료됐지만, refresh token은 유효한 경우 ->  access token 재발급
+        
         } else {
             
             const newAccessToken = jwt.sign({ userEmail: user.email, userNickname: user.nickName }, secretKey,{
                 expiresIn: "30s",
               });
             
-            res.send({ message: "new AccessToken", newAccessToken });
-      
+            res.cookie('user', newAccessToken, {
+                httpOnly: true,
+            });
+
+            req.currentUserEmail = user.email;
+            
         }
     
     //  access token 만료 X
@@ -61,6 +68,8 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
         const { userEmail } = jwt.verify(userAccessToken,secretKey) as JwtPayload;
 
         const user = await userService.findUserByEmail(userEmail);
+
+        req.currentUserEmail = user.email;
 
         const userId = user._id;
 
@@ -80,7 +89,7 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
                 update: {refreshToken : {base: newRefreshToken} },
             });
 
-            res.send({ message: "new RefreshToken", newRefreshToken });
+            
 
         }
 
@@ -96,7 +105,7 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
       result: 'forbidden-approach',
       reason: '정상적인 토큰이 아닙니다.',
     });
-    console.log(error);
+
     return;
   }
 }
