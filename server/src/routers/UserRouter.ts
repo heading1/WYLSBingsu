@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
 import { userService } from '../services';
+import { authJwt } from '../middlewares';
 
 const userRouter = Router();
 
@@ -44,6 +45,31 @@ userRouter.post('/register', async (req, res, next) => {
     });
 
     res.status(201).json(newUser);
+  } catch (error) {
+    next(error);
+  }
+});
+
+userRouter.post('/login', async function (req, res, next) {
+  try {
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        'headers의 Content-Type을 application/json으로 설정해주세요'
+      );
+    }
+
+    // req (request) 에서 데이터 가져오기
+    // const email: string = req.body.email;
+    // const password: string = req.body.password;
+
+    const { email,password } = req.body;
+
+    // 위 데이터가 db에 있는지 확인하고,
+    // db 있을 시 로그인 성공 및, 토큰 받아오기
+    const userToken = await userService.getUserToken({ email, password });
+
+    res.status(200).json(userToken);
   } catch (error) {
     next(error);
   }
