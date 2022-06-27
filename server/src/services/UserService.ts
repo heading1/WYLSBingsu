@@ -193,6 +193,19 @@ class UserService {
 
     return user;
   }
+  
+  async getUserLink(email:string): Promise<String> {
+
+    const user = await this.userModel.findByEmail(email);
+
+    const {_id } = user;
+    
+
+    const userLink = _id.toString()
+    
+    return userLink;
+
+  }
 }
 
 const userService = new UserService(userModel);
