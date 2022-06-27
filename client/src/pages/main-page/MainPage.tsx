@@ -88,11 +88,11 @@ const MainPage: React.FC = () => {
     // get();
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, [data]);
 
   return (
-    <Wrapper>
+    <Wrapper loading={loading}>
       <div>
         <img src={bingsu} />
         {loading ? (

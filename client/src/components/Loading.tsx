@@ -25,8 +25,9 @@ const LoadingSpinner = styled.div`
   height: 50px;
   border: 7px solid ${theme.point4};
   border-radius: 50%;
-  border-top-color: ${theme.point3};
+  border-top-color: ${theme.point2};
   animation: ${spin} 1s linear infinite;
+  z-index: 2;
 `;
 
 const Loading: React.FC = () => {
