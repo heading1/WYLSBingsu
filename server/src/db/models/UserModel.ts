@@ -41,6 +41,12 @@ export class UserModel {
     return user;
   }
 
+  async findByRandom(): Promise<UserData> {
+    const user = await User.aggregate([{ $sample: { size: 1 } }]);
+    const randomUser = user[0];
+    return randomUser;
+  }
+
   async create(userInfo: UserInfo): Promise<UserData> {
     const createdNewUser = await User.create(userInfo);
     return createdNewUser;

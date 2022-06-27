@@ -75,17 +75,13 @@ userRouter.post('/login', async function (req, res, next) {
   }
 });
 
-userRouter.get('/test', authJwt ,async function (req, res, next) {
+userRouter.get('/random', async (req, res, next) => {
   try {
-    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        'headers의 Content-Type을 application/json으로 설정해주세요'
-      );
-    }
 
-  
-    res.status(200).json('test입니다.');
+    const randomLink = await userService.findRandomUser();
+
+    res.status(200).json(randomLink);
+    
   } catch (error) {
     next(error);
   }

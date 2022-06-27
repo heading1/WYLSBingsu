@@ -30,6 +30,10 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 
+  button{
+    cursor: pointer;
+  }
+
   ol, ul, li {
     list-style: none;
   }
@@ -39,6 +43,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
   }
+
 `;
 
 export default GlobalStyle;
