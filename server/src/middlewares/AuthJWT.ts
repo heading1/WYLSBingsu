@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import jwt_decode from "jwt-decode";
-import { userModel } from '../db';
+import { userService } from '../services';
 
 async function authJwt(req: Request, res: Response, next: NextFunction) {
   // request 헤더로부터 authorization bearer 토큰을 받음.
@@ -10,7 +10,7 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
   // 이 토큰은 jwt 토큰 문자열이거나, 혹은 "null" 문자열이거나, undefined임.
   // 토큰이 "null" 일 경우, login_required 가 필요한 서비스 사용을 제한함.
   if (!userAcessToken || userAcessToken === 'null') {
-    console.log('서비스 사용 요청이 있습니다.하지만, Authorization 토큰: 없음');
+
     res.status(403).json({
       result: 'forbidden-approach',
       reason: '로그인한 유저만 사용할 수 있는 서비스입니다.',
@@ -30,9 +30,9 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
         
         const userInfo:any = jwt_decode(userAcessToken);
         
-        const { email } = userInfo;
-        
-        const user = await userModel.findByEmail(email);
+        const { userEmail } = userInfo;
+
+        const user = await userService.findUserByEmail(userEmail);
 
         const userRefreshToken = user.refreshToken?.base as string;
 
@@ -49,17 +49,18 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
         } else {
             
             const newAcessToken = jwt.sign({ userEmail: user.email, userNickname: user.nickName }, secretKey,{
-                expiresIn: "1h",
+                expiresIn: "30s",
               });
             
             res.send({ message: "new AcessToken", newAcessToken });
+      
         }
     
     //  access token 만료 X
     } else {
-        const { email } = jwt.verify(userAcessToken,secretKey) as JwtPayload;
+        const { userEmail } = jwt.verify(userAcessToken,secretKey) as JwtPayload;
 
-        const user = await userModel.findByEmail(email);
+        const user = await userService.findUserByEmail(userEmail);
 
         const userId = user._id;
 
@@ -71,10 +72,10 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
         if(verifyRefreshToken == "jwt expired"){
             
             const newRefreshToken = jwt.sign({}, secretKey,{
-                expiresIn: "1d",
+                expiresIn: "50s",
               });
 
-            const updatedUser = await userModel.updateRefreshToken({
+            const updatedUser = await userService.updateRefreshToken({
                 userId,
                 update: {refreshToken : {base: newRefreshToken} },
             });
@@ -85,8 +86,8 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
 
         // accesss token과 refresh token 모두가 유효한 경우 -> 다음 미들웨어로
         else{
-            
-        }
+
+        } 
     }
 
     next();
@@ -95,7 +96,7 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
       result: 'forbidden-approach',
       reason: '정상적인 토큰이 아닙니다.',
     });
-
+    console.log(error);
     return;
   }
 }

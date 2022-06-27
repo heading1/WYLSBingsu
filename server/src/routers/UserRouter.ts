@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
 import { userService } from '../services';
+import { authJwt } from '../middlewares';
 
 const userRouter = Router();
 
@@ -69,6 +70,22 @@ userRouter.post('/login', async function (req, res, next) {
     const userToken = await userService.getUserToken({ email, password });
 
     res.status(200).json(userToken);
+  } catch (error) {
+    next(error);
+  }
+});
+
+userRouter.get('/test', authJwt ,async function (req, res, next) {
+  try {
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        'headers의 Content-Type을 application/json으로 설정해주세요'
+      );
+    }
+
+  
+    res.status(200).json('test입니다.');
   } catch (error) {
     next(error);
   }

@@ -7,6 +7,13 @@ import {
   UserData,
 } from '../db';
 
+interface UserRefreshToken {
+  kakao?: string;
+  github?: string;
+  google?: string;
+  base?:string;
+}
+
 interface LoginInfo {
   email: string;
   password: string;
@@ -17,8 +24,36 @@ interface LoginResult {
   refreshToken: string;
 }
 
+interface ToUpdateRefreshToken {
+  userId: object;
+  update: {
+    [key: string]: UserRefreshToken;
+  };
+}
+
 class UserService {
   constructor(private userModel: UserModel) {}
+
+   async findUserByEmail(email: string): Promise<UserData> {
+    // 객체 destructuring
+  
+    // 이메일 중복 확인
+    const user = await this.userModel.findByEmail(email);
+    
+    return user;
+  }
+
+  async updateRefreshToken({ userId, update }: ToUpdateRefreshToken): Promise<UserData> {
+    const filter = { _id: userId };
+    const option = { returnOriginal: false };
+
+    const updatedUser = await this.userModel.updateRefreshToken({
+      userId,
+      update,
+    });
+    return updatedUser;
+  }
+
 
   // 일반 회원가입
   async addUser(userInfo: UserInfo): Promise<UserData> {
@@ -74,11 +109,11 @@ class UserService {
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
 
     const acessToken = jwt.sign({ userEmail: user.email, userNickname: user.nickName }, secretKey,{
-      expiresIn: "1h",
+      expiresIn: "30s",
     });
 
     const refreshToken = jwt.sign({}, secretKey,{
-      expiresIn: "1d",
+      expiresIn: "50s",
     });
 
     const updatedUser = await this.userModel.updateRefreshToken({
