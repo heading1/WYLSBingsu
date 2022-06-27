@@ -55,6 +55,7 @@ userRouter.get('/random', async (req, res, next) => {
     const randomLink = await userService.findRandomUser();
 
     res.status(200).json(randomLink);
+    
   } catch (error) {
     next(error);
   }

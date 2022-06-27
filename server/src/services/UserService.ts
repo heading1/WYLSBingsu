@@ -40,10 +40,10 @@ class UserService {
     const randomUser = await this.userModel.findByRandom();
 
     const {_id } = randomUser;
-    console.log(_id.toString(),randomUser.email)
+    
 
-    const randomLink = await bcrypt.hash(_id.toString(), 10);
-    console.log(randomUser.email,randomLink);
+    const randomLink = _id.toString()
+    
     return randomLink;
   }
 }
