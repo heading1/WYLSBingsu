@@ -69,7 +69,7 @@ userRouter.post('/login', async function (req, res, next) {
     // db 있을 시 로그인 성공 및, 토큰 받아오기
     const userToken = await userService.getUserToken({ email, password });
 
-    res.status(200).json(userToken);
+    res.status(201).json(userToken);
   } catch (error) {
     next(error);
   }
@@ -81,6 +81,20 @@ userRouter.get('/random', async (req, res, next) => {
     const randomLink = await userService.findRandomUser();
 
     res.status(200).json(randomLink);
+    
+  } catch (error) {
+    next(error);
+  }
+});
+
+userRouter.get('/link', authJwt, async (req, res, next) => {
+  try {
+
+    const userEmail = req.currentUserEmail;
+
+    const userLink = await userService.getUserLink(userEmail);
+
+    res.status(200).json(userLink);
     
   } catch (error) {
     next(error);
