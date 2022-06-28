@@ -20,7 +20,7 @@ interface LoginInfo {
 }
 
 interface LoginResult {
-  acessToken: string;
+  accessToken: string;
   refreshToken: string;
 }
 
@@ -109,7 +109,7 @@ class UserService {
     // 로그인 성공 -> JWT 웹 토큰 생성
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
 
-    const acessToken = jwt.sign({ userEmail: user.email, userNickname: user.nickName }, secretKey,{
+    const accessToken = jwt.sign({ userEmail: user.email, userNickname: user.nickName }, secretKey,{
       expiresIn: "30s",
     });
 
@@ -123,7 +123,7 @@ class UserService {
     });
 
 
-    return { acessToken, refreshToken };
+    return { accessToken, refreshToken };
   }
 
   // 랜덤 유저 링크 생성
@@ -137,6 +137,19 @@ class UserService {
     const randomLink = _id.toString()
     
     return randomLink;
+
+  }
+  
+  async getUserLink(email:string): Promise<String> {
+
+    const user = await this.userModel.findByEmail(email);
+
+    const {_id } = user;
+    
+
+    const userLink = _id.toString()
+    
+    return userLink;
 
   }
 }
