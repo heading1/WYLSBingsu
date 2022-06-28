@@ -16,7 +16,6 @@ interface LoginInfo {
 
 interface LoginResult {
   accessToken: string;
-  refreshToken: string;
 }
 
 interface ToUpdateRefreshToken {
@@ -132,7 +131,7 @@ class UserService {
       update: { refreshToken: { base: refreshToken } },
     });
 
-    return { accessToken, refreshToken };
+    return { accessToken };
   }
 
   // 랜덤 유저 링크 생성
@@ -193,18 +192,15 @@ class UserService {
 
     return user;
   }
-  
-  async getUserLink(email:string): Promise<String> {
 
+  async getUserLink(email: string): Promise<String> {
     const user = await this.userModel.findByEmail(email);
 
-    const {_id } = user;
-    
+    const { _id } = user;
 
-    const userLink = _id.toString()
-    
+    const userLink = _id.toString();
+
     return userLink;
-
   }
 }
 

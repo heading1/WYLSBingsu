@@ -67,7 +67,12 @@ userRouter.post('/login', async function (req, res, next) {
     // db 있을 시 로그인 성공 및, 토큰 받아오기
     const userToken = await userService.getUserToken({ email, password });
 
-    res.status(201).json(userToken);
+    const { accessToken } = userToken;
+    res.cookie('user', accessToken, {
+      httpOnly: true,
+    });
+
+    res.status(201).json({ message: '로그인에 성공했습니다!' });
   } catch (error) {
     next(error);
   }
@@ -83,7 +88,7 @@ userRouter.get('/random', async (req, res, next) => {
   }
 });
 
-userRouter.put('/', authJwt, tokenRequestMatch, async (req, res, next) => {
+userRouter.patch('/', authJwt, tokenRequestMatch, async (req, res, next) => {
   try {
     // content-type 을 application/json 로 프론트에서
     // 설정 안 하고 요청하면, body가 비어 있게 됨.
