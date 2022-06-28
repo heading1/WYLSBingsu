@@ -1,4 +1,4 @@
-import { model,Types } from 'mongoose';
+import { model, Types } from 'mongoose';
 import { UserSchema } from '../schemas/UserSchema';
 
 const User = model('users', UserSchema);
@@ -7,7 +7,7 @@ export interface UserRefreshToken {
   kakao?: string;
   github?: string;
   google?: string;
-  base?:string;
+  base?: string;
 }
 
 export interface UserInfo {
@@ -28,12 +28,18 @@ export interface UserData {
 }
 
 export interface ToUpdateRefreshToken {
-    userId: object;
-    update: {
-      [key: string]: UserRefreshToken;
-    };
-  }
-  
+  userId: object;
+  update: {
+    [key: string]: UserRefreshToken;
+  };
+}
+
+interface ToUpdate {
+  email: string;
+  update: {
+    [key: string]: string | number | UserRefreshToken;
+  };
+}
 
 export class UserModel {
   async findByEmail(email: string): Promise<UserData> {
@@ -52,7 +58,10 @@ export class UserModel {
     return createdNewUser;
   }
 
-  async updateRefreshToken({ userId, update }: ToUpdateRefreshToken): Promise<UserData> {
+  async updateRefreshToken({
+    userId,
+    update,
+  }: ToUpdateRefreshToken): Promise<UserData> {
     const filter = { _id: userId };
     const option = { returnOriginal: false };
 
@@ -60,6 +69,13 @@ export class UserModel {
     return updatedUser;
   }
 
+  async update({ email, update }: ToUpdate): Promise<UserData> {
+    const filter = { email: email };
+    const option = { returnOriginal: false };
+
+    const updatedUser = await User.findOneAndUpdate(filter, update, option);
+    return updatedUser;
+  }
 }
 
 const userModel = new UserModel();
