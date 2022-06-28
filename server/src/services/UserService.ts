@@ -36,7 +36,6 @@ class UserService {
   async findUserByEmail(email: string): Promise<UserData> {
     // 객체 destructuring
 
-    // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
 
     return user;
@@ -201,6 +200,40 @@ class UserService {
     const userLink = _id.toString();
 
     return userLink;
+  }
+
+  async deleteUserData(
+    email: string,
+    password: string
+  ): Promise<{ message: string }> {
+    let user = await this.userModel.findByEmail(email);
+
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!user) {
+      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
+
+    // 비밀번호 일치 여부 확인
+    const correctPasswordHash = user.password;
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      correctPasswordHash
+    );
+
+    if (!isPasswordCorrect) {
+      throw new Error(
+        '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
+      );
+    }
+
+    const { deletedCount } = await this.userModel.deleteById(email);
+
+    // 삭제에 실패한 경우, 에러 메시지 반환
+    if (deletedCount === 0) {
+      throw new Error(`${email} 님의 회원탈퇴를 실패하였습니다.`);
+    }
+
+    return { message: `${email} 님의 회원탈퇴하였습니다.` };
   }
 }
 
