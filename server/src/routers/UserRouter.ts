@@ -88,7 +88,7 @@ userRouter.get('/random', async (req, res, next) => {
   }
 });
 
-userRouter.patch('/', authJwt, tokenRequestMatch, async (req, res, next) => {
+userRouter.patch('/', authJwt, async (req, res, next) => {
   try {
     // content-type 을 application/json 로 프론트에서
     // 설정 안 하고 요청하면, body가 비어 있게 됨.
@@ -133,6 +133,36 @@ userRouter.patch('/', authJwt, tokenRequestMatch, async (req, res, next) => {
     );
 
     res.status(200).json(updatedUserInfo);
+  } catch (error) {
+    next(error);
+  }
+});
+
+userRouter.delete('/', authJwt, async (req, res, next) => {
+  try {
+    // content-type 을 application/json 로 프론트에서
+    // 설정 안 하고 요청하면, body가 비어 있게 됨.
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        'headers의 Content-Type을 application/json으로 설정해주세요'
+      );
+    }
+
+    // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
+    const password: string = req.body.password;
+
+    // Password 없을 시, 진행 불가
+    if (!password) {
+      throw new Error('정보를 변경하려면, 현재의 비밀번호가 필요합니다.');
+    }
+
+    // 사용자 정보를 삭제함.
+    const deleteResult = await userService.deleteUserData(
+      req.currentUserEmail,
+      password
+    );
+
+    res.status(200).json(deleteResult);
   } catch (error) {
     next(error);
   }

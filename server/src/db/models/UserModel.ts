@@ -76,6 +76,11 @@ export class UserModel {
     const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
   }
+
+  async deleteById(email: string): Promise<{ deletedCount: number }> {
+    const result = await User.deleteOne({ email: email });
+    return result;
+  }
 }
 
 const userModel = new UserModel();
