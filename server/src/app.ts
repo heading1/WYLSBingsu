@@ -1,6 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import * as redis from 'redis';
 import { userRouter } from './routers';
 import { errorLogger, errorHandler } from './middlewares';
 
@@ -8,6 +9,18 @@ const app = express();
 
 // CORS 에러 방지
 app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
+
+// Redis
+const redisClient = redis.createClient({
+  url: `${process.env.REDIS_URL}`,
+});
+redisClient.connect();
+redisClient.on('error', (err) => {
+  console.log(err);
+});
+redisClient.on('ready', () => {
+  console.log('정상적으로 Redis 서버에 연결되었습니다.');
+});
 
 app.use(cookieParser());
 
