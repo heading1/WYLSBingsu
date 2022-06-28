@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
-import { userService } from '../services';
+import { redisClient } from '../app';
+import { userService, mailer } from '../services';
 import { authJwt, tokenRequestMatch } from '../middlewares';
 
 const userRouter = Router();
@@ -175,6 +176,50 @@ userRouter.get('/link', authJwt, async (req, res, next) => {
     const userLink = await userService.getUserLink(userEmail);
 
     res.status(200).json(userLink);
+  } catch (error) {
+    next(error);
+  }
+});
+
+userRouter.post('/mail', async (req, res, next) => {
+  try {
+    //이메일 중복확인
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        'headers의 Content-Type을 application/json으로 설정해주세요'
+      );
+    }
+
+    // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
+    const email: string = req.body.email;
+
+    let regexEmail =
+      /^(([^<>()[\]\.,;:\s@"]+(\.[^<>()[\]\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!regexEmail.test(email)) {
+      throw new Error('이메일 형식이 올바르지 않습니다.');
+    }
+
+    const mailcheck = await userService.findUserByEmail(email);
+
+    if (mailcheck) {
+      throw new Error(
+        '이 이메일은 현재 사용중입니다. 다른 이메일을 입력해 주세요.'
+      );
+    }
+
+    const mailAuth = await mailer(email);
+
+    const { generatedAuthNumber, generatedIdentifierNumber } = mailAuth;
+    console.log(generatedAuthNumber, generatedIdentifierNumber);
+    // const redisSave = await redisClient.setEx(
+    //   email,
+    //   process.env.DEFAULT_EXPIRATION,
+    //   mailAuth.generatedAuthNumber
+    // );
+    // if (!redisSave) {
+
+    // }
+    res.status(201).json({ message: '메일발송성공' });
   } catch (error) {
     next(error);
   }

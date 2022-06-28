@@ -35,4 +35,4 @@ app.use('/user', userRouter);
 app.use(errorLogger);
 app.use(errorHandler);
 
-export { app };
+export { app, redisClient };
