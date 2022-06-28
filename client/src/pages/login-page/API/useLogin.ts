@@ -1,35 +1,33 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { FormInputType } from '@/types/types';
 import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const URI = `http://localhost:8070/user/login`;
 
-const requestLogin = async (data: FormInputType) => {
-  try {
-    const response = await axios.post(URI, data);
-    if (response.status === 200) {
-      return response;
-    }
-  } catch (err) {
-    return err;
-  }
+type LoginResponse = {
+  accessToken: string;
+  refreshToken: string;
 };
 
 const useLogin = () => {
-  const [error, setError] = useState('');
-  const [result, setResult] = useState('');
+  const [error, setError] = useState<Error['message']>('');
+  const [result, setResult] = useState<string>();
   const [isLoading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const asyncLogin = useCallback((data: FormInputType) => {
     setLoading(true);
-    requestLogin(data)
+    axios
+      .post<LoginResponse>(URI, data)
       .then((response) => {
         console.log('then');
         setResult('OK');
+        navigate('/');
       })
-      .catch((err) => {
+      .catch((err: AxiosError) => {
         console.log('catch');
-        setError(err);
+        setError(err.message);
       })
       .finally(() => {
         console.log('finally');
@@ -41,6 +39,3 @@ const useLogin = () => {
 };
 
 export default useLogin;
-
-// "email": "test2@test.com",
-// "password": "Test1234@"

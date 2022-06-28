@@ -1,26 +1,16 @@
 import GithubOAuth from './GithubOAuth';
 import CustomForm from '@/common/form-component/CustomForm';
 import { FormInputType } from '@/types/types';
-import { LoginButton } from './LoginFormStyle';
+import { LoginButton, LoadingDiv } from './LoginFormStyle';
 import Loading from '@/components/Loading';
 import useLogin from '../API/useLogin';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const LoginForm: React.FC = () => {
-  const { asyncLogin, error, result, isLoading } = useLogin();
-  const navigate = useNavigate();
+  const { asyncLogin, isLoading } = useLogin();
 
-  const onSubmit = (data: FormInputType) => {
+  const onSubmit = async (data: FormInputType) => {
     asyncLogin(data);
   };
-
-  useEffect(() => {
-    if (result !== '') {
-      console.log(result);
-      navigate('/');
-    }
-  }, [error, result]);
 
   return (
     <>
@@ -28,7 +18,11 @@ const LoginForm: React.FC = () => {
         <LoginButton type="submit">Login</LoginButton>
         <GithubOAuth />
       </CustomForm>
-      {isLoading && <Loading />}
+      {isLoading && (
+        <LoadingDiv>
+          <Loading />
+        </LoadingDiv>
+      )}
     </>
   );
 };
