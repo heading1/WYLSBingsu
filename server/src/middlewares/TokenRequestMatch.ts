@@ -12,7 +12,7 @@ async function tokenRequestMatch(
       );
       res.status(403).json({
         result: 'forbidden-approach',
-        reason: '로그인된 유저는 요청할 수 있는 권한이 없습니다.',
+        message: '로그인된 유저는 요청할 수 있는 권한이 없습니다.',
       });
 
       return;
@@ -21,7 +21,7 @@ async function tokenRequestMatch(
   } catch (error) {
     res.status(403).json({
       result: 'forbidden-approach',
-      reason: '정상적인 토큰이 아닙니다.',
+      message: '정상적인 토큰이 아닙니다.',
     });
     console.log(error);
     return;
