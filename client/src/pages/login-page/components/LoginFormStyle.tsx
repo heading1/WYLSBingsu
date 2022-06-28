@@ -26,3 +26,12 @@ export const LoadingDiv = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
 `;
+
+export const ErrorMessage = styled.p`
+  width: 100%;
+  margin: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.2rem;
+  color: red;
+`;
