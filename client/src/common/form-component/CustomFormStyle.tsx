@@ -28,6 +28,7 @@ const StyledForm = styled.form`
     font-size: 1.2rem;
     width: 100%;
     border-bottom: 3px solid black;
+    padding: 0.4rem 0.8rem;
 
     :-webkit-autofill,
     :-webkit-autofill:hover,

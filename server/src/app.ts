@@ -7,7 +7,7 @@ import { errorLogger, errorHandler } from './middlewares';
 const app = express();
 
 // CORS 에러 방지
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
 
 app.use(cookieParser());
 

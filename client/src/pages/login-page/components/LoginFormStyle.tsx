@@ -17,3 +17,21 @@ export const LoginButton = styled.button`
     opacity: 1;
   }
 `;
+
+export const LoadingDiv = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+`;
+
+export const ErrorMessage = styled.p`
+  width: 100%;
+  margin: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.2rem;
+  color: red;
+`;
