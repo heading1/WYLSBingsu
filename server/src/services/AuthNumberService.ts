@@ -16,6 +16,15 @@ class AuthNumberService {
 
     return createdAuthNumber;
   }
+
+  async findAuthNumber(
+    AuthNumberInfo: Partial<ToInsertAuthNumber>
+  ): Promise<AuthNumberData> {
+    // 이메일 중복 확인
+    const createdAuthNumber = await this.authNumberModel.find(AuthNumberInfo);
+
+    return createdAuthNumber;
+  }
 }
 
 const authNumberService = new AuthNumberService(authNumberModel);

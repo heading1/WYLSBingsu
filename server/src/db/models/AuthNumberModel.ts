@@ -25,10 +25,12 @@ export class AuthNumberModel {
     return createdAuthNumber;
   }
 
-  // async findByEmail(email: string): Promise<UserData> {
-  //     const user = await AuthNumber.findOne({ email });
-  //     return user;
-  //   }
+  async find(
+    AuthNumberInfo: Partial<ToInsertAuthNumber>
+  ): Promise<AuthNumberData> {
+    const findAuthNumber = await AuthNumber.findOne(AuthNumberInfo);
+    return findAuthNumber;
+  }
 }
 
 const authNumberModel = new AuthNumberModel();
