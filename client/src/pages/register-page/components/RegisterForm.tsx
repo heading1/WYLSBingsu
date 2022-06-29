@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import useRegister from '../hook/useRegister';
 import EmailCertificationForm from './EmailCertificationForm';
-import Loading from '@/components/Loading';
+import Loading from '@/common/components/Loading';
 
 const RegisterForm: React.FC = () => {
   const [inputData, setInputData] = useState<RegisterInputType>({
