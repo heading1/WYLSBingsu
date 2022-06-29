@@ -7,6 +7,7 @@ interface FormProps {
   onSubmit: (data: RegisterInputType) => void;
   header?: string;
   registerMode?: boolean;
+  isDisabled?: boolean;
 }
 
 const CustomForm: React.FC<FormProps> = ({
@@ -14,6 +15,7 @@ const CustomForm: React.FC<FormProps> = ({
   onSubmit,
   header,
   registerMode,
+  isDisabled,
 }) => {
   const {
     register,
@@ -40,6 +42,7 @@ const CustomForm: React.FC<FormProps> = ({
           id="emailInput"
           type="text"
           placeholder="필수 입력 항목"
+          disabled={isDisabled}
           {...register('email', {
             required: true,
             pattern:
@@ -61,6 +64,7 @@ const CustomForm: React.FC<FormProps> = ({
           id="passwordInput"
           type="password"
           placeholder="필수 입력 항목"
+          disabled={isDisabled}
           {...register('password', {
             required: true,
             pattern:
@@ -86,6 +90,7 @@ const CustomForm: React.FC<FormProps> = ({
             type="text"
             {...register('nickName')}
             placeholder="미 입력시 랜덤으로 주어집니다."
+            disabled={isDisabled}
           />
         </div>
       )}

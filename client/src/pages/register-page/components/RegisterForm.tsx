@@ -40,6 +40,7 @@ const RegisterForm: React.FC = () => {
         onSubmit={onSubmit}
         header="REGISTER IN BINGSU"
         registerMode={true}
+        isDisabled={isSend}
       >
         {showError && <p>{error}</p>}
         <RegisterButton type="submit" isDisabled={isSend} ref={buttonRef}>

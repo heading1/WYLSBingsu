@@ -7,7 +7,6 @@ type EmailValidationResponse = {
 };
 
 const useRegister = () => {
-  // const [result, setResult] = useState<string>();
   const [error, setError] = useState<Error['message']>('');
   const [isLoading, setLoading] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -24,7 +23,6 @@ const useRegister = () => {
       .post(emailValidationURI, { email }, { withCredentials: true })
       .then((response) => {
         console.log('then', response);
-        // setResult('OK');
         setError('');
         setShowError(false);
         setIsSend(true);
@@ -36,7 +34,6 @@ const useRegister = () => {
           if (responseError && responseError.response) {
             setError(responseError.response.data.message);
             setShowError(true);
-            // setResult('');
             setIsSend(false);
           }
         }
@@ -53,7 +50,6 @@ const useRegister = () => {
       .post(registerURI, data, { withCredentials: true })
       .then((response) => {
         console.log('then', response.data);
-        // setResult('OK');
         setError('');
         setShowError(false);
         setIsSuccess(true);
@@ -65,7 +61,6 @@ const useRegister = () => {
           if (responseError && responseError.response) {
             setError(responseError.response.data.message);
             setShowError(true);
-            // setResult('');
           }
         }
       })
@@ -80,7 +75,6 @@ const useRegister = () => {
     emailValidation,
     registerRequest,
     error,
-    // result,
     isSuccess,
     showError,
   };
