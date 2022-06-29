@@ -4,7 +4,12 @@ import styled from 'styled-components';
 import { keyframes } from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 80px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100vh;
+  width: 100vw;
 `;
 
 const spin = keyframes`

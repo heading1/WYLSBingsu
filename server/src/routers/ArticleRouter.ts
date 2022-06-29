@@ -1,16 +1,29 @@
 import { Router } from 'express';
+import { articleService } from '../services';
 
-const ArticleRouter = Router();
+const articleRouter = Router();
 
-ArticleRouter.post('/article', async (req, res, next) => {
-  interface article {
-    uniqueNumber: string;
-    nickName: string;
-    content: string;
-    toppingImage: string;
+articleRouter.post('/register', async (req, res, next) => {
+  try {
+    interface article {
+      uniqueNumber: string;
+      content: string;
+      nickName: string;
+      toppingImage: string;
+    }
+    //body 값 정리
+    const { uniqueNumber, content, nickName, toppingImage }: article = req.body;
+
+    const newArticle = await articleService.addArticle({
+      uniqueNumber,
+      content,
+      nickName,
+      toppingImage,
+    });
+    res.status(201).json(newArticle);
+  } catch (error) {
+    next(error);
   }
-  //body 값 정리
-  const { uniqueNumber, nickName, content, toppingImage }: article = req.body;
 });
 
-export { ArticleRouter };
+export { articleRouter };

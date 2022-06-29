@@ -20,7 +20,7 @@ const ArticleSchema = new Schema(
     },
   },
   {
-    collection: 'users',
+    collection: 'articles',
     timestamps: true,
   }
 );
