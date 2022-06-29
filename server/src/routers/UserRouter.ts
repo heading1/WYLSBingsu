@@ -224,22 +224,28 @@ userRouter.post('/mail', async (req, res, next) => {
     // const redisData = await redisClient.HGETALL(generatedIdentifierNumber);
     // console.log(redisData);
 
-    //dbtest
-    const flag: string = email;
-    const authNumber = generatedAuthNumber;
-    const identifierNumber = generatedIdentifierNumber;
-    const toInsertAuthNumberInfo = {
-      email,
-      authNumber,
-      identifierNumber,
-      flag,
-    };
-    const dbSave = await authNumberService.addAuthNumber(
-      toInsertAuthNumberInfo
-    );
-
-    if (!redisSave) {
+    if (!redisSave || redisSave < 1) {
+      //dbtest
+      const flag: string = email;
+      const authNumber = generatedAuthNumber;
+      const identifierNumber = generatedIdentifierNumber;
+      const toInsertAuthNumberInfo = {
+        email,
+        authNumber,
+        identifierNumber,
+        flag,
+      };
+      const dbSave = await authNumberService.addAuthNumber(
+        toInsertAuthNumberInfo
+      );
+      if (!dbSave) {
+        throw new Error('디비,redis연결이 이상합니다.');
+      }
     }
+
+    res.cookie('AuthEmailIdentifier', generatedIdentifierNumber, {
+      httpOnly: true,
+    });
     res.status(201).json({ message: '메일발송성공' });
   } catch (error) {
     next(error);
