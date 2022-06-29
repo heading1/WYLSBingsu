@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const CodeInput = styled.input`
-  width: 23rem;
+  width: 90%;
+  max-width: 26rem;
   height: 2.6rem;
   border-bottom: 3px solid black;
   font-size: 1.2rem;
@@ -14,7 +15,8 @@ export const CodeInput = styled.input`
 `;
 
 export const SubmitButton = styled.button`
-  width: 23rem;
+  width: 90%;
+  max-width: 26rem;
   height: 2.6rem;
   border-radius: 2.6rem;
   background-color: ${(props) => props.theme.point1};

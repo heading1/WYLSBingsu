@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
-  width: 23rem;
+  width: 90%;
+  max-width: 26rem;
   margin-bottom: 1.5rem;
 
   & h1 {
@@ -22,6 +23,11 @@ const StyledForm = styled.form`
   & label {
     margin-bottom: 0.9rem;
     font-size: 1.5rem;
+
+    & > span {
+      color: red;
+      font-size: 1rem;
+    }
   }
 
   & input {
@@ -46,7 +52,7 @@ const StyledForm = styled.form`
   }
 
   & > div {
-    margin-bottom: 4rem;
+    margin-bottom: 3.5rem;
   }
 
   & p {

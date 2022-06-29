@@ -1,29 +1,48 @@
 import { useForm } from 'react-hook-form';
 import StyledForm from './CustomFormStyle';
-import { FormInputType } from '@/types/types';
+import { RegisterInputType } from '@/types/interfaces';
 
 interface FormProps {
   children?: React.ReactNode;
-  onSubmit: (data: FormInputType) => void;
+  onSubmit: (data: RegisterInputType) => void;
+  header?: string;
+  registerMode?: boolean;
+  isDisabled?: boolean;
 }
 
-const CustomForm: React.FC<FormProps> = ({ children, onSubmit }) => {
+const CustomForm: React.FC<FormProps> = ({
+  children,
+  onSubmit,
+  header,
+  registerMode,
+  isDisabled,
+}) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInputType>({ mode: 'onChange' });
+  } = useForm<RegisterInputType>({ mode: 'onChange' });
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <h1>
-        WELCOME TO <strong>BINGSU</strong> WORLD!
+        {header ? (
+          <strong>{header}</strong>
+        ) : (
+          <>
+            WELCOME TO <strong>BINGSU</strong> WORLD!
+          </>
+        )}
       </h1>
       <div>
-        <label htmlFor="emailInput">Email</label>
+        <label htmlFor="emailInput">
+          Email<span> *</span>
+        </label>
         <input
           id="emailInput"
           type="text"
+          placeholder="필수 입력 항목"
+          disabled={isDisabled}
           {...register('email', {
             required: true,
             pattern:
@@ -38,10 +57,14 @@ const CustomForm: React.FC<FormProps> = ({ children, onSubmit }) => {
         )}
       </div>
       <div>
-        <label htmlFor="passwordInput">Password</label>
+        <label htmlFor="passwordInput">
+          Password<span> *</span>
+        </label>
         <input
           id="passwordInput"
           type="password"
+          placeholder="필수 입력 항목"
+          disabled={isDisabled}
           {...register('password', {
             required: true,
             pattern:
@@ -59,6 +82,18 @@ const CustomForm: React.FC<FormProps> = ({ children, onSubmit }) => {
           <p>비밀번호의 길이는 8글자 이상 20글자 이하입니다.</p>
         )}
       </div>
+      {registerMode && (
+        <div>
+          <label htmlFor="nickName">닉네임</label>
+          <input
+            id="nickName"
+            type="text"
+            {...register('nickName')}
+            placeholder="미 입력시 랜덤으로 주어집니다."
+            disabled={isDisabled}
+          />
+        </div>
+      )}
       {children}
     </StyledForm>
   );
