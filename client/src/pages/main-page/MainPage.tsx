@@ -17,6 +17,7 @@ import riceCakeImg from '@/assets/images/riceCake.png';
 import Topping from './components/Topping';
 import MockData from './MockData.json';
 import Loading from '@/components/Loading';
+import Detail from './components/Detail';
 
 const ratio = theme.windowHeight / 1500;
 const location1 = { top: 15, left: 32, width: 188 * ratio };
@@ -90,7 +91,6 @@ const MainPage: React.FC = () => {
       setLoading(false);
     }, 500);
   }, [data]);
-
   return (
     <Wrapper loading={loading}>
       <div>
@@ -115,6 +115,8 @@ const MainPage: React.FC = () => {
             })}
 
             <Footer nextPage={nextPage} prevPage={prevPage} />
+
+            <Detail nickname={''} article={''} />
           </>
         )}
       </div>
