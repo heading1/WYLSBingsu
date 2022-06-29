@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
-  width: 23rem;
+  width: 90%;
+  max-width: 26rem;
   margin-bottom: 1.5rem;
 
   & h1 {

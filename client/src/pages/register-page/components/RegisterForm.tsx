@@ -7,11 +7,10 @@ import EmailCertificationForm from '../components/EmailCertificationForm';
 
 const RegisterForm: React.FC = () => {
   const buttonRef = useRef() as React.MutableRefObject<HTMLButtonElement>;
-  const { isSend, emailValidation } = useRegister();
+  const { isSend, emailValidation, showError, error } = useRegister();
 
   const onSubmit = (data: FormInputType) => {
-    const addNickname = { ...data, nickName: '건방진 통통이' };
-    emailValidation(addNickname);
+    emailValidation(data);
   };
 
   useEffect(() => {
@@ -19,7 +18,12 @@ const RegisterForm: React.FC = () => {
   }, [isSend]);
 
   return (
-    <CustomForm onSubmit={onSubmit}>
+    <CustomForm
+      onSubmit={onSubmit}
+      header="REGISTER IN BINGSU"
+      registerMode={true}
+    >
+      {showError && <p>{error}</p>}
       <RegisterButton type="submit" isDisabled={isSend} ref={buttonRef}>
         {!isSend ? '회원가입' : '이메일이 전송됐습니다.'}
       </RegisterButton>

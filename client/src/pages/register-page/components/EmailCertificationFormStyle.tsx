@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const CodeInput = styled.input`
-  width: 23rem;
+  width: 90%;
+  max-width: 26rem;
   height: 2.6rem;
   border-bottom: 3px solid black;
   font-size: 1.2rem;
