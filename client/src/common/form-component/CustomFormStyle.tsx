@@ -52,7 +52,7 @@ const StyledForm = styled.form`
   }
 
   & > div {
-    margin-bottom: 3.8rem;
+    margin-bottom: 3.5rem;
   }
 
   & p {

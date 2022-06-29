@@ -15,7 +15,8 @@ export const CodeInput = styled.input`
 `;
 
 export const SubmitButton = styled.button`
-  width: 23rem;
+  width: 90%;
+  max-width: 26rem;
   height: 2.6rem;
   border-radius: 2.6rem;
   background-color: ${(props) => props.theme.point1};

@@ -39,6 +39,7 @@ const CustomForm: React.FC<FormProps> = ({
         <input
           id="emailInput"
           type="text"
+          placeholder="필수 입력 항목"
           {...register('email', {
             required: true,
             pattern:
@@ -59,6 +60,7 @@ const CustomForm: React.FC<FormProps> = ({
         <input
           id="passwordInput"
           type="password"
+          placeholder="필수 입력 항목"
           {...register('password', {
             required: true,
             pattern:
@@ -79,7 +81,12 @@ const CustomForm: React.FC<FormProps> = ({
       {registerMode && (
         <div>
           <label htmlFor="nickName">닉네임</label>
-          <input id="nickName" type="text" {...register('nickName')} />
+          <input
+            id="nickName"
+            type="text"
+            {...register('nickName')}
+            placeholder="미 입력시 랜덤으로 주어집니다."
+          />
         </div>
       )}
       {children}
