@@ -263,7 +263,7 @@ userRouter.post('/mail', async (req, res, next) => {
 
     if (!redisSave || redisSave < 1) {
       //dbtest
-      const flag: string = email;
+      const flag: string = 'email';
       const authNumber = generatedAuthNumber;
       const identifierNumber = generatedIdentifierNumber;
       const toInsertAuthNumberInfo = {
