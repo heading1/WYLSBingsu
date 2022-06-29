@@ -1,5 +1,5 @@
 import { RegisterInputType } from '@/types/interfaces';
-import CustomForm from '@/common/form-component/CustomForm';
+import CustomForm from '@/common/components/form-component/CustomForm';
 import { RegisterButton, SuccessModal } from './RegisterFormStyle';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
