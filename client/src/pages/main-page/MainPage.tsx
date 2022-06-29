@@ -15,6 +15,7 @@ import axios from 'axios';
 import Wrapper from './MainPageStyle';
 import MockData from './MockData.json';
 import Loading from '@/common/components/Loading';
+import useDeviceViewport from '@/common/hooks/useDeviceViewport';
 
 const ratio = theme.windowHeight / 1500;
 const location1 = { top: 15, left: 32, width: 188 * ratio };
@@ -52,6 +53,7 @@ interface DataInterface extends Array<TestInterface> {}
 const MainPage: React.FC = () => {
   const [page, setPage] = useState(0);
   const [data, setData] = useState<DataInterface>(MockData);
+  const { deviceHeight } = useDeviceViewport();
   const [viewData, setViewData] = useState({ nickName: '', content: '' });
   const maxPage = useMemo(() => Math.ceil(data.length / 6) - 1, [data]);
   const [viewDetail, setViewDetail] = useState(false);
@@ -92,7 +94,7 @@ const MainPage: React.FC = () => {
     }, 500);
   }, [data]);
   return (
-    <Wrapper $loading={loading}>
+    <Wrapper $loading={loading} deviceHeight={deviceHeight}>
       <div>
         <img src={bingsu} />
         {loading ? (
