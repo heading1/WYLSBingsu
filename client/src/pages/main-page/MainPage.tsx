@@ -9,15 +9,12 @@ import {
   kiwi,
   pineapple,
   watermelon,
-} from '../../assets/images';
-import { Header, Footer } from './components';
+} from '@/assets/images';
+import { Header, Footer, Detail, Topping } from './components';
 import axios from 'axios';
 import Wrapper from './MainPageStyle';
-import riceCakeImg from '@/assets/images/riceCake.png';
-import Topping from './components/Topping';
 import MockData from './MockData.json';
 import Loading from '@/common/components/Loading';
-import Detail from './components/Detail';
 
 const ratio = theme.windowHeight / 1500;
 const location1 = { top: 15, left: 32, width: 188 * ratio };
