@@ -2,21 +2,21 @@ import { Wrapper, NicknameInput, ArticleInput } from './ArticleFormStyle';
 
 interface ArticleProps {
   children: React.ReactNode;
-  nickname: string | '';
-  article: string | '';
+  nickName: string | '';
+  content: string | '';
 }
 
 const ArticleForm: React.FC<ArticleProps> = ({
   children,
-  nickname,
-  article,
+  nickName,
+  content,
 }) => {
   return (
     <Wrapper>
-      <label htmlFor="nickname">닉네임</label>
-      <NicknameInput type="text" name="nickname" value={nickname} disabled />
-      <label htmlFor="article">내용</label>
-      <ArticleInput name="article" disabled value={article} />
+      <label htmlFor="nickName">닉네임</label>
+      <NicknameInput type="text" name="nickName" value={nickName} disabled />
+      <label htmlFor="content">내용</label>
+      <ArticleInput name="content" disabled value={content} />
       {children}
     </Wrapper>
   );

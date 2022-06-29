@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 
 interface WrapperInterface {
-  loading: boolean;
+  $loading: boolean;
 }
 
 const Wrapper = styled.div<WrapperInterface>`
-  height: ${(props) => (props.loading ? '99vh' : '')};
+  height: ${(props) => (props.$loading ? '99vh' : '')};
   width: 100vw;
-  /* background-color: ${(props) =>
-    props.loading ? 'rgba(0, 0, 0, 0.2)' : ''}; */
   position: relative;
   display: flex;
   justify-content: center;

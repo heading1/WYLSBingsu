@@ -2,7 +2,7 @@ import GithubOAuth from './GithubOAuth';
 import CustomForm from '@/common/form-component/CustomForm';
 import { FormInputType } from '@/types/types';
 import { LoginButton, LoadingDiv, ErrorMessage } from './LoginFormStyle';
-import Loading from '@/components/Loading';
+import Loading from '@/common/components/Loading';
 import useLogin from '../hook/useLogin';
 
 const LoginForm: React.FC = () => {
