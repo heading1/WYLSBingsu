@@ -4,7 +4,7 @@ import { RegisterButton, SuccessModal } from './RegisterFormStyle';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import useRegister from '../hook/useRegister';
-import EmailCertificationForm from '../components/EmailCertificationForm';
+import EmailCertificationForm from './EmailCertificationForm';
 import Loading from '@/components/Loading';
 
 const RegisterForm: React.FC = () => {
