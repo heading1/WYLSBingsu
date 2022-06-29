@@ -255,7 +255,10 @@ userRouter.post('/mail', async (req, res, next) => {
     });
     console.log('통과했습니다', redisSave);
 
-    const redisExpire = await redisClient.expire(generatedIdentifierNumber, 60);
+    const redisExpire = await redisClient.expire(
+      generatedIdentifierNumber,
+      180
+    );
     console.log(redisExpire);
 
     // const redisData = await redisClient.HGETALL(generatedIdentifierNumber);
