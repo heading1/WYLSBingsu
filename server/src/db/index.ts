@@ -16,3 +16,4 @@ db.on('error', (error) =>
 
 export * from './models/UserModel';
 export * from './models/ArticleModel';
+export * from './models/AuthNumberModel';

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
 import { redisClient } from '../app';
-import { userService, mailer } from '../services';
+import { userService, mailer, authNumberService } from '../services';
 import { authJwt, tokenRequestMatch } from '../middlewares';
 
 const userRouter = Router();
@@ -211,14 +211,35 @@ userRouter.post('/mail', async (req, res, next) => {
 
     const { generatedAuthNumber, generatedIdentifierNumber } = mailAuth;
     console.log(generatedAuthNumber, generatedIdentifierNumber);
-    // const redisSave = await redisClient.setEx(
-    //   email,
-    //   process.env.DEFAULT_EXPIRATION,
-    //   mailAuth.generatedAuthNumber
-    // );
-    // if (!redisSave) {
+    console.log('통과했습니다');
+    const redisSave = await redisClient.HSET(generatedIdentifierNumber, {
+      email: email,
+      authNumber: generatedAuthNumber,
+    });
+    console.log('통과했습니다', redisSave);
 
-    // }
+    const redisExpire = await redisClient.expire(generatedIdentifierNumber, 60);
+    console.log(redisExpire);
+
+    // const redisData = await redisClient.HGETALL(generatedIdentifierNumber);
+    // console.log(redisData);
+
+    //dbtest
+    const flag: string = email;
+    const authNumber = generatedAuthNumber;
+    const identifierNumber = generatedIdentifierNumber;
+    const toInsertAuthNumberInfo = {
+      email,
+      authNumber,
+      identifierNumber,
+      flag,
+    };
+    const dbSave = await authNumberService.addAuthNumber(
+      toInsertAuthNumberInfo
+    );
+
+    if (!redisSave) {
+    }
     res.status(201).json({ message: '메일발송성공' });
   } catch (error) {
     next(error);
