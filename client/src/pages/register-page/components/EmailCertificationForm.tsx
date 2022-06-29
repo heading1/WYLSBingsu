@@ -1,11 +1,29 @@
 import { CodeInput, SubmitButton } from './EmailCertificationFormStyle';
 import { useState } from 'react';
+import { RegisterInputType } from '@/types/interfaces';
+import generateRandomName from '@/common/util/generateRandomName';
 
-const EmailCertificationForm: React.FC = () => {
-  const [authValue, setAuthValue] = useState<string>();
+interface EmailProps {
+  inputData: RegisterInputType;
+  registerRequest: (data: RegisterInputType) => void;
+}
+
+const EmailCertificationForm: React.FC<EmailProps> = ({
+  inputData,
+  registerRequest,
+}) => {
+  const [authValue, setAuthValue] = useState<string>('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuthValue(event.target.value);
+  };
+
+  const handleClick = () => {
+    let registerData = { ...inputData, emailAuthNumber: authValue };
+    if (!registerData.nickName) {
+      registerData = { ...registerData, nickName: generateRandomName() };
+    }
+    registerRequest(registerData);
   };
 
   return (
@@ -16,7 +34,7 @@ const EmailCertificationForm: React.FC = () => {
         value={authValue}
         onChange={handleChange}
       />
-      <SubmitButton>인증</SubmitButton>
+      <SubmitButton onClick={handleClick}>인증</SubmitButton>
     </>
   );
 };
