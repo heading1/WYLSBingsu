@@ -16,7 +16,7 @@ import Wrapper from './MainPageStyle';
 import riceCakeImg from '@/assets/images/riceCake.png';
 import Topping from './components/Topping';
 import MockData from './MockData.json';
-import Loading from '@/components/Loading';
+import Loading from '@/common/components/Loading';
 import Detail from './components/Detail';
 
 const ratio = theme.windowHeight / 1500;
@@ -55,25 +55,28 @@ interface DataInterface extends Array<TestInterface> {}
 const MainPage: React.FC = () => {
   const [page, setPage] = useState(0);
   const [data, setData] = useState<DataInterface>(MockData);
+  const [viewData, setViewData] = useState({ nickName: '', content: '' });
   const maxPage = useMemo(() => Math.ceil(data.length / 6) - 1, [data]);
+  const [viewDetail, setViewDetail] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const nextPage = () => {
     if (page === maxPage) setPage(0);
     else setPage((page) => page + 1);
-
-    console.log(page);
   };
 
   const prevPage = () => {
     if (page === 0) setPage(maxPage);
     else setPage((page) => page - 1);
-
-    console.log(page);
   };
 
-  const handleClick = () => {
-    return alert('test');
+  const openDetail = (index: number) => {
+    setViewData({ ...data[index] });
+    setViewDetail(true);
+  };
+
+  const closeDetail = () => {
+    setViewDetail(false);
   };
 
   useEffect(() => {
@@ -92,7 +95,7 @@ const MainPage: React.FC = () => {
     }, 500);
   }, [data]);
   return (
-    <Wrapper loading={loading}>
+    <Wrapper $loading={loading}>
       <div>
         <img src={bingsu} />
         {loading ? (
@@ -107,7 +110,7 @@ const MainPage: React.FC = () => {
                   rotate={randomRotate()}
                   key={i + 1}
                   imageSrc={randomTopping()}
-                  eventClick={handleClick}
+                  eventClick={() => openDetail(i)}
                 />
               ) : (
                 ''
@@ -116,7 +119,7 @@ const MainPage: React.FC = () => {
 
             <Footer nextPage={nextPage} prevPage={prevPage} />
 
-            <Detail nickname={''} article={''} />
+            {viewDetail && <Detail {...viewData} closeDetail={closeDetail} />}
           </>
         )}
       </div>

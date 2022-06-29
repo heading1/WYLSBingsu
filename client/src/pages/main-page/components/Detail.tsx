@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import ArticleForm from './ArticleForm';
 import { Wrapper, Background } from './DetailStyle';
 interface DetailProps {
-  nickname: string | '';
-  article: string | '';
+  nickName: string | '';
+  content: string | '';
+  closeDetail: Function;
 }
 
 const SubmitButton = styled.button`
@@ -17,12 +18,12 @@ const SubmitButton = styled.button`
   color: #fff;
 `;
 
-const Detail: React.FC<DetailProps> = ({ nickname, article }) => {
+const Detail: React.FC<DetailProps> = ({ nickName, content, closeDetail }) => {
   return (
     <Background>
       <Wrapper>
-        <ArticleForm nickname={nickname} article={article}>
-          <SubmitButton>종료</SubmitButton>
+        <ArticleForm nickName={nickName} content={content}>
+          <SubmitButton onClick={() => closeDetail()}>닫기</SubmitButton>
         </ArticleForm>
       </Wrapper>
     </Background>
