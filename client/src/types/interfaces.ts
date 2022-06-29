@@ -3,4 +3,14 @@ interface DeviceViewport {
   deviceHeight?: string;
 }
 
-export type { DeviceViewport };
+interface FormInputType {
+  email: string;
+  password: string;
+}
+
+interface RegisterInputType extends FormInputType {
+  nickName: string;
+  emailAuthNumber: string;
+}
+
+export type { DeviceViewport, FormInputType, RegisterInputType };

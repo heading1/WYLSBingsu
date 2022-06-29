@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import { FormInputType } from '@/types/types';
+import { FormInputType } from '@/types/interfaces';
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

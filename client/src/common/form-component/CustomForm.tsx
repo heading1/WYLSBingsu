@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form';
 import StyledForm from './CustomFormStyle';
-import { FormInputType } from '@/types/types';
+import { RegisterInputType } from '@/types/interfaces';
 
 interface FormProps {
   children?: React.ReactNode;
-  onSubmit: (data: FormInputType) => void;
+  onSubmit: (data: RegisterInputType) => void;
   header?: string;
   registerMode?: boolean;
 }
@@ -19,7 +19,7 @@ const CustomForm: React.FC<FormProps> = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInputType>({ mode: 'onChange' });
+  } = useForm<RegisterInputType>({ mode: 'onChange' });
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
