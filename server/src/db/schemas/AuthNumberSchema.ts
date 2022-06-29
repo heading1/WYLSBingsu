@@ -6,6 +6,10 @@ const AuthNumberSchema = new Schema(
       type: String,
       required: true,
     },
+    identifierNumber: {
+      type: String,
+      required: true,
+    },
     authNumber: {
       type: String,
       required: true,
@@ -15,10 +19,10 @@ const AuthNumberSchema = new Schema(
       required: true,
     },
     createdAt: {
-        type: Date,
-        expires: process.env.DEFAULT_EXPIRATION,
-        default: Date.now,
-    }
+      type: Date,
+      expires: '1m',
+      default: Date.now,
+    },
   },
   {
     collection: 'authNumber',
