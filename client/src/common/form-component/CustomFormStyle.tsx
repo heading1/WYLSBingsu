@@ -22,6 +22,11 @@ const StyledForm = styled.form`
   & label {
     margin-bottom: 0.9rem;
     font-size: 1.5rem;
+
+    & > span {
+      color: red;
+      font-size: 1rem;
+    }
   }
 
   & input {
@@ -46,7 +51,7 @@ const StyledForm = styled.form`
   }
 
   & > div {
-    margin-bottom: 4rem;
+    margin-bottom: 3.8rem;
   }
 
   & p {
