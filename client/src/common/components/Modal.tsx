@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div<{ flag: boolean }>`
@@ -45,12 +45,17 @@ const ContentStyled = styled.div`
 
 interface ModalProps {
   content: string;
-  show: boolean;
 }
 
 const Modal: React.FC<ModalProps> = (props) => {
-  const { content, show } = props;
-  const [flag, setFlag] = useState(!show);
+  const { content } = props;
+  const [flag, setFlag] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFlag(false);
+    }, 100);
+  }, []);
 
   const handleClose = () => {
     setFlag(true);
