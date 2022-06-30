@@ -5,7 +5,7 @@ import { useState, useLayoutEffect, useRef } from 'react';
 import useWrite from './hook/useWrite';
 import { ArticleInputType } from '@/types/interfaces';
 import Loading from '@/common/components/Loading';
-import InfoModal from './components/InfoModal';
+import ResponseModal from '@/common/components/response-modal/ResponseModal';
 
 const WritePage: React.FC = () => {
   const { deviceHeight } = useDeviceViewport();
@@ -58,7 +58,16 @@ const WritePage: React.FC = () => {
         )}
       </Wrapper>
       {isLoading && <Loading />}
-      {showModal && <InfoModal />}
+      {showModal && (
+        <ResponseModal
+          to={result.type === 'SUCCESS' ? '/' : undefined}
+          content={result.content}
+          buttonText="확인"
+          onClick={() => {
+            setShowModal(false);
+          }}
+        />
+      )}
     </>
   );
 };

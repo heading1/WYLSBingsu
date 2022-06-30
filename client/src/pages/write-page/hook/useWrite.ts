@@ -37,7 +37,7 @@ const useWrite = () => {
           console.log(response);
           setResult((previous) => ({
             ...previous,
-            type: '글 쓰기 성공',
+            type: 'SUCCESS',
             content: '글 쓰기에 성공했습니다!',
           }));
         })
@@ -48,8 +48,8 @@ const useWrite = () => {
               console.log(responseError.response);
               setResult((previous) => ({
                 ...previous,
-                type: '글 쓰기 실패',
-                content: 'responseError.response?.data.message',
+                type: 'FAIL',
+                content: '글 쓰기에 실패했습니다. 다시 시도해 주세요',
               }));
             }
           } else {
