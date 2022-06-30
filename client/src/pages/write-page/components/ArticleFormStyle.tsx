@@ -35,3 +35,12 @@ export const ArticleInput = styled.textarea`
   line-height: 1.8rem;
   border: 3px solid ${(props) => props.theme.point2};
 `;
+
+export const SubmitButton = styled.button`
+  width: 100%;
+  padding: 0.4rem 0;
+  background-color: ${(props) => props.theme.point2};
+  border-radius: 2rem;
+  font-size: 1.4rem;
+  color: #fff;
+`;

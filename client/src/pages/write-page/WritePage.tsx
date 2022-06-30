@@ -1,14 +1,17 @@
-import { Wrapper, SubmitButton, StyledHeader } from './WritePageStyle';
+import { Wrapper, StyledHeader } from './WritePageStyle';
 import { ArticleForm, SelectTopping, StateButton } from './components';
 import useDeviceViewport from '@/common/hooks/useDeviceViewport';
 import { useState, useLayoutEffect, useRef } from 'react';
 import useWrite from './hook/useWrite';
+import { ArticleInputType } from '@/types/interfaces';
+import Loading from '@/common/components/Loading';
 
 const WritePage: React.FC = () => {
   const { deviceHeight } = useDeviceViewport();
   const [writeState, setWriteState] = useState(1);
   const articleRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const { articlePost, setSelectedTopping, selectedTopping } = useWrite();
+  const { articlePost, setSelectedTopping, selectedTopping, isLoading } =
+    useWrite();
 
   useLayoutEffect(() => {
     const detectMobileKeyboard = () => {
@@ -22,27 +25,32 @@ const WritePage: React.FC = () => {
     return window.removeEventListener('resize', detectMobileKeyboard);
   }, []);
 
+  const handleSubmit = (data: ArticleInputType) => {
+    articlePost(data);
+  };
+
   return (
-    <Wrapper deviceHeight={deviceHeight}>
-      {writeState === 1 ? (
-        <>
-          <StyledHeader>토핑 정하기</StyledHeader>
-          <SelectTopping
-            setSelectedTopping={setSelectedTopping}
-            selectedTopping={selectedTopping}
-          />
-          <StateButton setWriteState={setWriteState} />
-        </>
-      ) : (
-        <>
-          <StyledHeader>토핑 올리기</StyledHeader>
-          <ArticleForm>
-            <SubmitButton onClick={articlePost}>글 쓰기</SubmitButton>
-          </ArticleForm>
-          <StateButton ref={articleRef} setWriteState={setWriteState} />
-        </>
-      )}
-    </Wrapper>
+    <>
+      <Wrapper deviceHeight={deviceHeight}>
+        {writeState === 1 ? (
+          <>
+            <StyledHeader>토핑 정하기</StyledHeader>
+            <SelectTopping
+              setSelectedTopping={setSelectedTopping}
+              selectedTopping={selectedTopping}
+            />
+            <StateButton setWriteState={setWriteState} />
+          </>
+        ) : (
+          <>
+            <StyledHeader>토핑 올리기</StyledHeader>
+            <ArticleForm onSubmit={handleSubmit} />
+            <StateButton ref={articleRef} setWriteState={setWriteState} />
+          </>
+        )}
+      </Wrapper>
+      {isLoading && <Loading />}
+    </>
   );
 };
 

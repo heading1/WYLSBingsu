@@ -13,15 +13,6 @@ export const Wrapper = styled.div<DeviceViewport>`
   flex-direction: column;
 `;
 
-export const SubmitButton = styled.button`
-  width: 100%;
-  padding: 0.4rem 0;
-  background-color: ${(props) => props.theme.point2};
-  border-radius: 2rem;
-  font-size: 1.4rem;
-  color: #fff;
-`;
-
 export const StyledHeader = styled.h1`
   width: 80%;
   max-width: 26rem;
