@@ -16,6 +16,7 @@ import Wrapper from './MainPageStyle';
 import MockData from './MockData.json';
 import Loading from '@/common/components/Loading';
 import useDeviceViewport from '@/common/hooks/useDeviceViewport';
+import Modal from '@/common/components/Modal';
 
 const ratio = theme.windowHeight / 1500;
 const location1 = { top: 15, left: 32, width: 188 * ratio };
@@ -119,6 +120,7 @@ const MainPage: React.FC = () => {
             <Footer nextPage={nextPage} prevPage={prevPage} />
 
             {viewDetail && <Detail {...viewData} closeDetail={closeDetail} />}
+            <Modal content="테스트" />
           </>
         )}
       </div>
