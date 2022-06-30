@@ -2,10 +2,9 @@ import { Wrapper, NicknameInput, ArticleInput } from './ArticleFormStyle';
 
 interface ArticleProps {
   children: React.ReactNode;
-  modal?: boolean;
 }
 
-const ArticleForm: React.FC<ArticleProps> = ({ children, modal }) => {
+const ArticleForm: React.FC<ArticleProps> = ({ children }) => {
   return (
     <Wrapper>
       <label htmlFor="nickname">닉네임</label>
