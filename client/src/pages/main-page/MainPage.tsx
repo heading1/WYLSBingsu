@@ -13,11 +13,14 @@ import {
 import { Header, Footer, Detail, Topping } from './components';
 import axios from 'axios';
 import Wrapper from './MainPageStyle';
-import MockData from './MockData.json';
 import Loading from '@/common/components/Loading';
 import useDeviceViewport from '@/common/hooks/useDeviceViewport';
 import Modal from '@/common/components/Modal';
 import shareMyLink from './hooks/useShareMyLink';
+import { useParams } from 'react-router-dom';
+import useToppingList from './hooks/useToppingList';
+import useToppingDetail from './hooks/useToppingDetail';
+import useDidMountEffect from './hooks/useDidMountEffect';
 
 const ratio = theme.windowHeight / 1500;
 const location1 = { top: 15, left: 32, width: 188 * ratio };
@@ -44,37 +47,48 @@ const randomTopping = () => {
 const randomRotate = () => {
   return Math.floor(Math.random() * 360);
 };
-interface TestInterface {
-  uniqueNumber: string;
-  nickName: string;
-  content: string;
-  toppingImage: string;
-}
-interface DataInterface extends Array<TestInterface> {}
-
+type data = { _id: string; nickName: string; toppingImage: string };
 const MainPage: React.FC = () => {
   const [page, setPage] = useState(0);
-  const [data, setData] = useState<DataInterface>(MockData);
+  const [data, setData] = useState<data[]>([]);
   const { deviceHeight } = useDeviceViewport();
-  const [viewData, setViewData] = useState({ nickName: '', content: '' });
-  const maxPage = useMemo(() => Math.ceil(data.length / 6) - 1, [data]);
   const [viewDetail, setViewDetail] = useState(false);
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState({ content: '', flag: false });
   const { getMyLink, showError, error, setShowError, result } = shareMyLink();
+  const params = useParams();
+  const userId = params.userId;
+
+  const {
+    getToppings,
+    toppingError,
+    toppingResult,
+    toppingIsLoading,
+    toppingShowError,
+    setToppingShowError,
+  } = useToppingList();
+
+  const {
+    getToppingDetail,
+    toppingDetailError,
+    toppingDetailResult,
+    toppingDetailIsLoading,
+    toppingDetailShowError,
+    setToppingDetailShowError,
+  } = useToppingDetail();
 
   const nextPage = () => {
-    if (page === maxPage) setPage(0);
-    else setPage((page) => page + 1);
+    setPage((cur) => cur + 1);
+    if (userId !== undefined) getToppings(page + 1, userId);
   };
 
   const prevPage = () => {
-    if (page === 0) setPage(maxPage);
+    if (page === 0) alert('첫 번째 빙수입니다.');
     else setPage((page) => page - 1);
   };
 
-  const openDetail = (index: number) => {
-    setViewData({ ...data[index] });
+  const openDetail = (_id: string) => {
+    getToppingDetail(_id);
     setViewDetail(true);
   };
 
@@ -83,20 +97,20 @@ const MainPage: React.FC = () => {
   };
 
   useEffect(() => {
-    setLoading(true);
+    if (userId !== undefined) getToppings(1, userId);
+  }, [userId]);
 
-    console.log(data);
-    //query를 리턴하는 함수를 result에 할당
-    // async function get() {
-    // const result = await axios.get(`/MockData.json`);
-    //   setData(MockData);
-    //   setLoading(false);
-    // }
-    // get();
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, [data]);
+  useDidMountEffect(() => {
+    const { data } = toppingResult;
+    if (data.length >= 1) {
+      setData(data);
+    }
+
+    if (data.length === 0 && page !== 0) {
+      setPage((cur) => cur - 1);
+      alert('마지막 빙수입니다.');
+    }
+  }, [toppingResult]);
 
   useEffect(() => {
     setModal({ content: error, flag: showError });
@@ -104,7 +118,7 @@ const MainPage: React.FC = () => {
 
   useEffect(() => {
     if (result.status === 'OK') {
-      const targetURL = `${window.location.origin}/article/1/${result.data}`;
+      const targetURL = `${window.location.origin}/${result.data}`;
       navigator.clipboard
         .writeText(targetURL)
         .then(() => alert('복사되었습니다.'));
@@ -115,19 +129,19 @@ const MainPage: React.FC = () => {
     <Wrapper $loading={loading} deviceHeight={deviceHeight}>
       <div>
         <img src={bingsu} />
-        {loading ? (
+        {toppingIsLoading || toppingDetailIsLoading ? (
           <Loading />
         ) : (
           <>
             <Header getMyLink={getMyLink} />
             {locationArr.map((item, i) => {
-              return data[6 * page + i] ? (
+              return data[i] ? (
                 <Topping
                   {...item}
                   rotate={randomRotate()}
                   key={i + 1}
                   imageSrc={randomTopping()}
-                  eventClick={() => openDetail(i)}
+                  eventClick={() => openDetail(data[i]._id)}
                 />
               ) : (
                 ''
@@ -136,7 +150,9 @@ const MainPage: React.FC = () => {
 
             <Footer nextPage={nextPage} prevPage={prevPage} />
 
-            {viewDetail && <Detail {...viewData} closeDetail={closeDetail} />}
+            {viewDetail && (
+              <Detail {...toppingDetailResult.data} closeDetail={closeDetail} />
+            )}
             <Modal
               content={modal.content}
               setOpen={setShowError}
