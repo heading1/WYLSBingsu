@@ -1,7 +1,12 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
 import { redisClient } from '../app';
-import { userService, mailer, authNumberService } from '../services';
+import {
+  userService,
+  mailer,
+  authNumberService,
+  passwordMailer,
+} from '../services';
 import { authJwt, tokenRequestMatch } from '../middlewares';
 
 const userRouter = Router();
@@ -292,9 +297,8 @@ userRouter.post('/mail', async (req, res, next) => {
   }
 });
 
-userRouter.post('/mail-auth', async (req, res, next) => {
+userRouter.post('/password-auth', async (req, res, next) => {
   try {
-    //이메일 중복확인
     if (is.emptyObject(req.body)) {
       throw new Error(
         'headers의 Content-Type을 application/json으로 설정해주세요'
@@ -343,7 +347,86 @@ userRouter.post('/mail-auth', async (req, res, next) => {
       throw new Error('인증번호가 틀립니다. 다시 입력해주세요');
     }
 
-    res.status(200).json({ message: '이메일 인증에 성공하였습니다.' });
+    const passwordAuthNumber = await passwordMailer(email);
+
+    const updatePassword = await userService.setPassword(
+      email,
+      passwordAuthNumber
+    );
+
+    res.status(200).json({ message: '비밀번호를 변경하였습니다.' });
+  } catch (error) {
+    next(error);
+  }
+});
+
+//비밀번호 password인증에 필요한 유저 이메일 발송
+userRouter.post('/password-mail', async (req, res, next) => {
+  try {
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        'headers의 Content-Type을 application/json으로 설정해주세요'
+      );
+    }
+
+    // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
+    const email: string = req.body.email;
+
+    let regexEmail =
+      /^(([^<>()[\]\.,;:\s@"]+(\.[^<>()[\]\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!regexEmail.test(email)) {
+      throw new Error('이메일 형식이 올바르지 않습니다.');
+    }
+
+    const mailcheck = await userService.findUserByEmail(email);
+
+    if (!mailcheck) {
+      throw new Error('가입된 이메일이 아닙니다. 다시 이메일을 입력해주세요.');
+    }
+
+    const mailAuth = await mailer(email);
+
+    const { generatedAuthNumber, generatedIdentifierNumber } = mailAuth;
+    console.log(generatedAuthNumber, generatedIdentifierNumber);
+    console.log('통과했습니다');
+    const redisSave = await redisClient.HSET(generatedIdentifierNumber, {
+      email: email,
+      authNumber: generatedAuthNumber,
+    });
+    console.log('통과했습니다', redisSave);
+
+    const redisExpire = await redisClient.expire(
+      generatedIdentifierNumber,
+      180
+    );
+    console.log(redisExpire);
+
+    // const redisData = await redisClient.HGETALL(generatedIdentifierNumber);
+    // console.log(redisData);
+
+    if (!redisSave || redisSave < 1) {
+      //dbtest
+      const flag: string = 'email';
+      const authNumber = generatedAuthNumber;
+      const identifierNumber = generatedIdentifierNumber;
+      const toInsertAuthNumberInfo = {
+        email,
+        authNumber,
+        identifierNumber,
+        flag,
+      };
+      const dbSave = await authNumberService.addAuthNumber(
+        toInsertAuthNumberInfo
+      );
+      if (!dbSave) {
+        throw new Error('디비,redis연결이 이상합니다.');
+      }
+    }
+
+    res.cookie('AuthEmailIdentifier', generatedIdentifierNumber, {
+      httpOnly: true,
+    });
+    res.status(201).json({ message: '메일발송성공' });
   } catch (error) {
     next(error);
   }
