@@ -13,4 +13,16 @@ interface RegisterInputType extends FormInputType {
   emailAuthNumber: string;
 }
 
-export type { DeviceViewport, FormInputType, RegisterInputType };
+interface ArticlePostType {
+  uniqueNumber: string;
+  nickName: string;
+  content: string;
+  toppingImage: string;
+}
+
+export type {
+  DeviceViewport,
+  FormInputType,
+  RegisterInputType,
+  ArticlePostType,
+};
