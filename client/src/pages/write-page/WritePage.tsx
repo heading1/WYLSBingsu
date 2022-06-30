@@ -1,11 +1,5 @@
-import {
-  Wrapper,
-  SubmitButton,
-  PageButton,
-  ButtonWrapper,
-} from './WritePageStyle';
-import ArticleForm from './components/ArticleForm';
-import SelectTopping from './components/SelectTopping';
+import { Wrapper, SubmitButton } from './WritePageStyle';
+import { ArticleForm, SelectTopping, StateButton } from './components';
 import useDeviceViewport from '@/common/hooks/useDeviceViewport';
 import { useState } from 'react';
 
@@ -17,32 +11,19 @@ const WritePage: React.FC = () => {
     <Wrapper deviceHeight={deviceHeight}>
       {writeState === 1 ? (
         <>
+          <h1>Select Topping</h1>
           <SelectTopping />
+          <StateButton setWriteState={setWriteState} />
         </>
       ) : (
         <>
           <h1>OOO님의 빙수</h1>
           <ArticleForm>
             <SubmitButton>글 쓰기</SubmitButton>
+            <StateButton setWriteState={setWriteState} />
           </ArticleForm>
         </>
       )}
-      <ButtonWrapper>
-        <PageButton
-          onClick={() => {
-            setWriteState(1);
-          }}
-        >
-          이전
-        </PageButton>
-        <PageButton
-          onClick={() => {
-            setWriteState(2);
-          }}
-        >
-          다음
-        </PageButton>
-      </ButtonWrapper>
     </Wrapper>
   );
 };
