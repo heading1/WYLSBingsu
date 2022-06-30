@@ -5,13 +5,21 @@ import { useState, useLayoutEffect, useRef } from 'react';
 import useWrite from './hook/useWrite';
 import { ArticleInputType } from '@/types/interfaces';
 import Loading from '@/common/components/Loading';
+import InfoModal from './components/InfoModal';
 
 const WritePage: React.FC = () => {
   const { deviceHeight } = useDeviceViewport();
   const [writeState, setWriteState] = useState(1);
   const articleRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const { articlePost, setSelectedTopping, selectedTopping, isLoading } =
-    useWrite();
+  const {
+    articlePost,
+    setSelectedTopping,
+    selectedTopping,
+    isLoading,
+    result,
+    showModal,
+    setShowModal,
+  } = useWrite();
 
   useLayoutEffect(() => {
     const detectMobileKeyboard = () => {
@@ -50,6 +58,7 @@ const WritePage: React.FC = () => {
         )}
       </Wrapper>
       {isLoading && <Loading />}
+      {showModal && <InfoModal />}
     </>
   );
 };
