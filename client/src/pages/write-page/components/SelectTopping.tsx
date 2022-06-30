@@ -13,6 +13,7 @@ import {
   pineapple,
   watermelon,
 } from '@/assets/images';
+import { useState } from 'react';
 
 const toppingList = [
   chocolate1,
@@ -25,12 +26,20 @@ const toppingList = [
 ];
 
 const SelectTopping: React.FC = () => {
+  const [select, setSelect] = useState<number>();
+
   return (
     <Wrapper>
       <ToppingContainer>
         {toppingList.map((topping, index) => (
-          <ToppingDiv>
-            <ToppingImg key={index} src={topping} />
+          <ToppingDiv className={select === index ? 'select' : ''}>
+            <ToppingImg
+              key={index}
+              src={topping}
+              onClick={() => {
+                setSelect(index);
+              }}
+            />
           </ToppingDiv>
         ))}
       </ToppingContainer>

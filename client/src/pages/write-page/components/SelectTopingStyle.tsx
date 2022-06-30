@@ -18,7 +18,7 @@ export const ToppingContainer = styled.div`
   grid-template-columns: repeat(2, auto);
   height: 100%;
   width: 100%;
-  padding: 1rem 0.5rem;
+  padding: 0.5rem 0.5rem;
 `;
 
 export const ToppingImg = styled.img<ToppingProps>`
@@ -31,10 +31,14 @@ export const ToppingDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
 
   :hover {
-    border: 3px solid ${(props) => props.theme.point2};
+    border: 3px solid ${(props) => props.theme.orange};
+  }
+
+  &.select {
+    border: 3px solid ${(props) => props.theme.orange};
   }
 `;
