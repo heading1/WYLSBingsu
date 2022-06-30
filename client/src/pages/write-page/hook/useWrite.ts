@@ -23,10 +23,10 @@ const useWrite = () => {
   const navigate = useNavigate();
 
   const articlePost = useCallback(
-    (data: ArticleInputType) => {
+    (data: ArticleInputType, userId: string) => {
       const postData: ArticlePostType = {
         ...data,
-        uniqueNumber: '62b949f1071bbbeff46ab87e',
+        uniqueNumber: userId,
         toppingImage: selectedTopping,
       };
 

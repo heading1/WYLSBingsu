@@ -6,6 +6,11 @@ import useWrite from './hook/useWrite';
 import { ArticleInputType } from '@/types/interfaces';
 import Loading from '@/common/components/Loading';
 import ResponseModal from '@/common/components/response-modal/ResponseModal';
+import { useParams } from 'react-router-dom';
+
+type IdParams = {
+  userId: string;
+};
 
 const WritePage: React.FC = () => {
   const { deviceHeight } = useDeviceViewport();
@@ -20,6 +25,7 @@ const WritePage: React.FC = () => {
     showModal,
     setShowModal,
   } = useWrite();
+  const params = useParams<IdParams>();
 
   useLayoutEffect(() => {
     const detectMobileKeyboard = () => {
@@ -34,7 +40,7 @@ const WritePage: React.FC = () => {
   }, []);
 
   const handleSubmit = (data: ArticleInputType) => {
-    articlePost(data);
+    articlePost(data, params.userId);
   };
 
   return (
@@ -60,7 +66,7 @@ const WritePage: React.FC = () => {
       {isLoading && <Loading />}
       {showModal && (
         <ResponseModal
-          to={result.type === 'SUCCESS' ? '/' : undefined}
+          to={result.type === 'SUCCESS' ? `/${params.userId}` : undefined}
           content={result.content}
           buttonText="확인"
           onClick={() => {
