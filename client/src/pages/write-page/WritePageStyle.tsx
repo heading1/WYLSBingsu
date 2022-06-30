@@ -4,7 +4,8 @@ import bingsuSrc from '@/assets/images/bingsu.jpeg';
 
 export const Wrapper = styled.div<DeviceViewport>`
   display: flex;
-  height: ${(props) => props.deviceHeight};
+  height: 100vh;
+  max-height: ${(props) => props.deviceHeight};
   background: url(${bingsuSrc}) no-repeat center/auto 100%;
   background-color: ${(props) => props.theme.point4};
   justify-content: center;
@@ -19,4 +20,13 @@ export const SubmitButton = styled.button`
   border-radius: 2rem;
   font-size: 1.4rem;
   color: #fff;
+`;
+
+export const StyledHeader = styled.h1`
+  width: 80%;
+  max-width: 26rem;
+  height: 2.6rem;
+  border-radius: 30px;
+  text-align: center;
+  background-color: #fff;
 `;

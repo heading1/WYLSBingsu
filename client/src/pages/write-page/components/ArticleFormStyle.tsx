@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { DeviceViewport } from '@/types/interfaces';
 
-export const Wrapper = styled.div<DeviceViewport>`
+export const Wrapper = styled.div`
   display: flex;
-  width: ${(props) => props.deviceWidth};
-  height: 80%;
-  padding: 0 1.5rem;
-  background-color: rgba(255, 255, 255, 0.7);
+  width: 95%;
+  max-width: 26rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: #fff;
   flex-direction: column;
   justify-content: center;
 
@@ -30,7 +30,7 @@ export const NicknameInput = styled.input`
 export const ArticleInput = styled.textarea`
   padding: 1rem;
   resize: none;
-  height: 20rem;
+  height: 16rem;
   background-color: #fff;
   line-height: 1.8rem;
   border: 3px solid ${(props) => props.theme.point2};

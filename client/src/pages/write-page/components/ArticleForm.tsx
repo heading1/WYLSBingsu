@@ -1,13 +1,13 @@
 import { Wrapper, NicknameInput, ArticleInput } from './ArticleFormStyle';
 
 interface ArticleProps {
-  deviceWidth: string | undefined;
   children: React.ReactNode;
+  modal?: boolean;
 }
 
-const ArticleForm: React.FC<ArticleProps> = ({ deviceWidth, children }) => {
+const ArticleForm: React.FC<ArticleProps> = ({ children, modal }) => {
   return (
-    <Wrapper deviceWidth={deviceWidth}>
+    <Wrapper>
       <label htmlFor="nickname">닉네임</label>
       <NicknameInput
         type="text"
