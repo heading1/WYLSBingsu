@@ -37,4 +37,15 @@ articleRouter.get('/:pageNumber/:_id', async function (req, res, next) {
   }
 });
 
+articleRouter.get('/detail/:_id', async function (req, res, next) {
+  try {
+    console.log('console');
+    const _id: string = req.params._id;
+    const articleDetailData = await articleService.getDetailData(_id);
+    res.status(200).json(articleDetailData);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { articleRouter };

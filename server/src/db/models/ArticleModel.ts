@@ -19,6 +19,11 @@ export interface ArticleData {
 }
 
 export class ArticleModel {
+  async detailFindById(detailId: string): Promise<Object> {
+    const detail = await Article.find({ _id: detailId });
+
+    return detail;
+  }
   async findById(articleId: string, pageNumber: number): Promise<Object[]> {
     const pageLimit: number = 6;
     const article = await Article.find(
