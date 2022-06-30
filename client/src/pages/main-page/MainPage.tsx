@@ -61,7 +61,7 @@ const MainPage: React.FC = () => {
   const [viewDetail, setViewDetail] = useState(false);
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState({ content: '', flag: false });
-  const { getMyLink, showError, error, setShowError } = shareMyLink();
+  const { getMyLink, showError, error, setShowError, result } = shareMyLink();
 
   const nextPage = () => {
     if (page === maxPage) setPage(0);
@@ -101,6 +101,15 @@ const MainPage: React.FC = () => {
   useEffect(() => {
     setModal({ content: error, flag: showError });
   }, [showError, error]);
+
+  useEffect(() => {
+    if (result.status === 'OK') {
+      const targetURL = `${window.location.origin}/article/1/${result.data}`;
+      navigator.clipboard
+        .writeText(targetURL)
+        .then(() => alert('복사되었습니다.'));
+    }
+  }, [result]);
 
   return (
     <Wrapper $loading={loading} deviceHeight={deviceHeight}>
