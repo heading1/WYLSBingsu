@@ -5,6 +5,8 @@ interface ArticleProps {
   nickName?: string | '';
   content?: string | '';
   message?: string | '';
+  toppingDetailShowError?: boolean;
+  toppingDetailError?: string;
 }
 
 const ArticleForm: React.FC<ArticleProps> = ({
@@ -12,10 +14,12 @@ const ArticleForm: React.FC<ArticleProps> = ({
   nickName,
   content,
   message,
+  toppingDetailShowError,
+  toppingDetailError,
 }) => {
   return (
     <Wrapper>
-      {nickName ? (
+      {nickName && !toppingDetailShowError ? (
         <>
           <label htmlFor="nickName">닉네임</label>
           <NicknameInput
@@ -33,7 +37,7 @@ const ArticleForm: React.FC<ArticleProps> = ({
       <ArticleInput
         name="content"
         disabled
-        value={content ? content : message}
+        value={toppingDetailError || content || message}
       />
       {children}
     </Wrapper>

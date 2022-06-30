@@ -30,7 +30,6 @@ const useToppingDetail = () => {
         setToppingDetailShowError(false);
       })
       .catch((err: AxiosError | Error) => {
-        console.log('catch', err);
         if (axios.isAxiosError(err)) {
           const responseError = err as AxiosError<toppingDetailError>;
           setToppingDetailShowError(true);

@@ -8,6 +8,8 @@ interface DetailProps {
   content?: string | '';
   message?: string | '';
   closeDetail: Function;
+  toppingDetailShowError?: boolean;
+  toppingDetailError?: string;
 }
 
 const SubmitButton = styled.button`
@@ -24,11 +26,19 @@ const Detail: React.FC<DetailProps> = ({
   content,
   message,
   closeDetail,
+  toppingDetailShowError,
+  toppingDetailError,
 }) => {
   return (
     <Background>
       <Wrapper>
-        <ArticleForm nickName={nickName} content={content} message={message}>
+        <ArticleForm
+          nickName={nickName}
+          content={content}
+          message={message}
+          toppingDetailShowError={toppingDetailShowError}
+          toppingDetailError={toppingDetailError}
+        >
           <SubmitButton onClick={() => closeDetail()}>닫기</SubmitButton>
         </ArticleForm>
       </Wrapper>

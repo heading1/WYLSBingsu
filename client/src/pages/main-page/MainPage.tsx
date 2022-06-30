@@ -163,7 +163,12 @@ const MainPage: React.FC = () => {
             <Footer nextPage={nextPage} prevPage={prevPage} />
 
             {viewDetail && (
-              <Detail {...toppingDetailResult.data} closeDetail={closeDetail} />
+              <Detail
+                {...toppingDetailResult.data}
+                closeDetail={closeDetail}
+                toppingDetailShowError={toppingDetailShowError}
+                toppingDetailError={toppingDetailError}
+              />
             )}
             <Modal
               content={modal.content}
