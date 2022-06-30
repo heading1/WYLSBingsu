@@ -15,7 +15,6 @@ type IdParams = {
 const WritePage: React.FC = () => {
   const { deviceHeight } = useDeviceViewport();
   const [writeState, setWriteState] = useState(1);
-  const articleRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const {
     articlePost,
     setSelectedTopping,
@@ -26,18 +25,6 @@ const WritePage: React.FC = () => {
     setShowModal,
   } = useWrite();
   const params = useParams<IdParams>();
-
-  useLayoutEffect(() => {
-    const detectMobileKeyboard = () => {
-      if (document.activeElement?.tagName === 'INPUT') {
-        articleRef.current.scrollIntoView({ block: 'end' });
-      }
-    };
-
-    window.addEventListener('resize', detectMobileKeyboard);
-
-    return window.removeEventListener('resize', detectMobileKeyboard);
-  }, []);
 
   const handleSubmit = (data: ArticleInputType) => {
     articlePost(data, params.userId);
@@ -59,7 +46,7 @@ const WritePage: React.FC = () => {
           <>
             <StyledHeader>토핑 올리기</StyledHeader>
             <ArticleForm onSubmit={handleSubmit} />
-            <StateButton ref={articleRef} setWriteState={setWriteState} />
+            <StateButton setWriteState={setWriteState} />
           </>
         )}
       </Wrapper>
