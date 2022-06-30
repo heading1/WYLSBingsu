@@ -116,15 +116,19 @@ class UserService {
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
 
     const accessToken = jwt.sign(
-      { userEmail: user.email, userNickname: user.nickName },
+      {
+        userEmail: user.email,
+        userNickname: user.nickName,
+        userId: userIdString,
+      },
       secretKey,
       {
-        expiresIn: '30s',
+        expiresIn: '1m',
       }
     );
 
     const refreshToken = jwt.sign({}, secretKey, {
-      expiresIn: '50s',
+      expiresIn: '3m',
     });
 
     const updatedUser = await this.userModel.updateRefreshToken({
