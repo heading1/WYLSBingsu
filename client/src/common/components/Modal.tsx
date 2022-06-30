@@ -1,12 +1,9 @@
-import { theme } from '@/styles';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { keyframes } from 'styled-components';
 
 const Wrapper = styled.div<{ flag: boolean }>`
   opacity: ${(props) => (props.flag ? 1 : 1)};
   background-color: rgba(0, 0, 0, 0.2);
-  /* transition: ; */
 `;
 
 const ModalStyled = styled.div<{ flag: boolean }>`
@@ -48,17 +45,12 @@ const ContentStyled = styled.div`
 
 interface ModalProps {
   content: string;
+  show: boolean;
 }
 
 const Modal: React.FC<ModalProps> = (props) => {
-  const [flag, setFlag] = useState(true);
-  const { content } = props;
-
-  useEffect(() => {
-    setTimeout(() => {
-      setFlag(false);
-    }, 100);
-  }, []);
+  const { content, show } = props;
+  const [flag, setFlag] = useState(!show);
 
   const handleClose = () => {
     setFlag(true);
