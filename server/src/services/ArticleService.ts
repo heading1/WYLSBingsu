@@ -15,7 +15,16 @@ class ArticleService {
 
     return products;
   }
+  async getDetailData(detailId: string): Promise<Object> {
+    const detail = await this.articleModel.detailFindById(detailId);
 
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!detail) {
+      throw new Error('해당 id의 글은 없습니다. 다시 한 번 확인해 주세요.');
+    }
+
+    return detail;
+  }
   async getArticleData(
     articleId: string,
     pageNumber: number
