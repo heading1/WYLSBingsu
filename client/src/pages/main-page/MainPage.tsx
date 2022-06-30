@@ -120,7 +120,7 @@ const MainPage: React.FC = () => {
             <Footer nextPage={nextPage} prevPage={prevPage} />
 
             {viewDetail && <Detail {...viewData} closeDetail={closeDetail} />}
-            <Modal content="테스트" />
+            <Modal content="테스트" show={false} />
           </>
         )}
       </div>
