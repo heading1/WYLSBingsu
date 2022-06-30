@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface ToppingProps {
-  image: string;
+  image?: string;
 }
 
 export const Wrapper = styled.div`
@@ -18,12 +18,27 @@ export const ToppingContainer = styled.div`
   grid-template-columns: repeat(2, auto);
   height: 100%;
   width: 100%;
-  padding: 1rem 0.5rem;
+  padding: 0.5rem 0.5rem;
 `;
 
-export const Topping = styled.div<ToppingProps>`
+export const ToppingImg = styled.img<ToppingProps>`
   width: 100px;
   height: 100px;
+`;
+
+export const ToppingDiv = styled.div`
   place-self: center center;
-  background: url(${(props) => props.image}) no-repeat center/contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 110px;
+  height: 110px;
+
+  :hover {
+    border: 3px solid ${(props) => props.theme.orange};
+  }
+
+  &.select {
+    border: 3px solid ${(props) => props.theme.orange};
+  }
 `;

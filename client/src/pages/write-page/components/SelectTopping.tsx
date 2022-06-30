@@ -1,4 +1,9 @@
-import { Wrapper, ToppingContainer, Topping } from './SelectTopingStyle';
+import {
+  Wrapper,
+  ToppingContainer,
+  ToppingImg,
+  ToppingDiv,
+} from './SelectTopingStyle';
 import {
   chocolate1,
   chocolate2,
@@ -8,6 +13,7 @@ import {
   pineapple,
   watermelon,
 } from '@/assets/images';
+import { useState } from 'react';
 
 const toppingList = [
   chocolate1,
@@ -20,11 +26,21 @@ const toppingList = [
 ];
 
 const SelectTopping: React.FC = () => {
+  const [select, setSelect] = useState<number>();
+
   return (
     <Wrapper>
       <ToppingContainer>
         {toppingList.map((topping, index) => (
-          <Topping key={index} image={topping} />
+          <ToppingDiv className={select === index ? 'select' : ''}>
+            <ToppingImg
+              key={index}
+              src={topping}
+              onClick={() => {
+                setSelect(index);
+              }}
+            />
+          </ToppingDiv>
         ))}
       </ToppingContainer>
     </Wrapper>
