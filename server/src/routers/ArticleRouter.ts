@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { articleService } from '../services';
+import { authJwt, tokenRequestMatch } from '../middlewares';
 
 const articleRouter = Router();
 
@@ -37,14 +38,19 @@ articleRouter.get('/:pageNumber/:_id', async (req, res, next) => {
   }
 });
 
-articleRouter.get('/detail/tail/:_id', async (req, res, next) => {
-  try {
-    const _id: string = req.params._id;
-    const articleDetailData = await articleService.getDetailData(_id);
-    res.status(200).json(articleDetailData);
-  } catch (error) {
-    next(error);
+articleRouter.get(
+  '/detail/tail/:_id',
+  authJwt,
+  tokenRequestMatch,
+  async (req, res, next) => {
+    try {
+      const _id: string = req.params._id;
+      const articleDetailData = await articleService.getDetailData(_id);
+      res.status(200).json(articleDetailData);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 export { articleRouter };
