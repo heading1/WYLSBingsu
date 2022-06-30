@@ -45,15 +45,15 @@ const ContentStyled = styled.div`
 
 interface ModalProps {
   content: string;
-  setShowError?: Function | undefined;
+  setOpen: Function;
   open: boolean;
 }
 
 const Modal: React.FC<ModalProps> = (props) => {
-  const { content, setShowError, open } = props;
+  const { content, setOpen, open } = props;
 
   const handleClose = () => {
-    if (setShowError) setShowError(false);
+    setOpen(false);
   };
 
   return (

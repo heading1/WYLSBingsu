@@ -130,7 +130,7 @@ const MainPage: React.FC = () => {
             {viewDetail && <Detail {...viewData} closeDetail={closeDetail} />}
             <Modal
               content={modal.content}
-              setShowError={setShowError}
+              setOpen={setShowError}
               open={showError}
             />
           </>
