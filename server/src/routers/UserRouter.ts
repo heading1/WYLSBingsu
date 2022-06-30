@@ -110,12 +110,15 @@ userRouter.post('/login', async function (req, res, next) {
     // db 있을 시 로그인 성공 및, 토큰 받아오기
     const userToken = await userService.getUserToken({ email, password });
 
-    const { accessToken } = userToken;
+    const { accessToken, userIdString } = userToken;
+
     res.cookie('user', accessToken, {
       httpOnly: true,
     });
 
-    res.status(201).json({ message: '로그인에 성공했습니다!' });
+    res
+      .status(201)
+      .json({ message: '로그인에 성공했습니다!', userId: userIdString });
   } catch (error) {
     next(error);
   }

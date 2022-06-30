@@ -6,7 +6,7 @@ async function tokenRequestMatch(
   next: NextFunction
 ) {
   try {
-    if (req.currentUserEmail !== req.body.email) {
+    if (req.currentUserId !== req.params._id) {
       console.log(
         '사용자 요청이 있었습니다. 하지만 권한이 없거나 적절하지 않습니다.'
       );
