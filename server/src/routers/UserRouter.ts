@@ -292,4 +292,61 @@ userRouter.post('/mail', async (req, res, next) => {
   }
 });
 
+userRouter.post('/mail-auth', async (req, res, next) => {
+  try {
+    //이메일 중복확인
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        'headers의 Content-Type을 application/json으로 설정해주세요'
+      );
+    }
+
+    // body data로부터, 확인용으로 사용할 현재 메일인증번호를 추출함.
+    interface user {
+      email: string;
+      emailAuthNumber: string;
+    }
+
+    const { email, emailAuthNumber }: user = req.body;
+
+    //이메일 인증 로직
+    let serverAuthNumber: string = '0';
+    const AuthEmailIdentifier = req.cookies['AuthEmailIdentifier'];
+    console.log('req.cookies', AuthEmailIdentifier);
+    if (!AuthEmailIdentifier) {
+      throw new Error('이메일 인증을 다시 시작하세요');
+    }
+    const redisData = await redisClient.HGETALL(AuthEmailIdentifier);
+    console.log(redisData);
+    console.log(redisData.authNumber);
+    console.log(typeof redisData.authNumber);
+
+    if (typeof redisData.authNumber == 'undefined') {
+      const flag: string = 'email';
+      const toFindAuthNumber = {
+        email: email,
+        flag: flag,
+        identifierNumber: AuthEmailIdentifier,
+      };
+      const dbSave = await authNumberService.findAuthNumber(toFindAuthNumber);
+      if (!dbSave) {
+        throw new Error(
+          '인증 시간이 지났습니다. 이메일 인증을 다시 시작하세요'
+        );
+      }
+      serverAuthNumber = dbSave.authNumber;
+    } else {
+      serverAuthNumber = redisData.authNumber;
+    }
+
+    if (emailAuthNumber !== serverAuthNumber) {
+      throw new Error('인증번호가 틀립니다. 다시 입력해주세요');
+    }
+
+    res.status(200).json({ message: '이메일 인증에 성공하였습니다.' });
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { userRouter };
