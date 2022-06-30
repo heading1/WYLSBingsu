@@ -41,7 +41,7 @@ const shareMyLink = () => {
       });
   }, []);
 
-  return { getMyLink, error, result, isLoading, showError };
+  return { getMyLink, error, result, isLoading, showError, setShowError };
 };
 
 export default shareMyLink;

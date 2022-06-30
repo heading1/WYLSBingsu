@@ -17,6 +17,7 @@ import MockData from './MockData.json';
 import Loading from '@/common/components/Loading';
 import useDeviceViewport from '@/common/hooks/useDeviceViewport';
 import Modal from '@/common/components/Modal';
+import shareMyLink from './hooks/useShareMyLink';
 
 const ratio = theme.windowHeight / 1500;
 const location1 = { top: 15, left: 32, width: 188 * ratio };
@@ -60,6 +61,7 @@ const MainPage: React.FC = () => {
   const [viewDetail, setViewDetail] = useState(false);
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState({ content: '', flag: false });
+  const { getMyLink, showError, error, setShowError } = shareMyLink();
 
   const nextPage = () => {
     if (page === maxPage) setPage(0);
@@ -96,12 +98,9 @@ const MainPage: React.FC = () => {
     }, 500);
   }, [data]);
 
-  const handleModal = (
-    obj: { content: string; flag?: boolean } = { content: '', flag: true }
-  ) => {
-    setModal(obj as { content: string; flag: boolean });
-    console.log(obj);
-  };
+  useEffect(() => {
+    setModal({ content: error, flag: showError });
+  }, [showError, error]);
 
   return (
     <Wrapper $loading={loading} deviceHeight={deviceHeight}>
@@ -111,7 +110,7 @@ const MainPage: React.FC = () => {
           <Loading />
         ) : (
           <>
-            <Header handleModal={handleModal} />
+            <Header getMyLink={getMyLink} />
             {locationArr.map((item, i) => {
               return data[6 * page + i] ? (
                 <Topping
@@ -129,7 +128,11 @@ const MainPage: React.FC = () => {
             <Footer nextPage={nextPage} prevPage={prevPage} />
 
             {viewDetail && <Detail {...viewData} closeDetail={closeDetail} />}
-            {modal.flag && <Modal content={modal.content} />}
+            <Modal
+              content={modal.content}
+              setShowError={setShowError}
+              open={showError}
+            />
           </>
         )}
       </div>
