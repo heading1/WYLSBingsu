@@ -18,6 +18,7 @@ const StateButton: React.FC<StateButtonProps> = ({ setWriteState }) => {
         onClick={() => {
           setWriteState(2);
         }}
+        next={true}
       >
         다음
       </PageButton>

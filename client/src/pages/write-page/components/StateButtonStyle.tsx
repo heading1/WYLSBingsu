@@ -1,14 +1,25 @@
 import styled from 'styled-components';
 
-export const PageButton = styled.button`
+interface ButtonProps {
+  next?: boolean;
+}
+
+export const PageButton = styled.button<ButtonProps>`
   width: 45%;
-  font-size: 1.6rem;
-  border: 1px solid black;
+  height: 2.4rem;
+  font-size: 1.4rem;
+  border-radius: 1.6rem;
+  color: #fff;
+  background-color: ${(props) => (props.next ? props.theme.point3 : 'gray')};
+
+  + button {
+    margin-left: 20px;
+  }
 `;
 
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
-  width: 95%;
+  width: 80%;
   max-width: 26rem;
 `;

@@ -21,3 +21,12 @@ export const SubmitButton = styled.button`
   font-size: 1.4rem;
   color: #fff;
 `;
+
+export const StyledHeader = styled.h1`
+  width: 80%;
+  max-width: 26rem;
+  height: 2.6rem;
+  border-radius: 30px;
+  text-align: center;
+  background-color: #fff;
+`;

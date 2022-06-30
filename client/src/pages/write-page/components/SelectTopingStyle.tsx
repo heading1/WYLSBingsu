@@ -9,6 +9,8 @@ export const Wrapper = styled.div`
   max-width: 26rem;
   height: 60%;
   margin: 2rem 0;
+  border-radius: 30px;
+  background-color: #fff;
 `;
 
 export const ToppingContainer = styled.div`
@@ -16,6 +18,7 @@ export const ToppingContainer = styled.div`
   grid-template-columns: repeat(2, auto);
   height: 100%;
   width: 100%;
+  padding: 1rem 0.5rem;
 `;
 
 export const Topping = styled.div<ToppingProps>`
