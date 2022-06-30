@@ -16,8 +16,11 @@ class ArticleService {
     return products;
   }
 
-  async getArticleData(articleId: string): Promise<ArticleData> {
-    const article = await this.articleModel.findById(articleId);
+  async getArticleData(
+    articleId: string,
+    pageNumber: number
+  ): Promise<Object[]> {
+    const article = await this.articleModel.findById(articleId, pageNumber);
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!article) {

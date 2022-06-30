@@ -25,5 +25,16 @@ articleRouter.post('/register', async (req, res, next) => {
     next(error);
   }
 });
+articleRouter.get('/:pageNumber/:_id', async function (req, res, next) {
+  try {
+    const _id: string = req.params._id;
+    const pageNumber: number = Number(req.params.pageNumber);
+    const articleData = await articleService.getArticleData(_id, pageNumber);
+
+    res.status(200).json(articleData);
+  } catch (error) {
+    next(error);
+  }
+});
 
 export { articleRouter };
