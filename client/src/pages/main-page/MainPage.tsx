@@ -134,6 +134,9 @@ const MainPage: React.FC = () => {
             .then(() => alert('복사되었습니다.'));
         }
         break;
+
+      default:
+        break;
     }
   }, [result]);
 

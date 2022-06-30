@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Wrapper, Tooltip, NavButton } from './HeaderStyle';
 import { topping, home, share } from '@/assets/images';
 import shareMyLink from '../hooks/useShareMyLink';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface HeaderProps {
   getMyLink: Function;
@@ -9,9 +10,17 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ getMyLink, setBtnType }) => {
+  let navigate = useNavigate();
+  const params = useParams();
+  const userId = params.userId;
+
   const handleHomeClick = () => {
     setBtnType('home');
     getMyLink();
+  };
+
+  const handleToppingClick = () => {
+    navigate(`/${userId}/write`);
   };
 
   const handleShareClick = () => {
@@ -31,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({ getMyLink, setBtnType }) => {
         </NavButton>
         <NavButton>
           <Tooltip>토핑올리기</Tooltip>
-          <img src={topping} alt="토핑올리기" />
+          <img src={topping} alt="토핑올리기" onClick={handleToppingClick} />
         </NavButton>
         <NavButton>
           <Tooltip>공유하기</Tooltip>
