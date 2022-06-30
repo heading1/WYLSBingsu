@@ -19,8 +19,16 @@ export interface ArticleData {
 }
 
 export class ArticleModel {
-  async findById(articleId: string): Promise<ArticleData | null> {
-    const article = await Article.findOne({ _id: articleId });
+  async findById(articleId: string, pageNumber: number): Promise<Object[]> {
+    const pageLimit: number = 6;
+    const article = await Article.find(
+      { uniqueNumber: articleId },
+      { createdAt: 0, updatedAt: 0, __v: 0, content: 0, uniqueNumber: 0 }
+    )
+      .sort({ _id: 1 })
+      .skip((pageNumber - 1) * pageLimit)
+      .limit(pageLimit);
+
     return article;
   }
   async create(articleInfo: ArticleInfo): Promise<ArticleData> {
