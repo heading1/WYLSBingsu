@@ -1,5 +1,5 @@
 import GithubOAuth from './GithubOAuth';
-import CustomForm from '@/common/form-component/CustomForm';
+import CustomForm from '@/common/components/form-component/CustomForm';
 import { FormInputType } from '@/types/interfaces';
 import { LoginButton, LoadingDiv, ErrorMessage } from './LoginFormStyle';
 import Loading from '@/common/components/Loading';

@@ -20,7 +20,7 @@ const AuthNumberSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      expires: '1m',
+      expires: '3m',
       default: Date.now,
     },
   },
