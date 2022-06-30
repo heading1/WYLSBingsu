@@ -8,8 +8,14 @@ import watermelon from './watermelon.png';
 import bingsu from './bingsu.jpeg';
 import no_bingsu from './no_bingsu.jpeg';
 import only_bingsu from './only_bingsu.png';
+import home from './home.png';
+import share from './share.png';
+import topping from './topping.png';
 
 export {
+  home,
+  share,
+  topping,
   chocolate1,
   chocolate2,
   chocolate3,

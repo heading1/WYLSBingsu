@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-
-interface WrapperInterface {
+import { DeviceViewport } from '@/types/interfaces';
+interface WrapperInterface extends DeviceViewport {
   $loading: boolean;
 }
 
 const Wrapper = styled.div<WrapperInterface>`
-  height: ${(props) => (props.$loading ? '99vh' : '')};
+  height: ${(props) => (props.$loading ? props.deviceHeight : '')};
   width: 100vw;
   position: relative;
   display: flex;
@@ -14,17 +14,14 @@ const Wrapper = styled.div<WrapperInterface>`
   & > div {
     position: absolute;
     display: inline-block;
-    height: 100vh;
+    height: ${(props) => props.deviceHeight};
     overflow: hidden;
     z-index: -1;
   }
   & > img {
     display: block;
-    /* position: relative; */
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
   }
 `;
 

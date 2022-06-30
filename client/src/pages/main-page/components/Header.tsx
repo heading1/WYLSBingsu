@@ -1,9 +1,6 @@
 import React from 'react';
 import { Wrapper, Tooltip, NavButton } from './HeaderStyle';
-import Button from '@mui/material/Button';
-import topping from '@/assets/images/topping.png';
-import home from '@/assets/images/home.png';
-import share from '@/assets/images/share.png';
+import { topping, home, share } from '@/assets/images';
 
 const Header: React.FC = () => {
   return (
