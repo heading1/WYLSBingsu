@@ -5,7 +5,23 @@ import { userService } from '../services';
 
 async function authJwt(req: Request, res: Response, next: NextFunction) {
   // request 헤더로부터 authorization bearer 토큰을 받음.
-  const userAccessToken = req.headers['authorization']?.split(' ')[1];
+  // const userAccessToken = req.headers['authorization']?.split(' ')[1];
+
+  var accessCookies = req.headers['cookie']?.split(';').map(function (element) {
+    let elements = element.split('=');
+    return {
+      key: elements[0].replace(/(\s*)/g, ''),
+      value: elements[1],
+    };
+  });
+
+  console.log(accessCookies);
+
+  const accessCookie = accessCookies?.find((token) => token.key === 'user');
+  console.log(accessCookie);
+  console.log(accessCookie?.value);
+
+  const userAccessToken = accessCookie?.value;
 
   // 이 토큰은 jwt 토큰 문자열이거나, 혹은 "null" 문자열이거나, undefined임.
   // 토큰이 "null" 일 경우, login_required 가 필요한 서비스 사용을 제한함.
