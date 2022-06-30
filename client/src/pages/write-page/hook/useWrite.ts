@@ -34,7 +34,6 @@ const useWrite = () => {
       axios
         .post(POST_URI, postData)
         .then((response) => {
-          console.log(response);
           setResult((previous) => ({
             ...previous,
             type: 'SUCCESS',
@@ -45,7 +44,6 @@ const useWrite = () => {
           if (axios.isAxiosError(err)) {
             const responseError = err as AxiosError<ArticlePostResponse>;
             if (responseError && responseError.response) {
-              console.log(responseError.response);
               setResult((previous) => ({
                 ...previous,
                 type: 'FAIL',

@@ -1,7 +1,7 @@
 import { Wrapper, StyledHeader } from './WritePageStyle';
 import { ArticleForm, SelectTopping, StateButton } from './components';
 import useDeviceViewport from '@/common/hooks/useDeviceViewport';
-import { useState, useLayoutEffect, useRef } from 'react';
+import { useState } from 'react';
 import useWrite from './hook/useWrite';
 import { ArticleInputType } from '@/types/interfaces';
 import Loading from '@/common/components/Loading';
