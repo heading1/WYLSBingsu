@@ -5,9 +5,20 @@ import shareMyLink from '../hooks/useShareMyLink';
 
 interface HeaderProps {
   getMyLink: Function;
+  setBtnType: Function;
 }
 
-const Header: React.FC<HeaderProps> = ({ getMyLink }) => {
+const Header: React.FC<HeaderProps> = ({ getMyLink, setBtnType }) => {
+  const handleHomeClick = () => {
+    setBtnType('home');
+    getMyLink();
+  };
+
+  const handleShareClick = () => {
+    setBtnType('share');
+    getMyLink();
+  };
+
   return (
     <Wrapper>
       <article>
@@ -16,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ getMyLink }) => {
       <nav>
         <NavButton>
           <Tooltip>내 빙수가기</Tooltip>
-          <img src={home} alt="내 빙수가기" />
+          <img src={home} alt="내 빙수가기" onClick={handleHomeClick} />
         </NavButton>
         <NavButton>
           <Tooltip>토핑올리기</Tooltip>
@@ -24,7 +35,7 @@ const Header: React.FC<HeaderProps> = ({ getMyLink }) => {
         </NavButton>
         <NavButton>
           <Tooltip>공유하기</Tooltip>
-          <img src={share} alt="공유하기" onClick={() => getMyLink()} />
+          <img src={share} alt="공유하기" onClick={handleShareClick} />
         </NavButton>
       </nav>
     </Wrapper>

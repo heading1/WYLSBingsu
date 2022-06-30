@@ -21,6 +21,7 @@ import { useParams } from 'react-router-dom';
 import useToppingList from './hooks/useToppingList';
 import useToppingDetail from './hooks/useToppingDetail';
 import useDidMountEffect from './hooks/useDidMountEffect';
+import { useNavigate } from 'react-router-dom';
 
 const ratio = theme.windowHeight / 1500;
 const location1 = { top: 15, left: 32, width: 188 * ratio };
@@ -56,8 +57,10 @@ const MainPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState({ content: '', flag: false });
   const { getMyLink, showError, error, setShowError, result } = shareMyLink();
+  const [btnType, setBtnType] = useState('');
   const params = useParams();
   const userId = params.userId;
+  let navigate = useNavigate();
 
   const {
     getToppings,
@@ -117,11 +120,20 @@ const MainPage: React.FC = () => {
   }, [showError, error]);
 
   useEffect(() => {
-    if (result.status === 'OK') {
-      const targetURL = `${window.location.origin}/${result.data}`;
-      navigator.clipboard
-        .writeText(targetURL)
-        .then(() => alert('복사되었습니다.'));
+    switch (btnType) {
+      case 'home':
+        if (result.status === 'OK') {
+          navigate(`/${result.data}`);
+        }
+        break;
+      case 'share':
+        if (result.status === 'OK') {
+          const targetURL = `${window.location.origin}/${result.data}`;
+          navigator.clipboard
+            .writeText(targetURL)
+            .then(() => alert('복사되었습니다.'));
+        }
+        break;
     }
   }, [result]);
 
@@ -133,7 +145,7 @@ const MainPage: React.FC = () => {
           <Loading />
         ) : (
           <>
-            <Header getMyLink={getMyLink} />
+            <Header getMyLink={getMyLink} setBtnType={setBtnType} />
             {locationArr.map((item, i) => {
               return data[i] ? (
                 <Topping
