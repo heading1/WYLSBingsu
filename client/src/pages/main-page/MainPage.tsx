@@ -134,6 +134,9 @@ const MainPage: React.FC = () => {
             .then(() => alert('복사되었습니다.'));
         }
         break;
+
+      default:
+        break;
     }
   }, [result]);
 
@@ -163,7 +166,12 @@ const MainPage: React.FC = () => {
             <Footer nextPage={nextPage} prevPage={prevPage} />
 
             {viewDetail && (
-              <Detail {...toppingDetailResult.data} closeDetail={closeDetail} />
+              <Detail
+                {...toppingDetailResult.data}
+                closeDetail={closeDetail}
+                toppingDetailShowError={toppingDetailShowError}
+                toppingDetailError={toppingDetailError}
+              />
             )}
             <Modal
               content={modal.content}
