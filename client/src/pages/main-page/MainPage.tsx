@@ -59,6 +59,7 @@ const MainPage: React.FC = () => {
   const maxPage = useMemo(() => Math.ceil(data.length / 6) - 1, [data]);
   const [viewDetail, setViewDetail] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [modal, setModal] = useState({ content: '', flag: false });
 
   const nextPage = () => {
     if (page === maxPage) setPage(0);
@@ -94,6 +95,14 @@ const MainPage: React.FC = () => {
       setLoading(false);
     }, 500);
   }, [data]);
+
+  const handleModal = (
+    obj: { content: string; flag?: boolean } = { content: '', flag: true }
+  ) => {
+    setModal(obj as { content: string; flag: boolean });
+    console.log(obj);
+  };
+
   return (
     <Wrapper $loading={loading} deviceHeight={deviceHeight}>
       <div>
@@ -102,7 +111,7 @@ const MainPage: React.FC = () => {
           <Loading />
         ) : (
           <>
-            <Header />
+            <Header handleModal={handleModal} />
             {locationArr.map((item, i) => {
               return data[6 * page + i] ? (
                 <Topping
@@ -120,7 +129,7 @@ const MainPage: React.FC = () => {
             <Footer nextPage={nextPage} prevPage={prevPage} />
 
             {viewDetail && <Detail {...viewData} closeDetail={closeDetail} />}
-            <Modal content="테스트" />
+            {modal.flag && <Modal content={modal.content} />}
           </>
         )}
       </div>

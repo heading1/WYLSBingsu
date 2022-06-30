@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Wrapper, Tooltip, NavButton } from './HeaderStyle';
 import { topping, home, share } from '@/assets/images';
+import shareMyLink from '../hooks/useShareMyLink';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  handleModal: Function;
+}
+
+const Header: React.FC<HeaderProps> = ({ handleModal }) => {
+  const { getMyLink, showError, error } = shareMyLink();
+
+  const handleShareMyLink = () => {
+    getMyLink();
+  };
+
+  useEffect(() => {
+    handleModal({ content: error, flag: showError });
+  }, [showError]);
+
   return (
     <Wrapper>
       <article>
@@ -19,7 +34,7 @@ const Header: React.FC = () => {
         </NavButton>
         <NavButton>
           <Tooltip>공유하기</Tooltip>
-          <img src={share} alt="공유하기" />
+          <img src={share} alt="공유하기" onClick={handleShareMyLink} />
         </NavButton>
       </nav>
     </Wrapper>
