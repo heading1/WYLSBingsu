@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Wrapper, Tooltip, NavButton } from './HeaderStyle';
 import { topping, home, share } from '@/assets/images';
+import shareMyLink from '../hooks/useShareMyLink';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  getMyLink: Function;
+}
+
+const Header: React.FC<HeaderProps> = ({ getMyLink }) => {
   return (
     <Wrapper>
       <article>
@@ -19,7 +24,7 @@ const Header: React.FC = () => {
         </NavButton>
         <NavButton>
           <Tooltip>공유하기</Tooltip>
-          <img src={share} alt="공유하기" />
+          <img src={share} alt="공유하기" onClick={() => getMyLink()} />
         </NavButton>
       </nav>
     </Wrapper>

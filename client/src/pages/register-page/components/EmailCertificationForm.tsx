@@ -1,7 +1,7 @@
 import { CodeInput, SubmitButton } from './EmailCertificationFormStyle';
 import { useState } from 'react';
 import { RegisterInputType } from '@/types/interfaces';
-import generateRandomName from '@/common/util/generateRandomName';
+import generateRandomName from '@/common/utils/generateRandomName';
 
 interface EmailProps {
   inputData: RegisterInputType;

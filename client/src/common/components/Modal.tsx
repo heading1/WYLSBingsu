@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div<{ flag: boolean }>`
-  opacity: ${(props) => (props.flag ? 1 : 1)};
+const Wrapper = styled.div<{ open: boolean }>`
+  opacity: ${(props) => (props.open ? 1 : 1)};
   background-color: rgba(0, 0, 0, 0.2);
 `;
 
-const ModalStyled = styled.div<{ flag: boolean }>`
+const ModalStyled = styled.div<{ open: boolean }>`
   position: absolute;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   left: 0;
-  top: ${(props) => (props.flag ? '-15%' : '0')};
+  top: ${(props) => (props.open ? '0' : '-15%')};
   width: 95%;
   height: 10%;
   transition: all 0.2s linear;
@@ -45,25 +45,20 @@ const ContentStyled = styled.div`
 
 interface ModalProps {
   content: string;
+  setOpen: Function;
+  open: boolean;
 }
 
 const Modal: React.FC<ModalProps> = (props) => {
-  const { content } = props;
-  const [flag, setFlag] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setFlag(false);
-    }, 100);
-  }, []);
+  const { content, setOpen, open } = props;
 
   const handleClose = () => {
-    setFlag(true);
+    setOpen(false);
   };
 
   return (
-    <Wrapper flag={flag}>
-      <ModalStyled flag={flag}>
+    <Wrapper open={open}>
+      <ModalStyled open={open}>
         <ContentStyled>
           <span>{content}</span>
         </ContentStyled>

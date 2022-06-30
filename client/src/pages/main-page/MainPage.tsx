@@ -17,6 +17,7 @@ import MockData from './MockData.json';
 import Loading from '@/common/components/Loading';
 import useDeviceViewport from '@/common/hooks/useDeviceViewport';
 import Modal from '@/common/components/Modal';
+import shareMyLink from './hooks/useShareMyLink';
 
 const ratio = theme.windowHeight / 1500;
 const location1 = { top: 15, left: 32, width: 188 * ratio };
@@ -59,6 +60,8 @@ const MainPage: React.FC = () => {
   const maxPage = useMemo(() => Math.ceil(data.length / 6) - 1, [data]);
   const [viewDetail, setViewDetail] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [modal, setModal] = useState({ content: '', flag: false });
+  const { getMyLink, showError, error, setShowError, result } = shareMyLink();
 
   const nextPage = () => {
     if (page === maxPage) setPage(0);
@@ -94,6 +97,20 @@ const MainPage: React.FC = () => {
       setLoading(false);
     }, 500);
   }, [data]);
+
+  useEffect(() => {
+    setModal({ content: error, flag: showError });
+  }, [showError, error]);
+
+  useEffect(() => {
+    if (result.status === 'OK') {
+      const targetURL = `${window.location.origin}/article/1/${result.data}`;
+      navigator.clipboard
+        .writeText(targetURL)
+        .then(() => alert('복사되었습니다.'));
+    }
+  }, [result]);
+
   return (
     <Wrapper $loading={loading} deviceHeight={deviceHeight}>
       <div>
@@ -102,7 +119,7 @@ const MainPage: React.FC = () => {
           <Loading />
         ) : (
           <>
-            <Header />
+            <Header getMyLink={getMyLink} />
             {locationArr.map((item, i) => {
               return data[6 * page + i] ? (
                 <Topping
@@ -120,7 +137,11 @@ const MainPage: React.FC = () => {
             <Footer nextPage={nextPage} prevPage={prevPage} />
 
             {viewDetail && <Detail {...viewData} closeDetail={closeDetail} />}
-            <Modal content="테스트" />
+            <Modal
+              content={modal.content}
+              setOpen={setShowError}
+              open={showError}
+            />
           </>
         )}
       </div>
