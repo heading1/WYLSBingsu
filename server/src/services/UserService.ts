@@ -16,6 +16,7 @@ interface LoginInfo {
 
 interface LoginResult {
   accessToken: string;
+  userIdString: string;
 }
 
 interface ToUpdateRefreshToken {
@@ -99,6 +100,7 @@ class UserService {
     // 비밀번호 일치 여부 확인
     const correctPasswordHash = user.password;
     const userId = user._id;
+    const userIdString = userId.toString();
     const isPasswordCorrect = await bcrypt.compare(
       password,
       correctPasswordHash
@@ -130,7 +132,7 @@ class UserService {
       update: { refreshToken: { base: refreshToken } },
     });
 
-    return { accessToken };
+    return { accessToken, userIdString };
   }
 
   // 랜덤 유저 링크 생성
