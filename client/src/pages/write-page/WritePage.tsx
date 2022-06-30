@@ -5,7 +5,7 @@ import { useState, useLayoutEffect, useRef } from 'react';
 
 const WritePage: React.FC = () => {
   const { deviceHeight } = useDeviceViewport();
-  const [writeState, setWriteState] = useState(2);
+  const [writeState, setWriteState] = useState(1);
   const articleRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useLayoutEffect(() => {
