@@ -23,10 +23,16 @@ interface ArticlePostType extends ArticleInputType {
   toppingImage: string;
 }
 
+interface ResponseObjectType {
+  type: string;
+  content: string;
+}
+
 export type {
   DeviceViewport,
   FormInputType,
   RegisterInputType,
   ArticleInputType,
   ArticlePostType,
+  ResponseObjectType,
 };
