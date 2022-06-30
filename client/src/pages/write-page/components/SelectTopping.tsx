@@ -1,4 +1,9 @@
-import { Wrapper, ToppingContainer, Topping } from './SelectTopingStyle';
+import {
+  Wrapper,
+  ToppingContainer,
+  ToppingImg,
+  ToppingDiv,
+} from './SelectTopingStyle';
 import {
   chocolate1,
   chocolate2,
@@ -24,7 +29,9 @@ const SelectTopping: React.FC = () => {
     <Wrapper>
       <ToppingContainer>
         {toppingList.map((topping, index) => (
-          <Topping key={index} image={topping} />
+          <ToppingDiv>
+            <ToppingImg key={index} src={topping} />
+          </ToppingDiv>
         ))}
       </ToppingContainer>
     </Wrapper>

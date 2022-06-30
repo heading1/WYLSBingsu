@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface ToppingProps {
-  image: string;
+  image?: string;
 }
 
 export const Wrapper = styled.div`
@@ -21,9 +21,20 @@ export const ToppingContainer = styled.div`
   padding: 1rem 0.5rem;
 `;
 
-export const Topping = styled.div<ToppingProps>`
+export const ToppingImg = styled.img<ToppingProps>`
   width: 100px;
   height: 100px;
+`;
+
+export const ToppingDiv = styled.div`
   place-self: center center;
-  background: url(${(props) => props.image}) no-repeat center/contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+
+  :hover {
+    border: 3px solid ${(props) => props.theme.point2};
+  }
 `;
