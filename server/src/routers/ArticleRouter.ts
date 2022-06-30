@@ -25,7 +25,7 @@ articleRouter.post('/register', async (req, res, next) => {
     next(error);
   }
 });
-articleRouter.get('/:pageNumber/:_id', async function (req, res, next) {
+articleRouter.get('/:pageNumber/:_id', async (req, res, next) => {
   try {
     const _id: string = req.params._id;
     const pageNumber: number = Number(req.params.pageNumber);
@@ -37,9 +37,8 @@ articleRouter.get('/:pageNumber/:_id', async function (req, res, next) {
   }
 });
 
-articleRouter.get('/detail/:_id', async function (req, res, next) {
+articleRouter.get('/detail/tail/:_id', async (req, res, next) => {
   try {
-    console.log('console');
     const _id: string = req.params._id;
     const articleDetailData = await articleService.getDetailData(_id);
     res.status(200).json(articleDetailData);
