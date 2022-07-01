@@ -105,6 +105,11 @@ const MainPage: React.FC = () => {
 
   useDidMountEffect(() => {
     const { data } = toppingResult;
+
+    if (data.length === 0 && page === 0) {
+      setData([]);
+    }
+
     if (data.length >= 1) {
       setData(data);
     } else {
