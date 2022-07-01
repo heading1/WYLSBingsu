@@ -21,7 +21,6 @@ const useLogin = () => {
     axios
       .post<LoginResponse>(URI, data, { withCredentials: true })
       .then((response) => {
-        console.log('then', response);
         setResult('OK');
         setError('');
         setShowError(false);
@@ -29,7 +28,6 @@ const useLogin = () => {
       })
       .catch((err: AxiosError | Error) => {
         if (axios.isAxiosError(err)) {
-          console.log('catch', err);
           const responseError = err as AxiosError<LoginResponse>;
           if (responseError && responseError.response) {
             setError(responseError.response.data.message);
