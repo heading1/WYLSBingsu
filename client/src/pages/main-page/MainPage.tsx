@@ -100,10 +100,6 @@ const MainPage: React.FC = () => {
     }
   }, [userId]);
 
-  useEffect(() => {
-    console.log(info);
-  }, [info]);
-
   useDidMountEffect(() => {
     const { data } = toppingResult;
     if (data.length >= 1) {
