@@ -13,9 +13,10 @@ const Wrapper = styled.header`
   & > article {
     position: absolute;
     margin-left: 5%;
-    width: 60%;
+    width: 50%;
     font-size: 1rem;
     top: 0.5vh;
+    word-break: keep-all;
   }
   & > nav {
     position: absolute;
