@@ -6,8 +6,10 @@ import { useEffect, useRef, useState } from 'react';
 import useRegister from '../hook/useRegister';
 import EmailCertificationForm from './EmailCertificationForm';
 import Loading from '@/common/components/Loading';
+import ResponseModal from '@/common/components/response-modal/ResponseModal';
 
 const RegisterForm: React.FC = () => {
+  const MODAL_CONTENT = '이메일 인증에 성공했습니다!';
   const [inputData, setInputData] = useState<RegisterInputType>({
     email: '',
     password: '',
@@ -55,14 +57,11 @@ const RegisterForm: React.FC = () => {
         />
       )}
       {isSuccess && (
-        <SuccessModal>
-          <div>
-            <span>이메일 인증에 성공했습니다!</span>
-            <Link to="/login">
-              <button>로그인</button>
-            </Link>
-          </div>
-        </SuccessModal>
+        <ResponseModal
+          to="/login"
+          content={MODAL_CONTENT}
+          buttonText="로그인"
+        />
       )}
     </>
   );
