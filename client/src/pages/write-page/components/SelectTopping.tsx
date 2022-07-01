@@ -25,19 +25,25 @@ const toppingList = [
   watermelon,
 ];
 
-const SelectTopping: React.FC = () => {
-  const [select, setSelect] = useState<number>();
+interface SelectToppingProps {
+  setSelectedTopping: React.Dispatch<React.SetStateAction<string>>;
+  selectedTopping: string;
+}
 
+const SelectTopping: React.FC<SelectToppingProps> = ({
+  setSelectedTopping,
+  selectedTopping,
+}) => {
   return (
     <Wrapper>
       <ToppingContainer>
-        {toppingList.map((topping, index) => (
-          <ToppingDiv className={select === index ? 'select' : ''}>
+        {toppingList.map((topping) => (
+          <ToppingDiv className={selectedTopping === topping ? 'selected' : ''}>
             <ToppingImg
-              key={index}
+              key={topping}
               src={topping}
               onClick={() => {
-                setSelect(index);
+                setSelectedTopping(topping);
               }}
             />
           </ToppingDiv>

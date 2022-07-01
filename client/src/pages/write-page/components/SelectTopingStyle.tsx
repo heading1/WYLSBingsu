@@ -38,7 +38,7 @@ export const ToppingDiv = styled.div`
     border: 3px solid ${(props) => props.theme.orange};
   }
 
-  &.select {
+  &.selected {
     border: 3px solid ${(props) => props.theme.orange};
   }
 `;

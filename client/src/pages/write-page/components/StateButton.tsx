@@ -1,13 +1,27 @@
 import { ButtonWrapper, PageButton } from './StateButtonStyle';
+import { useRef, useLayoutEffect } from 'react';
 
 interface StateButtonProps {
   setWriteState: React.Dispatch<React.SetStateAction<number>>;
-  ref?: React.MutableRefObject<HTMLDivElement>;
 }
 
-const StateButton: React.FC<StateButtonProps> = ({ setWriteState, ref }) => {
+const StateButton: React.FC<StateButtonProps> = ({ setWriteState }) => {
+  const divRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+
+  useLayoutEffect(() => {
+    const detectMobileKeyboard = () => {
+      if (document.activeElement?.tagName === 'INPUT') {
+        divRef.current.scrollIntoView({ block: 'end' });
+      }
+    };
+
+    window.addEventListener('resize', detectMobileKeyboard);
+
+    return window.removeEventListener('resize', detectMobileKeyboard);
+  }, []);
+
   return (
-    <ButtonWrapper ref={ref}>
+    <ButtonWrapper ref={divRef}>
       <PageButton
         onClick={() => {
           setWriteState(1);
