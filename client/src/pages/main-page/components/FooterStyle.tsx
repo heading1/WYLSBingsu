@@ -7,6 +7,7 @@ const Wrapper = styled.section`
   transform: translate(-50%, -100%);
   display: flex;
   justify-content: space-around;
+  align-items: center;
   width: 100%;
   height: 10%;
   & > button {
@@ -16,6 +17,13 @@ const Wrapper = styled.section`
     :hover {
       background-color: ${(props) => props.theme.point3};
     }
+  }
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration-style: bold;
+    font-size: 1.5rem;
   }
 `;
 

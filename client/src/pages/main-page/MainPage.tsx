@@ -125,7 +125,7 @@ const MainPage: React.FC = () => {
         if (result.status === 'OK') {
           navigate(`/${result.data}`);
         } else {
-          alert('내 빙수가 없습니다.\n 로그인 화면으로 이동합니다!');
+          alert('내 빙수를 찾을 수 없습니다.\n 로그인 화면으로 이동합니다!');
           navigate('/login');
         }
         break;
@@ -166,7 +166,7 @@ const MainPage: React.FC = () => {
               );
             })}
 
-            <Footer nextPage={nextPage} prevPage={prevPage} />
+            <Footer nextPage={nextPage} prevPage={prevPage} page={page} />
 
             {viewDetail && (
               <Detail
