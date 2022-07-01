@@ -435,11 +435,11 @@ userRouter.post('/password-mail', async (req, res, next) => {
   }
 });
 
-userRouter.get('/info', authJwt, async (req, res, next) => {
+userRouter.get('/info/:_id', async (req, res, next) => {
   try {
-    const userInfo = await userService.findUserByEmail(req.currentUserEmail);
-
-    res.status(200).json(userInfo);
+    const userInfo = await userService.findUserById(req.params._id);
+    const { nickName } = userInfo;
+    res.status(200).json(nickName);
   } catch (error) {
     next(error);
   }
