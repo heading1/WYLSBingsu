@@ -15,7 +15,7 @@ class ArticleService {
 
     return products;
   }
-  async getDetailData(detailId: string): Promise<Object> {
+  async getDetailData(detailId: string): Promise<ArticleData> {
     const detail = await this.articleModel.detailFindById(detailId);
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
