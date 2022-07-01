@@ -329,7 +329,7 @@ userRouter.post('/password-auth', async (req, res, next) => {
     console.log(typeof redisData.authNumber);
 
     if (typeof redisData.authNumber == 'undefined') {
-      const flag: string = 'email';
+      const flag: string = 'password';
       const toFindAuthNumber = {
         email: email,
         flag: flag,
@@ -409,7 +409,7 @@ userRouter.post('/password-mail', async (req, res, next) => {
 
     if (!redisSave || redisSave < 1) {
       //dbtest
-      const flag: string = 'email';
+      const flag: string = 'password';
       const authNumber = generatedAuthNumber;
       const identifierNumber = generatedIdentifierNumber;
       const toInsertAuthNumberInfo = {
