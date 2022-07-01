@@ -131,12 +131,12 @@ class UserService {
       },
       secretKey,
       {
-        expiresIn: '1m',
+        expiresIn: '1h',
       }
     );
 
     const refreshToken = jwt.sign({}, secretKey, {
-      expiresIn: '3m',
+      expiresIn: '24h',
     });
 
     const updatedUser = await this.userModel.updateRefreshToken({

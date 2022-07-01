@@ -67,7 +67,7 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
           },
           secretKey,
           {
-            expiresIn: '1m',
+            expiresIn: '1h',
           }
         );
 
@@ -99,7 +99,7 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
       // access token은 유효하지만, refresh token은 만료된 경우 ->  refresh token 재발급
       if (verifyRefreshToken == 'jwt expired') {
         const newRefreshToken = jwt.sign({}, secretKey, {
-          expiresIn: '3m',
+          expiresIn: '24h',
         });
 
         const updatedUser = await userService.updateRefreshToken({
