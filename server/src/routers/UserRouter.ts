@@ -435,4 +435,13 @@ userRouter.post('/password-mail', async (req, res, next) => {
   }
 });
 
+userRouter.get('/info', authJwt, async (req, res, next) => {
+  try {
+    const userInfo = await userService.findUserByEmail(req.currentUserEmail);
+
+    res.status(200).json(userInfo);
+  } catch (error) {
+    next(error);
+  }
+});
 export { userRouter };
