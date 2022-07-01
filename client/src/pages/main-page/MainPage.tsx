@@ -22,6 +22,7 @@ import useToppingList from './hooks/useToppingList';
 import useToppingDetail from './hooks/useToppingDetail';
 import useDidMountEffect from './hooks/useDidMountEffect';
 import { useNavigate } from 'react-router-dom';
+import useInfo from './hooks/useInfo';
 
 const ratio = theme.windowHeight / 1500;
 const location1 = { top: 15, left: 32, width: 188 * ratio };
@@ -57,19 +58,13 @@ const MainPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState({ content: '', flag: false });
   const { getMyLink, showError, error, setShowError, result } = shareMyLink();
+  const { getMyInfo, info, infoError, isInfoError } = useInfo();
   const [btnType, setBtnType] = useState('');
   const params = useParams();
   const userId = params.userId;
   let navigate = useNavigate();
 
-  const {
-    getToppings,
-    toppingError,
-    toppingResult,
-    toppingIsLoading,
-    toppingShowError,
-    setToppingShowError,
-  } = useToppingList();
+  const { getToppings, toppingResult, toppingIsLoading } = useToppingList();
 
   const {
     getToppingDetail,
@@ -77,7 +72,6 @@ const MainPage: React.FC = () => {
     toppingDetailResult,
     toppingDetailIsLoading,
     toppingDetailShowError,
-    setToppingDetailShowError,
   } = useToppingDetail();
 
   const nextPage = () => {
@@ -100,8 +94,15 @@ const MainPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (userId !== undefined) getToppings(1, userId);
+    if (userId !== undefined) {
+      getToppings(1, userId);
+      getMyInfo(userId);
+    }
   }, [userId]);
+
+  useEffect(() => {
+    console.log(info);
+  }, [info]);
 
   useDidMountEffect(() => {
     const { data } = toppingResult;
@@ -151,7 +152,11 @@ const MainPage: React.FC = () => {
           <Loading />
         ) : (
           <>
-            <Header getMyLink={getMyLink} setBtnType={setBtnType} />
+            <Header
+              getMyLink={getMyLink}
+              setBtnType={setBtnType}
+              info={info.data}
+            />
             {locationArr.map((item, i) => {
               return data[i] ? (
                 <Topping
