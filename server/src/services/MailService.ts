@@ -47,23 +47,23 @@ async function mailer(email: string): Promise<mailAuthData> {
                       margin-bottom: 35px;
                       font-size: 30px;
                       font-weight: 600;
-                      color: #ff7800;
+                      color: #4A63C4;
                   "
               >
                   이메일 인증번호 발송
               </h3>
               <div style="padding: 10px 0 20px; border-top: 1px solid #333">
                   <p style="font-size: 18px; font-weight: 600; line-height: 20px">
-                      안녕하세요. WYLSBingsu입니다.
+                      안녕하세요 😆  빙수🍧먹을래?입니다.
                   </p>
                   <p style="font-size: 14px; font-weight: 600; line-height: 20px">
                       아래 인증 번호를 확인하시고 진행해주세요
                   </p>
               </div>
-              <div style="padding: 20px 30px; background: #ff7800">
+              <div style="padding: 20px 30px; background: #4A63C4">
                   🎫 인증번호: <b>${generatedAuthNumber}</b>
               </div>
-              <h3>🤫절대 타인에게 보여주지 마세요!</h3>
+              <h3>🤫 절대 타인에게 보여주지 마세요!</h3>
           </div>
           <div
               style="
@@ -74,7 +74,7 @@ async function mailer(email: string): Promise<mailAuthData> {
               "
           >
               <address style="margin-bottom: 15px; font-style: normal">
-              WYLSBingsu 서울특별시 소동구 소동란로 119 타워 7층<br />
+              WYLSBingsu 서울특별시 빙수구 빙동란로 293 타워 9층<br />
                   TEL. 02-7777-7777~9
               </address>
               <div style="text-align: center">
@@ -118,23 +118,23 @@ async function passwordMailer(email: string): Promise<string> {
                         margin-bottom: 35px;
                         font-size: 30px;
                         font-weight: 600;
-                        color: #ff7800;
+                        color: #4A63C4;
                     "
                 >
                     임시 비밀번호 발송
                 </h3>
                 <div style="padding: 10px 0 20px; border-top: 1px solid #333">
                     <p style="font-size: 18px; font-weight: 600; line-height: 20px">
-                        안녕하세요. WYLSBingsu입니다.
+                        안녕하세요 😆 빙수🍧먹을래?입니다.
                     </p>
                     <p style="font-size: 14px; font-weight: 600; line-height: 20px">
                         아래 임시 비밀번호를 확인하시고 진행해주세요
                     </p>
                 </div>
-                <div style="padding: 20px 30px; background: #ff7800">
+                <div style="padding: 20px 30px; background: #4A63C4">
                     🎫 임시 비밀번호: <b>${generatedAuthNumber}</b>
                 </div>
-                <h3>🤫절대 타인에게 보여주지 마세요!</h3>
+                <h3>🤫 절대 타인에게 보여주지 마세요!</h3>
             </div>
             <div
                 style="
@@ -145,7 +145,7 @@ async function passwordMailer(email: string): Promise<string> {
                 "
             >
                 <address style="margin-bottom: 15px; font-style: normal">
-                WYLSBingsu 서울특별시 소동구 소동란로 119 타워 7층<br />
+                WYLSBingsu 서울특별시 빙수구 빙동란로 293 타워 9층<br />
                     TEL. 02-7777-7777~9
                 </address>
                 <div style="text-align: center">
