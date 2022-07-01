@@ -124,6 +124,9 @@ const MainPage: React.FC = () => {
       case 'home':
         if (result.status === 'OK') {
           navigate(`/${result.data}`);
+        } else {
+          alert('내 빙수가 없습니다.\n 로그인 화면으로 이동합니다!');
+          navigate('/login');
         }
         break;
       case 'share':
