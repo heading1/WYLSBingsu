@@ -76,13 +76,16 @@ const MainPage: React.FC = () => {
 
   const nextPage = () => {
     setPage((cur) => cur + 1);
-    if (userId !== undefined) getToppings(page + 1, userId);
   };
 
   const prevPage = () => {
     if (page === 0) alert('첫 번째 빙수입니다.');
     else setPage((page) => page - 1);
   };
+
+  useEffect(() => {
+    if (userId !== undefined) getToppings(page + 1, userId);
+  }, [page]);
 
   const openDetail = (_id: string) => {
     getToppingDetail(_id);
@@ -95,7 +98,7 @@ const MainPage: React.FC = () => {
 
   useEffect(() => {
     if (userId !== undefined) {
-      getToppings(1, userId);
+      getToppings(page + 1, userId);
       getMyInfo(userId);
     }
   }, [userId]);
@@ -104,11 +107,9 @@ const MainPage: React.FC = () => {
     const { data } = toppingResult;
     if (data.length >= 1) {
       setData(data);
-    }
-
-    if (data.length === 0 && page !== 0) {
-      setPage((cur) => cur - 1);
+    } else {
       alert('마지막 빙수입니다.');
+      setPage((page) => page - 1);
     }
   }, [toppingResult]);
 
