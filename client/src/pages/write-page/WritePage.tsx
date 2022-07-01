@@ -15,6 +15,7 @@ type IdParams = {
 const WritePage: React.FC = () => {
   const { deviceHeight } = useDeviceViewport();
   const [writeState, setWriteState] = useState(1);
+
   const {
     articlePost,
     setSelectedTopping,
@@ -27,7 +28,8 @@ const WritePage: React.FC = () => {
   const params = useParams<IdParams>();
 
   const handleSubmit = (data: ArticleInputType) => {
-    articlePost(data, params.userId);
+    if (!data.nickName || !data.content) alert('닉네임과 내용을 입력해주세요!');
+    else articlePost(data, params.userId);
   };
 
   return (

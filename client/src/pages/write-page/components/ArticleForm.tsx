@@ -6,7 +6,7 @@ import {
   ArticleInput,
   SubmitButton,
 } from './ArticleFormStyle';
-
+import generateRandomName from '@/common/utils/generateRandomName';
 interface ArticleProps {
   onSubmit: (data: ArticleInputType) => void;
 }
@@ -23,6 +23,7 @@ const ArticleForm: React.FC<ArticleProps> = ({ onSubmit }) => {
         name="nickname"
         placeholder="닉네임을 적어주세요."
         ref={nicknameRef}
+        defaultValue={generateRandomName()}
       />
       <label htmlFor="article">내용</label>
       <ArticleInput
