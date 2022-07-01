@@ -11,6 +11,7 @@ import only_bingsu from './only_bingsu.png';
 import home from './home.png';
 import share from './share.png';
 import topping from './topping.png';
+import pixelBingsu from './pixel_bingsu.png';
 
 export {
   home,
@@ -26,4 +27,5 @@ export {
   bingsu,
   no_bingsu,
   only_bingsu,
+  pixelBingsu,
 };
