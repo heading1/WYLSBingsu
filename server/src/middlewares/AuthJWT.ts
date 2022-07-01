@@ -43,7 +43,7 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
     if (verifyAccessToken == 'jwt expired') {
       const userInfo: any = jwt_decode(userAccessToken);
 
-      const { userEmail } = userInfo;
+      const { userEmail, userId } = userInfo;
 
       const user = await userService.findUserByEmail(userEmail);
 
@@ -60,10 +60,14 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
         return;
       } else {
         const newAccessToken = jwt.sign(
-          { userEmail: user.email, userNickname: user.nickName },
+          {
+            userEmail: user.email,
+            userNickname: user.nickName,
+            userId: user._id.toString(),
+          },
           secretKey,
           {
-            expiresIn: '30s',
+            expiresIn: '1m',
           }
         );
 
@@ -72,6 +76,7 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
         });
 
         req.currentUserEmail = user.email;
+        req.currentUserId = user._id.toString();
       }
 
       //  access token 만료 X
@@ -83,9 +88,9 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
 
       const user = await userService.findUserByEmail(userEmail);
 
-      req.currentUserEmail = user.email;
-
       const userId = user._id;
+      req.currentUserEmail = user.email;
+      req.currentUserId = userId.toString();
 
       const userRefreshToken = user.refreshToken?.base as string;
 
@@ -94,7 +99,7 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
       // access token은 유효하지만, refresh token은 만료된 경우 ->  refresh token 재발급
       if (verifyRefreshToken == 'jwt expired') {
         const newRefreshToken = jwt.sign({}, secretKey, {
-          expiresIn: '50s',
+          expiresIn: '3m',
         });
 
         const updatedUser = await userService.updateRefreshToken({

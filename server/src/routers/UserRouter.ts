@@ -110,12 +110,15 @@ userRouter.post('/login', async function (req, res, next) {
     // db 있을 시 로그인 성공 및, 토큰 받아오기
     const userToken = await userService.getUserToken({ email, password });
 
-    const { accessToken } = userToken;
+    const { accessToken, userIdString } = userToken;
+
     res.cookie('user', accessToken, {
       httpOnly: true,
     });
 
-    res.status(201).json({ message: '로그인에 성공했습니다!' });
+    res
+      .status(201)
+      .json({ message: '로그인에 성공했습니다!', userId: userIdString });
   } catch (error) {
     next(error);
   }
@@ -326,7 +329,7 @@ userRouter.post('/password-auth', async (req, res, next) => {
     console.log(typeof redisData.authNumber);
 
     if (typeof redisData.authNumber == 'undefined') {
-      const flag: string = 'email';
+      const flag: string = 'password';
       const toFindAuthNumber = {
         email: email,
         flag: flag,
@@ -406,7 +409,7 @@ userRouter.post('/password-mail', async (req, res, next) => {
 
     if (!redisSave || redisSave < 1) {
       //dbtest
-      const flag: string = 'email';
+      const flag: string = 'password';
       const authNumber = generatedAuthNumber;
       const identifierNumber = generatedIdentifierNumber;
       const toInsertAuthNumberInfo = {

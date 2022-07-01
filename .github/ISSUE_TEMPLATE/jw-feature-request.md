@@ -1,0 +1,20 @@
+---
+name: JW Feature request
+about: Suggest an idea for this project
+title: "[FE]"
+labels: "\U0001F528 Feature, \U0001F5A5 Frontend, ❗️high-priority"
+assignees: jinux127
+
+---
+
+## 🔨 기능 설명
+
+
+## 📑 완료 조건
+1. 
+
+## 💭 관련 백로그
+ - -
+
+## 💭 예상 작업 시간
+h

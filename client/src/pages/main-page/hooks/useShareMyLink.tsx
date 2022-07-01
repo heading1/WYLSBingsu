@@ -1,5 +1,4 @@
 import axios, { AxiosError } from 'axios';
-import { FormInputType } from '@/types/interfaces';
 import { useCallback, useState } from 'react';
 
 type shareMyLinkResponse = {
@@ -37,7 +36,9 @@ const shareMyLink = () => {
         }
       })
       .finally(() => {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 400);
       });
   }, []);
 
