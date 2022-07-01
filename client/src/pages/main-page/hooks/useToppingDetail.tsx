@@ -16,7 +16,6 @@ const useToppingDetail = () => {
   const [toppingDetailShowError, setToppingDetailShowError] = useState(false);
 
   const getToppingDetail = useCallback((_id: string) => {
-    // const URI = `http://localhost:8070/article/${page}/${userId}`;
     const URI = `http://localhost:8070/article/detail/tail/${_id}`;
     setToppingDetailIsLoading(true);
     axios
@@ -40,9 +39,7 @@ const useToppingDetail = () => {
         }
       })
       .finally(() => {
-        setTimeout(() => {
-          setToppingDetailIsLoading(false);
-        }, 250);
+        setToppingDetailIsLoading(false);
       });
   }, []);
 

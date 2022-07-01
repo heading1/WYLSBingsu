@@ -158,7 +158,7 @@ const MainPage: React.FC = () => {
                   {...item}
                   rotate={randomRotate()}
                   key={i + 1}
-                  imageSrc={randomTopping()}
+                  imageSrc={data[i].toppingImage}
                   eventClick={() => openDetail(data[i]._id)}
                 />
               ) : (
