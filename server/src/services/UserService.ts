@@ -42,6 +42,14 @@ class UserService {
     return user;
   }
 
+  async findUserById(_id: string): Promise<UserData> {
+    // 객체 destructuring
+
+    const user = await this.userModel.findById(_id);
+
+    return user;
+  }
+
   async updateRefreshToken({
     userId,
     update,
