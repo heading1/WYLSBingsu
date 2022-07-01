@@ -47,6 +47,11 @@ export class UserModel {
     return user;
   }
 
+  async findById(_id: string): Promise<UserData> {
+    const user = await User.findById(_id);
+    return user;
+  }
+
   async findByRandom(): Promise<UserData> {
     const user = await User.aggregate([{ $sample: { size: 1 } }]);
     const randomUser = user[0];
