@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 type LoginResponse = {
   message: string;
+  userId: string;
 };
 
 const useLogin = () => {
@@ -13,7 +14,7 @@ const useLogin = () => {
   const [isLoading, setLoading] = useState(false);
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
-  const URI = `http://localhost:8070/user/login`;
+  const URI = 'http://localhost:8070/user/login';
 
   const asyncLogin = useCallback((data: FormInputType) => {
     setLoading(true);
@@ -24,7 +25,7 @@ const useLogin = () => {
         setResult('OK');
         setError('');
         setShowError(false);
-        navigate('/');
+        navigate(`/${response.data.userId}`);
       })
       .catch((err: AxiosError | Error) => {
         if (axios.isAxiosError(err)) {
