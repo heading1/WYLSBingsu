@@ -7,9 +7,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 interface HeaderProps {
   getMyLink: Function;
   setBtnType: Function;
+  info: any;
 }
 
-const Header: React.FC<HeaderProps> = ({ getMyLink, setBtnType }) => {
+const Header: React.FC<HeaderProps> = ({ getMyLink, setBtnType, info }) => {
   let navigate = useNavigate();
   const params = useParams();
   const userId = params.userId;
@@ -31,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ getMyLink, setBtnType }) => {
   return (
     <Wrapper>
       <article>
-        <h2>bingsu</h2>
+        <h2>{info ? `${info}의 빙수` : `BINGSU`}</h2>
       </article>
       <nav>
         <NavButton>
