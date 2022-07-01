@@ -108,8 +108,10 @@ const MainPage: React.FC = () => {
     if (data.length >= 1) {
       setData(data);
     } else {
-      alert('마지막 빙수입니다.');
-      setPage((page) => page - 1);
+      if (page !== 0) {
+        alert('마지막 빙수입니다.');
+        setPage((page) => page - 1);
+      }
     }
   }, [toppingResult]);
 
