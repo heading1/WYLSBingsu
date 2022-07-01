@@ -8,13 +8,14 @@ import {
   RegisterPage,
   ErrorPage,
   WritePage,
+  IntroPage,
 } from './pages';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<IntroPage />} />
         <Route path="/:userId" element={<MainPage />} />
         <Route path=":userid/write" element={<WritePage />} />
         <Route path="/login" element={<LoginPage />} />
