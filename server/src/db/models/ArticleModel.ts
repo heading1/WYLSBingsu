@@ -15,44 +15,20 @@ export interface ArticleData {
   uniqueNumber: string;
   content: string;
   nickName: string;
-  toppingImage: string;
 }
 
 export class ArticleModel {
-  async detailFindById(detailId: string): Promise<Object> {
-    const releaseTime = new Date(2022, 6, 23, 0, 0, 0, 0);
-    const presentTime = Date.now();
-    if (releaseTime.getTime() <= presentTime) {
-      const detail = await Article.findOne(
-        { _id: detailId },
-        {
-          uniqueNumber: 0,
-          toppingImage: 0,
-          createdAt: 0,
-          updatedAt: 0,
-          __v: 0,
-        }
-      );
-      return detail;
-    } else {
-      const day = Math.ceil(
-        (releaseTime.getTime() - presentTime) / (1000 * 60 * 60 * 24)
-      );
-      const hour = Math.ceil(
-        ((releaseTime.getTime() - presentTime) % (1000 * 60 * 60 * 24)) /
-          (1000 * 60 * 60)
-      );
-      const min = Math.ceil(
-        ((releaseTime.getTime() - presentTime) % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      const sec = Math.ceil(
-        ((releaseTime.getTime() - presentTime) % (1000 * 60)) / 1000
-      );
-      const message = {
-        message: `${day}일 ${hour}시간 ${min}분 ${sec}초 남았네요. 빙수먹으려면 좀 기다려야겠네요! 🥲`,
-      };
-      return message;
-    }
+  async detailFindById(detailId: string): Promise<ArticleData> {
+    const detail = await Article.findOne(
+      { _id: detailId },
+      {
+        toppingImage: 0,
+        createdAt: 0,
+        updatedAt: 0,
+        __v: 0,
+      }
+    );
+    return detail;
   }
   async findById(articleId: string, pageNumber: number): Promise<Object[]> {
     const pageLimit: number = 6;
