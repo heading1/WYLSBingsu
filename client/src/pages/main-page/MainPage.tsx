@@ -109,7 +109,6 @@ const MainPage: React.FC = () => {
     if (data.length === 0 && page === 0) {
       setData([]);
     }
-
     if (data.length >= 1) {
       setData(data);
     } else {
@@ -167,6 +166,7 @@ const MainPage: React.FC = () => {
                   {...item}
                   rotate={randomRotate()}
                   key={i + 1}
+                  nickName={data[i].nickName}
                   imageSrc={data[i].toppingImage}
                   eventClick={() => openDetail(data[i]._id)}
                 />
