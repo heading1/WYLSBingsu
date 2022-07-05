@@ -1,8 +1,6 @@
 import { useForm } from 'react-hook-form';
 import StyledForm from './CustomFormStyle';
 import { RegisterInputType } from '@/types/interfaces';
-import { MutableRefObject, useRef } from 'react';
-
 interface FormProps {
   children?: React.ReactNode;
   onSubmit: (data: RegisterInputType) => void;
@@ -24,7 +22,6 @@ const CustomForm: React.FC<FormProps> = ({
     watch,
     formState: { errors },
   } = useForm<RegisterInputType>({ mode: 'onChange' });
-  const passwordRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
