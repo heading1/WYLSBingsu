@@ -40,15 +40,11 @@ const locationArr = [
   location6,
 ];
 const toppingImgArr = [kiwi, pineapple, watermelon];
-const randomTopping = () => {
-  const randomIndex = Math.floor(Math.random() * toppingImgArr.length);
-  const randomImage = toppingImgArr[randomIndex];
 
-  return randomImage;
-};
 const randomRotate = () => {
   return Math.floor(Math.random() * 360);
 };
+
 type data = { _id: string; nickName: string; toppingImage: string };
 const MainPage: React.FC = () => {
   const [page, setPage] = useState(0);
@@ -177,14 +173,14 @@ const MainPage: React.FC = () => {
 
             <Footer nextPage={nextPage} prevPage={prevPage} page={page} />
 
-            {viewDetail && (
-              <Detail
-                {...toppingDetailResult.data}
-                closeDetail={closeDetail}
-                toppingDetailShowError={toppingDetailShowError}
-                toppingDetailError={toppingDetailError}
-              />
-            )}
+            <Detail
+              {...toppingDetailResult.data}
+              closeDetail={closeDetail}
+              toppingDetailShowError={toppingDetailShowError}
+              toppingDetailError={toppingDetailError}
+              view={viewDetail}
+            />
+
             <Modal
               content={modal.content}
               setOpen={setShowError}
@@ -197,4 +193,4 @@ const MainPage: React.FC = () => {
   );
 };
 
-export default MainPage;
+export default React.memo(MainPage);
