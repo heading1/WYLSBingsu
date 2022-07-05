@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { DeviceViewport } from '@/types/interfaces';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<DeviceViewport>`
   display: flex;
-  height: 100vh;
+  height: ${(props) => props.deviceHeight};
   justify-content: center;
   align-items: center;
   flex-direction: column;

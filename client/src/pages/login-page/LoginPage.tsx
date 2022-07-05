@@ -3,9 +3,11 @@ import LoginForm from './components/LoginForm';
 import { Wrapper, RegisterLink } from './LoginPageStyle';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import useDeviceViewport from '@/common/hooks/useDeviceViewport';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
+  const { deviceHeight } = useDeviceViewport();
 
   useEffect(() => {
     axios
@@ -22,7 +24,7 @@ const LoginPage: React.FC = () => {
   }, []);
 
   return (
-    <Wrapper>
+    <Wrapper deviceHeight={deviceHeight}>
       <LoginForm />
       <p>
         <span>혹시 회원이 아니신가요?</span>
