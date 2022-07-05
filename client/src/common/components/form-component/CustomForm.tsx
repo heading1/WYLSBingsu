@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import StyledForm from './CustomFormStyle';
 import { RegisterInputType } from '@/types/interfaces';
+import { MutableRefObject, useRef } from 'react';
 
 interface FormProps {
   children?: React.ReactNode;
@@ -20,8 +21,10 @@ const CustomForm: React.FC<FormProps> = ({
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<RegisterInputType>({ mode: 'onChange' });
+  const passwordRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
@@ -36,7 +39,7 @@ const CustomForm: React.FC<FormProps> = ({
       </h1>
       <div>
         <label htmlFor="emailInput">
-          Email<span> *</span>
+          Email<span>*</span>
         </label>
         <input
           id="emailInput"
@@ -58,7 +61,7 @@ const CustomForm: React.FC<FormProps> = ({
       </div>
       <div>
         <label htmlFor="passwordInput">
-          Password<span> *</span>
+          Password<span>*</span>
         </label>
         <input
           id="passwordInput"
@@ -83,16 +86,35 @@ const CustomForm: React.FC<FormProps> = ({
         )}
       </div>
       {registerMode && (
-        <div>
-          <label htmlFor="nickName">닉네임</label>
-          <input
-            id="nickName"
-            type="text"
-            {...register('nickName')}
-            placeholder="미 입력시 랜덤으로 주어집니다."
-            disabled={isDisabled}
-          />
-        </div>
+        <>
+          <div>
+            <label htmlFor="nickName">
+              Password Check<span>*</span>
+            </label>
+            <input
+              id="password_check"
+              type="password"
+              {...register('password_check', {
+                validate: (value) => value === watch('password'),
+              })}
+              disabled={isDisabled}
+            />
+            {errors.password_check &&
+              errors.password_check.type === 'validate' && (
+                <p>비밀번호가 일치하지 않습니다.</p>
+              )}
+          </div>
+          <div>
+            <label htmlFor="nickName">닉네임</label>
+            <input
+              id="nickName"
+              type="text"
+              {...register('nickName')}
+              placeholder="미 입력시 랜덤으로 주어집니다."
+              disabled={isDisabled}
+            />
+          </div>
+        </>
       )}
       {children}
     </StyledForm>
