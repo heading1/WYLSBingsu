@@ -25,15 +25,16 @@ const StyledForm = styled.form`
     font-size: 1.5rem;
 
     & > span {
+      padding-left: 0.5rem;
       color: red;
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
   }
 
   & input {
     font-size: 1.2rem;
     width: 100%;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid gray;
     padding: 0.4rem 0.8rem;
 
     &:focus {
@@ -42,7 +43,7 @@ const StyledForm = styled.form`
   }
 
   & > div {
-    margin-bottom: 3.5rem;
+    margin-bottom: 3.2rem;
   }
 
   & p {
