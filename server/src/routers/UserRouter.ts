@@ -444,4 +444,13 @@ userRouter.get('/info/:_id', async (req, res, next) => {
     next(error);
   }
 });
+
+userRouter.get('/logout', authJwt, async (req, res, next) => {
+  try {
+    res.cookie('user', '', { maxAge: 0 });
+    res.status(200).json({ message: '로그아웃 되었습니다.' });
+  } catch (error) {
+    next(error);
+  }
+});
 export { userRouter };
