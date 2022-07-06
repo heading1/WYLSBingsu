@@ -53,7 +53,11 @@ const MainPage: React.FC = () => {
   const { deviceHeight } = useDeviceViewport();
   const [viewDetail, setViewDetail] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [modal, setModal] = useState({ content: '', flag: false });
+  const [modal, setModal] = useState({
+    content: '',
+    flag: false,
+    afterClose: () => {},
+  });
   const { getMyLink, showError, error, setShowError, result } = shareMyLink();
   const { getMyInfo, info } = useInfo();
   const [btnType, setBtnType] = useState('');
@@ -118,35 +122,35 @@ const MainPage: React.FC = () => {
   }, [toppingResult]);
 
   useEffect(() => {
-    setModal({ content: error, flag: showError });
-  }, [showError, error]);
-
-  useEffect(() => {
     switch (btnType) {
       case 'home':
         if (result.status === 'OK') {
           navigate(`/${result.data}`);
         } else {
-          alert('내 빙수를 찾을 수 없습니다.\n 로그인 화면으로 이동합니다!');
-          navigate('/login');
-        }
-        break;
-      case 'share':
-        if (result.status === 'OK') {
-          const targetURL = `${window.location.origin}/${result.data}`;
-          navigator.clipboard
-            .writeText(targetURL)
-            .then(() => alert('복사되었습니다.'));
+          setModal({
+            content: `내 빙수를 찾을 수 없습니다.\n로그인 화면으로 이동합니다!`,
+            flag: true,
+            afterClose: () => navigate('/login'),
+          });
         }
         break;
       case 'logout':
-        console.log(logoutStatus);
-        alert('로그아웃');
+        if (result.status === 'OK') {
+          setModal({
+            content: `성공적으로 로그아웃되었습니다.\n로그인 화면으로 이동합니다!`,
+            flag: true,
+            afterClose: () => navigate('/login'),
+          });
+        }
         break;
       default:
         break;
     }
   }, [result, logoutStatus]);
+
+  useEffect(() => {
+    getMyLink();
+  }, []);
 
   return (
     <Wrapper $loading={loading} deviceHeight={deviceHeight}>
@@ -161,6 +165,7 @@ const MainPage: React.FC = () => {
               setBtnType={setBtnType}
               info={info.data}
               getLogout={getLogout}
+              isLogin={!showError}
             />
             {locationArr.map((item, i) => {
               return data[i] ? (
@@ -189,8 +194,9 @@ const MainPage: React.FC = () => {
 
             <Modal
               content={modal.content}
-              setOpen={setShowError}
-              open={showError}
+              setOpen={setModal}
+              open={modal.flag}
+              afterClose={modal.afterClose}
             />
           </>
         )}

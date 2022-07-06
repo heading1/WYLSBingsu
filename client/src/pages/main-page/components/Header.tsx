@@ -9,6 +9,7 @@ interface HeaderProps {
   setBtnType: Function;
   info: any;
   getLogout: Function;
+  isLogin: boolean;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -16,6 +17,7 @@ const Header: React.FC<HeaderProps> = ({
   setBtnType,
   info,
   getLogout,
+  isLogin,
 }) => {
   let navigate = useNavigate();
   const params = useParams();
@@ -31,8 +33,11 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   const handleShareClick = () => {
-    setBtnType('share');
-    getMyLink();
+    navigator.clipboard
+      .writeText(location.href)
+      .then(() =>
+        alert('빙수의 링크가 복사되었습니다.\n친구들에게 공유해보세요!')
+      );
   };
 
   const handleLogoutClick = () => {
@@ -54,14 +59,18 @@ const Header: React.FC<HeaderProps> = ({
           <Tooltip>토핑올리기</Tooltip>
           <img src={topping} alt="토핑올리기" onClick={handleToppingClick} />
         </NavButton>
-        <NavButton>
-          <Tooltip>공유하기</Tooltip>
-          <img src={share} alt="공유하기" onClick={handleShareClick} />
-        </NavButton>
-        <NavButton>
-          <Tooltip>로그아웃</Tooltip>
-          <img src={logout} alt="공유하기" onClick={handleLogoutClick} />
-        </NavButton>
+        {isLogin && (
+          <>
+            <NavButton>
+              <Tooltip>공유하기</Tooltip>
+              <img src={share} alt="공유하기" onClick={handleShareClick} />
+            </NavButton>
+            <NavButton>
+              <Tooltip>로그아웃</Tooltip>
+              <img src={logout} alt="공유하기" onClick={handleLogoutClick} />
+            </NavButton>
+          </>
+        )}
       </nav>
     </Wrapper>
   );
