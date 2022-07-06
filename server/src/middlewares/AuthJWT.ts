@@ -52,6 +52,7 @@ async function authJwt(req: Request, res: Response, next: NextFunction) {
       const verifyRefreshToken = verifyToken(userRefreshToken);
 
       if (verifyRefreshToken == 'jwt expired') {
+        res.cookie('user', '', { maxAge: 0 });
         res.status(403).json({
           result: 'login expired',
           message: '로그인이 만료되었습니다. 다시 로그인 해주세요',
