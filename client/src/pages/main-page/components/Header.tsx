@@ -10,6 +10,7 @@ interface HeaderProps {
   info: any;
   getLogout: Function;
   isLogin: boolean;
+  setModal: Function;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -18,6 +19,7 @@ const Header: React.FC<HeaderProps> = ({
   info,
   getLogout,
   isLogin,
+  setModal,
 }) => {
   let navigate = useNavigate();
   const params = useParams();
@@ -33,11 +35,12 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   const handleShareClick = () => {
-    navigator.clipboard
-      .writeText(location.href)
-      .then(() =>
-        alert('빙수의 링크가 복사되었습니다.\n친구들에게 공유해보세요!')
-      );
+    navigator.clipboard.writeText(location.href).then(() =>
+      setModal({
+        content: '빙수의 링크가 복사되었습니다.\n친구들에게 공유해보세요!',
+        flag: true,
+      })
+    );
   };
 
   const handleLogoutClick = () => {
