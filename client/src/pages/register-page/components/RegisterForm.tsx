@@ -1,7 +1,6 @@
 import { RegisterInputType } from '@/types/interfaces';
 import CustomForm from '@/common/components/form-component/CustomForm';
-import { RegisterButton, SuccessModal } from './RegisterFormStyle';
-import { Link } from 'react-router-dom';
+import { RegisterButton } from './RegisterFormStyle';
 import { useEffect, useRef, useState } from 'react';
 import useRegister from '../hook/useRegister';
 import EmailCertificationForm from './EmailCertificationForm';
