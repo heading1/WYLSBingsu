@@ -23,6 +23,7 @@ import useToppingDetail from './hooks/useToppingDetail';
 import useDidMountEffect from './hooks/useDidMountEffect';
 import { useNavigate } from 'react-router-dom';
 import useInfo from './hooks/useInfo';
+import useLogout from '@/common/hooks/useLogout';
 
 const ratio = theme.windowHeight / 1500;
 const location1 = { top: 15, left: 32, width: 188 * ratio };
@@ -54,12 +55,13 @@ const MainPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState({ content: '', flag: false });
   const { getMyLink, showError, error, setShowError, result } = shareMyLink();
-  const { getMyInfo, info, infoError, isInfoError } = useInfo();
+  const { getMyInfo, info } = useInfo();
   const [btnType, setBtnType] = useState('');
   const params = useParams();
   const userId = params.userId;
   let navigate = useNavigate();
 
+  const { getLogout, logoutStatus } = useLogout();
   const { getToppings, toppingResult, toppingIsLoading } = useToppingList();
 
   const {
@@ -137,11 +139,14 @@ const MainPage: React.FC = () => {
             .then(() => alert('복사되었습니다.'));
         }
         break;
-
+      case 'logout':
+        console.log(logoutStatus);
+        alert('로그아웃');
+        break;
       default:
         break;
     }
-  }, [result]);
+  }, [result, logoutStatus]);
 
   return (
     <Wrapper $loading={loading} deviceHeight={deviceHeight}>
@@ -155,6 +160,7 @@ const MainPage: React.FC = () => {
               getMyLink={getMyLink}
               setBtnType={setBtnType}
               info={info.data}
+              getLogout={getLogout}
             />
             {locationArr.map((item, i) => {
               return data[i] ? (

@@ -21,8 +21,8 @@ const Wrapper = styled.header`
   & > nav {
     position: absolute;
     top: 0.5vh;
-    width: 60%;
-    left: 40%;
+    width: 45%;
+    left: 55%;
     min-width: 200px;
     display: flex;
     justify-content: flex-end;

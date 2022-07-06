@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Wrapper, Tooltip, NavButton } from './HeaderStyle';
-import { topping, home, share } from '@/assets/images';
+import { topping, home, share, logout } from '@/assets/images';
 import shareMyLink from '../hooks/useShareMyLink';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -8,9 +8,15 @@ interface HeaderProps {
   getMyLink: Function;
   setBtnType: Function;
   info: any;
+  getLogout: Function;
 }
 
-const Header: React.FC<HeaderProps> = ({ getMyLink, setBtnType, info }) => {
+const Header: React.FC<HeaderProps> = ({
+  getMyLink,
+  setBtnType,
+  info,
+  getLogout,
+}) => {
   let navigate = useNavigate();
   const params = useParams();
   const userId = params.userId;
@@ -29,6 +35,11 @@ const Header: React.FC<HeaderProps> = ({ getMyLink, setBtnType, info }) => {
     getMyLink();
   };
 
+  const handleLogoutClick = () => {
+    setBtnType('logout');
+    getLogout();
+  };
+
   return (
     <Wrapper>
       <article>
@@ -36,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({ getMyLink, setBtnType, info }) => {
       </article>
       <nav>
         <NavButton>
-          <Tooltip>내 빙수가기</Tooltip>
+          <Tooltip>내 빙수</Tooltip>
           <img src={home} alt="내 빙수가기" onClick={handleHomeClick} />
         </NavButton>
         <NavButton>
@@ -46,6 +57,10 @@ const Header: React.FC<HeaderProps> = ({ getMyLink, setBtnType, info }) => {
         <NavButton>
           <Tooltip>공유하기</Tooltip>
           <img src={share} alt="공유하기" onClick={handleShareClick} />
+        </NavButton>
+        <NavButton>
+          <Tooltip>로그아웃</Tooltip>
+          <img src={logout} alt="공유하기" onClick={handleLogoutClick} />
         </NavButton>
       </nav>
     </Wrapper>
