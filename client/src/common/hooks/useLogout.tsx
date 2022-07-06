@@ -40,7 +40,7 @@ const useLogout = () => {
           setIsLogoutError(true);
           if (responseError && responseError.response) {
             setLogoutError(responseError.response.data.message);
-            setLogoutStatus({ status: 'logoutError', data: '' });
+            setLogoutStatus({ status: 'error', data: '' });
           }
         }
       })

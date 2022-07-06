@@ -8,9 +8,15 @@ interface HeaderProps {
   getMyLink: Function;
   setBtnType: Function;
   info: any;
+  getLogout: Function;
 }
 
-const Header: React.FC<HeaderProps> = ({ getMyLink, setBtnType, info }) => {
+const Header: React.FC<HeaderProps> = ({
+  getMyLink,
+  setBtnType,
+  info,
+  getLogout,
+}) => {
   let navigate = useNavigate();
   const params = useParams();
   const userId = params.userId;
@@ -31,6 +37,7 @@ const Header: React.FC<HeaderProps> = ({ getMyLink, setBtnType, info }) => {
 
   const handleLogoutClick = () => {
     setBtnType('logout');
+    getLogout();
   };
 
   return (

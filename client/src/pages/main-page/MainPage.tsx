@@ -140,11 +140,13 @@ const MainPage: React.FC = () => {
         }
         break;
       case 'logout':
+        console.log(logoutStatus);
+        alert('로그아웃');
         break;
       default:
         break;
     }
-  }, [result]);
+  }, [result, logoutStatus]);
 
   return (
     <Wrapper $loading={loading} deviceHeight={deviceHeight}>
@@ -158,6 +160,7 @@ const MainPage: React.FC = () => {
               getMyLink={getMyLink}
               setBtnType={setBtnType}
               info={info.data}
+              getLogout={getLogout}
             />
             {locationArr.map((item, i) => {
               return data[i] ? (
