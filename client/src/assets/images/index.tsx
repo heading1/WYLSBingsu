@@ -12,6 +12,7 @@ import home from './home.png';
 import share from './share.png';
 import topping from './topping.png';
 import pixelBingsu from './pixel_bingsu.png';
+import logout from './logout.png';
 
 export {
   home,
@@ -28,4 +29,5 @@ export {
   no_bingsu,
   only_bingsu,
   pixelBingsu,
+  logout,
 };
