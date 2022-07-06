@@ -10,6 +10,7 @@ interface DetailProps {
   closeDetail: Function;
   toppingDetailShowError?: boolean;
   toppingDetailError?: string;
+  view: boolean;
 }
 
 const SubmitButton = styled.button`
@@ -28,10 +29,12 @@ const Detail: React.FC<DetailProps> = ({
   closeDetail,
   toppingDetailShowError,
   toppingDetailError,
+  view,
 }) => {
+  console.log(view);
   return (
-    <Background>
-      <Wrapper>
+    <Background $view={view}>
+      <Wrapper $view={view}>
         <ArticleForm
           nickName={nickName}
           content={content}

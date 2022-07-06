@@ -1,7 +1,11 @@
 import { DeviceViewport } from '@/types/interfaces';
 import styled, { css } from 'styled-components';
 
-const Wrapper = styled.div<DeviceViewport>`
+interface WrapperInterface extends DeviceViewport {
+  $view: boolean;
+}
+
+const Wrapper = styled.div<WrapperInterface>`
   position: absolute;
   width: 90%;
   max-width: 468px;
@@ -9,18 +13,24 @@ const Wrapper = styled.div<DeviceViewport>`
   padding-top: 2%;
   padding-bottom: 2%;
   background-color: aliceblue;
-  opacity: 1;
+  transform: all;
+  transition: 0.3s linear;
+  /* opacity: 1; */
+  opacity: ${(props) => (props.$view ? 1 : 0)};
+  margin-top: ${(props) => (props.$view ? 0 : 200)}%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: ${(props) => (props.$view ? 'center' : 'flex-end')};
 `;
 
-const Background = styled.div`
+const Background = styled.div<WrapperInterface>`
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   width: 100vw;
+  visibility: ${(props) => (props.$view ? '' : 'hidden')};
+  /* opacity: ${(props) => (props.$view ? 1 : 0)}; */
   z-index: 3;
   display: flex;
   justify-content: center;
