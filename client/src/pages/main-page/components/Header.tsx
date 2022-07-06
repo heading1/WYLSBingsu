@@ -10,6 +10,7 @@ interface HeaderProps {
   info: any;
   getLogout: Function;
   isLogin: boolean;
+  user: string;
   setModal: Function;
 }
 
@@ -19,6 +20,7 @@ const Header: React.FC<HeaderProps> = ({
   info,
   getLogout,
   isLogin,
+  user,
   setModal,
 }) => {
   let navigate = useNavigate();
@@ -62,12 +64,15 @@ const Header: React.FC<HeaderProps> = ({
           <Tooltip>토핑올리기</Tooltip>
           <img src={topping} alt="토핑올리기" onClick={handleToppingClick} />
         </NavButton>
+        {location.pathname === `/${user}` && (
+          <NavButton>
+            <Tooltip>공유하기</Tooltip>
+            <img src={share} alt="공유하기" onClick={handleShareClick} />
+          </NavButton>
+        )}
+
         {isLogin && (
           <>
-            <NavButton>
-              <Tooltip>공유하기</Tooltip>
-              <img src={share} alt="공유하기" onClick={handleShareClick} />
-            </NavButton>
             <NavButton>
               <Tooltip>로그아웃</Tooltip>
               <img src={logout} alt="공유하기" onClick={handleLogoutClick} />

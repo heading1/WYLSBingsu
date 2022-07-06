@@ -166,6 +166,7 @@ const MainPage: React.FC = () => {
               info={info.data}
               getLogout={getLogout}
               isLogin={!showError}
+              user={result.data}
               setModal={setModal}
             />
             {locationArr.map((item, i) => {
