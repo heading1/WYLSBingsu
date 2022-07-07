@@ -41,28 +41,38 @@ const ContentStyled = styled.div`
   padding: 5px;
   overflow: scroll;
   border-right: 1px solid;
+  & > pre {
+    font-size: large;
+  }
 `;
 
 interface ModalProps {
   content: string;
   setOpen: Function;
   open: boolean;
+  afterClose?: Function;
 }
 
 const Modal: React.FC<ModalProps> = (props) => {
-  const { content, setOpen, open } = props;
+  const { content, setOpen, open, afterClose } = props;
 
   const handleClose = () => {
     setOpen(false);
+    if (afterClose) {
+      // 모달창 올라가는 시간
+      setTimeout(() => {
+        afterClose();
+      }, 200);
+    }
   };
 
   return (
     <Wrapper open={open}>
       <ModalStyled open={open}>
         <ContentStyled>
-          <span>{content}</span>
+          <pre>{content}</pre>
         </ContentStyled>
-        <ButtonStyled onClick={handleClose}>닫기</ButtonStyled>
+        <ButtonStyled onClick={handleClose}>확인</ButtonStyled>
       </ModalStyled>
     </Wrapper>
   );
