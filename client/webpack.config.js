@@ -2,6 +2,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 const isDevelopment = process.env.NODE_ENV !== 'production';
+const dotenv = require('dotenv');
+dotenv.config();
+
 /*
 mode : 프로덕션 모드인지 개발 모드인지 확인하는 옵션이다.
 devtool : 프로덕션 모드인 경우엔 hidden-source-map을 권장한다. (외부에서 리액트 구조를 확인할 수 없다.)
@@ -35,6 +38,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
       favicon: './public/favicon.ico',
+    }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(
+        process.env.NODE_ENV === 'development'
+          ? process.env.API_URL
+          : process.env.API_BUILD_URL
+      ),
     }),
   ],
 
