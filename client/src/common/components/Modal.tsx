@@ -39,7 +39,6 @@ const ContentStyled = styled.div`
   justify-content: center;
   align-items: center;
   padding: 5px;
-  overflow: scroll;
   border-right: 1px solid;
   & > pre {
     font-size: large;
