@@ -14,7 +14,7 @@ const useLogin = () => {
   const [isLoading, setLoading] = useState(false);
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
-  const URI = 'http://localhost:8070/user/login';
+  const URI = `${process.env}/user/login`;
 
   const asyncLogin = useCallback((data: FormInputType) => {
     setLoading(true);

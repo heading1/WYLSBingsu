@@ -17,7 +17,7 @@ const IntroPage: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8070/user/link', { withCredentials: true })
+      .get(`${process.env}/user/link`, { withCredentials: true })
       .then((response) => {
         console.log(response);
         if (response?.data) {

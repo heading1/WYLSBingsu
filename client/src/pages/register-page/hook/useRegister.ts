@@ -13,8 +13,8 @@ const useRegister = () => {
   const [isSend, setIsSend] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const emailValidationURI = 'http://localhost:8070/user/mail';
-  const registerURI = 'http://localhost:8070/user/register';
+  const emailValidationURI = `${process.env}/user/mail`;
+  const registerURI = `${process.env}/user/register`;
 
   // step1: email로만 요청을 보내 인증 번호 메일 전송 상태 응답을 받는다.
   const emailValidation = useCallback(({ email }: RegisterInputType) => {

@@ -12,8 +12,8 @@ const useToppingList = () => {
   const [toppingShowError, setToppingShowError] = useState(false);
 
   const getToppings = useCallback((page?: number, userId?: string) => {
-    const URI = `http://localhost:8070/article/${page}/${userId}`;
-    // const URI = `http://localhost:8070/article/${page}/test`;
+    const URI = `${process.env}/article/${page}/${userId}`;
+
     setToppingIsLoading(true);
     axios
       .get<[]>(URI, {
