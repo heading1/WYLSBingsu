@@ -12,6 +12,8 @@ export const Wrapper = styled.div<DeviceViewport>`
 
 export const RegisterLink = styled(Link)`
   margin-left: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  padding-bottom: 3px;
+  border-bottom: 3px solid ${(props) => props.theme.point2};
   color: ${(props) => props.theme.point2};
 `;
