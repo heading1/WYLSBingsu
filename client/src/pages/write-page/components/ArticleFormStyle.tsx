@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   background-color: #fff;
   flex-direction: column;
   justify-content: center;
+  border-radius: 30px;
 
   & label {
     font-size: 1.4rem;

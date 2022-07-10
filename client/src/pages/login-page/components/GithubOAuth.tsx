@@ -2,8 +2,8 @@ import Wrapper from './GithubOAuthStyle';
 
 const GithubOAuth: React.FC = () => {
   return (
-    <Wrapper href="/login">
-      <span>Github Login</span>
+    <Wrapper disabled>
+      <span>Github Login이 추후 제공될 예정입니다!</span>
     </Wrapper>
   );
 };
