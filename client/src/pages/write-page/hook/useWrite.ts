@@ -19,7 +19,7 @@ const useWrite = () => {
     content: '',
   });
   const [showModal, setShowModal] = useState(false);
-  const POST_URI = 'http://localhost:8070/article/register';
+  const POST_URI = `${process.env}/article/register`;
   const navigate = useNavigate();
 
   const articlePost = useCallback(

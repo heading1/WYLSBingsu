@@ -20,7 +20,7 @@ const useInfo = () => {
   const [isInfoError, setIsInfoError] = useState(false);
 
   const getMyInfo = useCallback((_id: string) => {
-    const URI = `http://localhost:8070/user/info/${_id}`;
+    const URI = `${process.env}/user/info/${_id}`;
 
     setLoading(true);
     axios

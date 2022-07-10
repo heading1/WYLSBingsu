@@ -10,7 +10,7 @@ const shareMyLink = () => {
   const [result, setResult] = useState({ status: '', data: '' });
   const [isLoading, setLoading] = useState(false);
   const [showError, setShowError] = useState(false);
-  const URI = `http://localhost:8070/user/link`;
+  const URI = `${process.env}/user/link`;
 
   const getMyLink = useCallback(() => {
     setLoading(true);

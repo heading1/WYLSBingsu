@@ -20,7 +20,7 @@ const useLogout = () => {
   const [isLogoutError, setIsLogoutError] = useState(false);
 
   const getLogout = useCallback((_id: string) => {
-    const URI = `http://localhost:8070/user/logout`;
+    const URI = `${process.env}/user/logout`;
 
     setLogoutLoading(true);
     axios

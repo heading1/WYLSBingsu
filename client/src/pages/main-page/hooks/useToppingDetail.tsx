@@ -16,7 +16,7 @@ const useToppingDetail = () => {
   const [toppingDetailShowError, setToppingDetailShowError] = useState(false);
 
   const getToppingDetail = useCallback((_id: string) => {
-    const URI = `http://localhost:8070/article/detail/tail/${_id}`;
+    const URI = `${process.env}/article/detail/tail/${_id}`;
     setToppingDetailIsLoading(true);
     axios
       .get<[]>(URI, {

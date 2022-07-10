@@ -5,7 +5,7 @@ node_modules
 *.log
 
 # Environment variables
-.env
+server/.env
 
 # Cache
 .cache
