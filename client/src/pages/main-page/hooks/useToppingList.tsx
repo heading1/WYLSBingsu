@@ -39,7 +39,7 @@ const useToppingList = () => {
       .finally(() => {
         setTimeout(() => {
           setToppingIsLoading(false);
-        }, 250);
+        }, 800);
       });
   }, []);
 
