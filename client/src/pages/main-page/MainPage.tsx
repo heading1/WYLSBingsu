@@ -156,52 +156,48 @@ const MainPage: React.FC = () => {
     <Wrapper $loading={loading} deviceHeight={deviceHeight}>
       <div>
         <img src={bingsu} />
-        {toppingIsLoading || toppingDetailIsLoading ? (
-          <Loading />
-        ) : (
-          <>
-            <Header
-              getMyLink={getMyLink}
-              setBtnType={setBtnType}
-              info={info.data}
-              getLogout={getLogout}
-              isLogin={!showError}
-              user={result.data}
-              setModal={setModal}
-            />
-            {locationArr.map((item, i) => {
-              return data[i] ? (
-                <Topping
-                  {...item}
-                  rotate={randomRotate()}
-                  key={i + 1}
-                  nickName={data[i].nickName}
-                  imageSrc={data[i].toppingImage}
-                  eventClick={() => openDetail(data[i]._id)}
-                />
-              ) : (
-                ''
-              );
-            })}
 
-            <Footer nextPage={nextPage} prevPage={prevPage} page={page} />
-
-            <Detail
-              {...toppingDetailResult.data}
-              closeDetail={closeDetail}
-              toppingDetailShowError={toppingDetailShowError}
-              toppingDetailError={toppingDetailError}
-              view={viewDetail}
+        {toppingIsLoading ? <Loading /> : ''}
+        <Header
+          getMyLink={getMyLink}
+          setBtnType={setBtnType}
+          info={info.data}
+          getLogout={getLogout}
+          isLogin={!showError}
+          user={result.data}
+          setModal={setModal}
+        />
+        {locationArr.map((item, i) => {
+          return data[i] ? (
+            <Topping
+              {...item}
+              rotate={randomRotate()}
+              key={i + 1}
+              nickName={data[i].nickName}
+              imageSrc={data[i].toppingImage}
+              eventClick={() => openDetail(data[i]._id)}
             />
+          ) : (
+            ''
+          );
+        })}
 
-            <Modal
-              content={modal.content}
-              setOpen={setModal}
-              open={modal.flag}
-              afterClose={modal.afterClose}
-            />
-          </>
-        )}
+        <Footer nextPage={nextPage} prevPage={prevPage} page={page} />
+
+        <Detail
+          {...toppingDetailResult.data}
+          closeDetail={closeDetail}
+          toppingDetailShowError={toppingDetailShowError}
+          toppingDetailError={toppingDetailError}
+          view={viewDetail}
+        />
+
+        <Modal
+          content={modal.content}
+          setOpen={setModal}
+          open={modal.flag}
+          afterClose={modal.afterClose}
+        />
       </div>
     </Wrapper>
   );

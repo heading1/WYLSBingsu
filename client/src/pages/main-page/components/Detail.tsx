@@ -31,7 +31,6 @@ const Detail: React.FC<DetailProps> = ({
   toppingDetailError,
   view,
 }) => {
-  console.log(view);
   return (
     <Background $view={view}>
       <Wrapper $view={view}>

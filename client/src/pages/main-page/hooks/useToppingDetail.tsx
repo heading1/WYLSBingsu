@@ -39,7 +39,9 @@ const useToppingDetail = () => {
         }
       })
       .finally(() => {
-        setToppingDetailIsLoading(false);
+        setTimeout(() => {
+          setToppingDetailIsLoading(false);
+        }, 800);
       });
   }, []);
 
