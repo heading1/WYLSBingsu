@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.a`
+const Wrapper = styled.button`
   display: flex;
   width: 100%;
   height: 2.6rem;
@@ -12,6 +12,7 @@ const Wrapper = styled.a`
   font-size: 1.2rem;
   opacity: 0.7;
   transition: opacity 0.3s linear;
+  cursor: not-allowed;
 
   &:hover {
     opacity: 1;

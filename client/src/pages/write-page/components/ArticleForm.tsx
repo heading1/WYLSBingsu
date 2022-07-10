@@ -30,6 +30,7 @@ const ArticleForm: React.FC<ArticleProps> = ({ onSubmit }) => {
         name="article"
         placeholder="내용을 적어주세요."
         ref={articleRef}
+        maxLength={1000}
       />
       <SubmitButton
         onClick={() => {
