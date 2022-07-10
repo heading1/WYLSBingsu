@@ -13,16 +13,17 @@ const Wrapper = styled.header`
   & > article {
     position: absolute;
     margin-left: 5%;
-    width: 50%;
+    width: 40%;
     font-size: 1rem;
-    top: 0.5vh;
+    padding-top: 1%;
+    padding-right: 3%;
     word-break: keep-all;
   }
   & > nav {
     position: absolute;
     top: 0.5vh;
-    width: 45%;
-    left: 55%;
+    width: 60%;
+    left: 40%;
     min-width: 200px;
     display: flex;
     justify-content: flex-end;
