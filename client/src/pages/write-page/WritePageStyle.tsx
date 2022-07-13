@@ -20,3 +20,20 @@ export const StyledHeader = styled.h1`
   text-align: center;
   background-color: #fff;
 `;
+
+export const BackImg = styled.img`
+  position: absolute;
+  @media screen and (min-width: 450px) {
+    display: none;
+  }
+  top: 3%;
+  left: 5%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+
+  :hover {
+    transform: scale(1.3);
+  }
+`;

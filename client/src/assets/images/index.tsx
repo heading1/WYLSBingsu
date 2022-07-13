@@ -13,6 +13,7 @@ import share from './share.png';
 import topping from './topping.png';
 import pixelBingsu from './pixel_bingsu.png';
 import logout from './logout.png';
+import back from './back.png';
 
 export {
   home,
@@ -30,4 +31,5 @@ export {
   only_bingsu,
   pixelBingsu,
   logout,
+  back,
 };
