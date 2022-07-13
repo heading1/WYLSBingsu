@@ -5,7 +5,6 @@ import bingsuSrc from '@/assets/images/bingsu.jpeg';
 export const Wrapper = styled.div<DeviceViewport>`
   display: flex;
   height: 100vh;
-  max-height: ${(props) => props.deviceHeight};
   background: url(${bingsuSrc}) no-repeat center/auto 100%;
   background-color: ${(props) => props.theme.point4};
   justify-content: center;
