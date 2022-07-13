@@ -22,8 +22,8 @@ export const ToppingContainer = styled.div`
 `;
 
 export const ToppingImg = styled.img<ToppingProps>`
-  width: 100px;
-  height: 100px;
+  width: 70%;
+  height: auto;
 `;
 
 export const ToppingDiv = styled.div`
@@ -31,8 +31,10 @@ export const ToppingDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 110px;
-  height: 110px;
+  width: 70%;
+  height: auto;
+  min-height: 85px;
+  border: 3px solid #fff;
 
   :hover {
     border: 3px solid ${(props) => props.theme.orange};
